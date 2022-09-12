@@ -175,6 +175,8 @@ public class TutorialFinished : MonoBehaviour
                         gasPicked = true;
                         tutorialState = 0;
                     }
+
+                    
                 }
 
             }
@@ -200,6 +202,9 @@ public class TutorialFinished : MonoBehaviour
                         gasPicked = true;
                         tutorialState = 0;
                     }
+
+
+                    
                 }
             }
         }

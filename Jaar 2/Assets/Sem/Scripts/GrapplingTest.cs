@@ -118,7 +118,9 @@ public class GrapplingTest : MonoBehaviour
             joint.maxDistance += 3 * Time.deltaTime;
         }
 
-            
+        
+
+
 
 
 
@@ -130,7 +132,7 @@ public class GrapplingTest : MonoBehaviour
         grapplePoint = childOfPoint.transform.position;
         joint.connectedAnchor = grapplePoint;
 
-        
+
         
 
     }
