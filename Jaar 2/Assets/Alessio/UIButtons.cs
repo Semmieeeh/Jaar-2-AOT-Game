@@ -11,6 +11,7 @@ public class UIButtons : MonoBehaviour
     public GameObject slider;
     public GameObject music;
     public GameObject fullscreen, resolution;
+    public GameObject canvasSem;
 
     public void Start()
     {
@@ -19,6 +20,10 @@ public class UIButtons : MonoBehaviour
         slider.SetActive(false);
         fullscreen.SetActive(false);
         resolution.SetActive(false);
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        canvasSem.SetActive(false);
     }
     public void Play()
     {
@@ -26,6 +31,10 @@ public class UIButtons : MonoBehaviour
         credits.SetActive(false);
         image.SetActive(false);
         music.SetActive(false);
+        Time.timeScale = 1f;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        canvasSem.SetActive(true);
     }
     public void Escape()
     {
