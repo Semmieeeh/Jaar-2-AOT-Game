@@ -22,11 +22,12 @@ public class DashPower : MonoBehaviour
         if (pm.airDash == true)
         {
             Slider();
+            cannotDashUI.SetActive(false);
         }
         else
         {
             slider.value = 3;
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftAlt))
             {
                 cannotDashUI.SetActive(true);
             }

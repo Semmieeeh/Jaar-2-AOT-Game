@@ -150,19 +150,7 @@ public class GrapplingTest : MonoBehaviour
       
     }
 
-    public void Check()
-    {
-        Animator anim = GameObject.Find("Crosshair").GetComponent<Animator>();
-        if (Physics.Raycast(playerCam.position, playerCam.forward, out hit, maxDistance, whatIsGrappleable) || isGrappling == true)
-        {
-            canFire = true;
-        }
-        else
-        {
-            canFire = false;
-        }
-        anim.SetBool("canFire", canFire);
-    }
+    
 
     //Called after Update
     
@@ -230,8 +218,24 @@ public class GrapplingTest : MonoBehaviour
     {
         return grapplePoint;
     }
-    
 
+    public void Check()
+    {
+        if (GameObject.Find("Crosshair") == null)
+        {
+            return;
+        }
+        Animator anim = GameObject.Find("Crosshair").GetComponent<Animator>();
+        if (Physics.Raycast(playerCam.position, playerCam.forward, out hit, maxDistance, whatIsGrappleable) || isGrappling == true)
+        {
+            canFire = true;
+        }
+        else
+        {
+            canFire = false;
+        }
+        anim.SetBool("canFire", canFire);
+    }
 
 
 }

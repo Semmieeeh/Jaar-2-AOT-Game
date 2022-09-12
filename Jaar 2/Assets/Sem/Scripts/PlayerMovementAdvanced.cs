@@ -324,14 +324,22 @@ public class PlayerMovementAdvanced : MonoBehaviour
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
             // limit velocity if needed
-            if (flatVel.magnitude > moveSpeed && grapplingTest.isGrappling == true)
+            if (flatVel.magnitude > moveSpeed && grapplingTest.isGrappling == true &&Input.GetKey(KeyCode.LeftShift))
             {
-                rb.velocity = Vector3.ClampMagnitude(rb.velocity, moveSpeed * 6f);
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, walkSpeed * 12f);
+            }
+            else if (flatVel.magnitude > moveSpeed && grapplingTest.isGrappling == true)
+            {
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, walkSpeed * 6f);
+            }
+            else if (flatVel.magnitude > moveSpeed && grapplingTest.isGrappling == false)
+            {
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, walkSpeed * 8f);
             }
 
-            
 
-            
+
+
         }
 
 
