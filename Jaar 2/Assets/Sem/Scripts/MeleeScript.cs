@@ -27,7 +27,7 @@ public class MeleeScript : MonoBehaviour
     public float attackStateReset;
     public float attackStateResetResetMax;
     public float attackStateResetResetMin;
-    
+    public bool isReloading;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +52,7 @@ public class MeleeScript : MonoBehaviour
     {
         Animator anim = gameObject.GetComponent<Animator>();
         anim.SetInteger("AttackState", attackstate);
+        anim.SetBool("isReloading", isReloading);
 
        
         cooldown -= 1*Time.deltaTime;
@@ -98,12 +99,7 @@ public class MeleeScript : MonoBehaviour
         {
             chargedDamage += 15 * Time.deltaTime;
             attackstate = 1;
-            if (Input.GetKeyUp(KeyCode.F))
-            {
-                attackstate = 2;
-                attackTransition = attackTransitionMax;
-                chargedDamage = minChargedDamage;
-            }
+            
         }
 
         
@@ -126,7 +122,13 @@ public class MeleeScript : MonoBehaviour
             attackTransition = attackTransitionMax;
             chargedDamage = minChargedDamage;
         }
-        
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            attackstate = 2;
+            attackTransition = attackTransitionMax;
+            chargedDamage = minChargedDamage;
+        }
+
 
 
 
@@ -162,7 +164,10 @@ public class MeleeScript : MonoBehaviour
         {
             
         }
-        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(Reload());
+        }
 
     }
 
@@ -184,5 +189,14 @@ public class MeleeScript : MonoBehaviour
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(10);
         }
     }
+
+
+    public IEnumerator Reload()
+    {
+        isReloading = true;
+        yield return new WaitForSeconds(1);
+        isReloading = false;
+    }
+
 
 }
