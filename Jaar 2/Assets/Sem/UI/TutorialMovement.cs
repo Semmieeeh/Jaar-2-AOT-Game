@@ -16,7 +16,7 @@ public class TutorialMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    bool readyToJump;
+    
 
     [Header("Crouching")]
     public float crouchSpeed;
@@ -62,7 +62,7 @@ public class TutorialMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
-        readyToJump = true;
+        
 
         startYScale = transform.localScale.y;
     }

@@ -63,6 +63,10 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public GrapplingTest grapplingTest;
     public GameObject cannotJump;
     public MovementState state;
+
+
+
+    
     public enum MovementState
     {
         walking,
@@ -213,14 +217,15 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
 
 
-
-
         
+
+
     }
 
     private void FixedUpdate()
     {
         MovePlayer();
+        
     }
 
     
@@ -398,4 +403,21 @@ public class PlayerMovementAdvanced : MonoBehaviour
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
+
+
+    
+	
+
+    
+    
+
+
+
+
+    
 }
+
+
+
+
+
