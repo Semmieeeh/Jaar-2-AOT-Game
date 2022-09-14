@@ -28,13 +28,13 @@ public class GrapplingTest : MonoBehaviour
     public RaycastHit hit;
     public GameObject childOfPoint;
     public bool fallEffect;
-    bool tutorialPartOne;
+    
    
 
 
     public void Start()
     {
-        tutorialPartOne = false;
+        
         idleStrength = 4;
         
         minDamperStrength = 1f;
