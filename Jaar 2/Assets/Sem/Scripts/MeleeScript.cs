@@ -165,7 +165,7 @@ public class MeleeScript : MonoBehaviour
         {
             
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && isReloading == false)
         {
             StartCoroutine(Reload());
         }
@@ -195,10 +195,11 @@ public class MeleeScript : MonoBehaviour
     public IEnumerator Reload()
     {
         isReloading = true;
-        
-        
-        yield return new WaitForSeconds(1);
-        
+
+        blade.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        blade.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
         isReloading = false;
     }
 
