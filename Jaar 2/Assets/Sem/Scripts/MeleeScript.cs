@@ -29,10 +29,12 @@ public class MeleeScript : MonoBehaviour
     public float attackStateResetResetMin;
     public bool isReloading;
     public GameObject blade;
+    public WeaponSway weaponSway;
+    public int swordBlades;
     // Start is called before the first frame update
     void Start()
     {
-        
+        swordBlades = 3;
         range = 3f;
         damage = 10;
         maxCooldown = 2;
@@ -44,8 +46,9 @@ public class MeleeScript : MonoBehaviour
         minChargedDamage = 0f;
         attackTransitionMax = 2;
         attackTransitionMin = 0f;
-        
-        
+        weaponSway = GameObject.Find("RightSwordHolder").GetComponent<WeaponSway>();
+
+
     }
 
     // Update is called once per frame
@@ -55,6 +58,11 @@ public class MeleeScript : MonoBehaviour
         anim.SetInteger("AttackState", attackstate);
         anim.SetBool("isReloading", isReloading);
 
+
+        if(swordBlades == 0)
+        {
+            blade.SetActive(false);
+        }
        
         cooldown -= 1*Time.deltaTime;
 
@@ -103,32 +111,35 @@ public class MeleeScript : MonoBehaviour
             
         }
 
+
+
+
         
-
-
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range, enemy) && attackTransition == attackTransitionMin)
-        {
-            if (Input.GetKeyUp(KeyCode.F)&& canAttack == true)
+        
+            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range, enemy) && attackTransition == attackTransitionMin)
+            {
+                if (Input.GetKeyUp(KeyCode.F) && canAttack == true &&swordBlades >0)
+                {
+                    attackstate = 2;
+                    finalDamage = damage + chargedDamage;
+                    Slash();
+                    chargedDamage = minChargedDamage;
+                    attackTransition = attackTransitionMax;
+                }
+            }
+            else if (Input.GetKeyUp(KeyCode.F) && canAttack == true && attackTransition == attackTransitionMin)
             {
                 attackstate = 2;
-                finalDamage = damage + chargedDamage;
-                Slash();
-                chargedDamage = minChargedDamage;                              
                 attackTransition = attackTransitionMax;
-            }            
-        }
-        else if(Input.GetKeyUp(KeyCode.F) && canAttack == true && attackTransition == attackTransitionMin )
-        {
-            attackstate = 2;
-            attackTransition = attackTransitionMax;
-            chargedDamage = minChargedDamage;
-        }
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            attackstate = 2;
-            attackTransition = attackTransitionMax;
-            chargedDamage = minChargedDamage;
-        }
+                chargedDamage = minChargedDamage;
+            }
+            if (Input.GetKeyUp(KeyCode.F))
+            {
+                attackstate = 2;
+                attackTransition = attackTransitionMax;
+                chargedDamage = minChargedDamage;
+            }
+        
 
 
 
@@ -168,6 +179,7 @@ public class MeleeScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && isReloading == false)
         {
             StartCoroutine(Reload());
+            isReloading = true;
         }
 
     }
@@ -176,6 +188,7 @@ public class MeleeScript : MonoBehaviour
     public void Slash()
     {
         hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(finalDamage);
+        swordBlades -= 1;
 
     }
     public void SlashHit()
@@ -194,13 +207,16 @@ public class MeleeScript : MonoBehaviour
 
     public IEnumerator Reload()
     {
-        isReloading = true;
 
+        weaponSway.canSway = false;
         blade.SetActive(false);
         yield return new WaitForSeconds(1f);
+        swordBlades = 3;
         blade.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         isReloading = false;
+        
+        weaponSway.canSway = true;
     }
 
 
