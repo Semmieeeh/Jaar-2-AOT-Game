@@ -19,6 +19,10 @@ public class Healthbarscript : MonoBehaviour
     public void UpdateHealthBar()
     {
         float fillAmount = (float)currentHeal/(float)maxHeal;
+        if(healthbarSprite == null)
+        {
+            return;
+        }
         healthbarSprite.fillAmount = fillAmount;
     }
     public void DamageTitan(float amount)

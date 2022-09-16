@@ -23,7 +23,7 @@ public class UIButtons : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        canvasSem.SetActive(false);
+        //canvasSem.SetActive(false);
     }
     public void Play()
     {
@@ -34,12 +34,18 @@ public class UIButtons : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        canvasSem.SetActive(true);
+        //canvasSem.SetActive(true);
     }
     public void Escape()
     {
         mainMenu.SetActive(true);
         image.SetActive(true);
+    }
+    public void ExitEscape()
+    {
+        mainMenu.SetActive(false);
+        image.SetActive(false);
+
     }
 
     public void Options()
@@ -66,9 +72,18 @@ public class UIButtons : MonoBehaviour
         fullscreen.SetActive(false);
         resolution.SetActive(false);
     }
+    public void EscBack()
+    {
+        credits.SetActive(false);
+        mainMenu.SetActive(false);
+        back.SetActive(false);
+        slider.SetActive(false);
+        fullscreen.SetActive(false);
+        resolution.SetActive(false);
+    }
 
-    List<int> widhts = new List<int>() { 568, 920, 1280, 1920 };
-    List<int> heights = new List<int>() { 320, 540, 800, 1080 };
+    List<int> widhts = new List<int>() { 568, 960, 1280, 1920 };
+    List<int> heights = new List<int>() { 320, 540, 720, 1080 };
 
     public void SetScreenSize(int index)
     {

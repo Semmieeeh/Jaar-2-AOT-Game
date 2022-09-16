@@ -38,18 +38,30 @@ public class PlayerJump : MonoBehaviour
 
                     jumpedFloat += 1;
 
-                    if (jumpedFloat == 1 || maxJump == true)
+                    if (jumpedFloat == 1)
                     {
                         jumpPower.y = 80;        
                     }
 
-                    if (jumpedFloat == 2 || maxJump == true)
+                    if (jumpedFloat == 2)
                     {
                         jumpedFloat = 2;
 
+                        jumpPower.y = 180;
+                    }
+
+                    if (jumpedFloat == 2 && maxJump == true)
+                    {
+                        jumpedFloat = 3;
+
+                        maxJump = false;
+                    }
+
+                    if(jumpedFloat == 3)
+                    {
                         isGrounded = false;
 
-                        GetComponent<Rigidbody>().drag = 2;
+                        GetComponent<Rigidbody>().drag = 5;
                     }
                 }
                 
