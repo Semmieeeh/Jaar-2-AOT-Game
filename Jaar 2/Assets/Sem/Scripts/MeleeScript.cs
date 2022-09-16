@@ -34,6 +34,7 @@ public class MeleeScript : MonoBehaviour
     public WeaponSway weaponSway;
     public int swordBlades;
     public bool disappeared;
+    public LayerMask swordClink;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +55,7 @@ public class MeleeScript : MonoBehaviour
 
     }
 
+    
     // Update is called once per frame
     void Update()
     {
@@ -136,12 +138,16 @@ public class MeleeScript : MonoBehaviour
                     cooldown = maxCooldown;
                 }
             }
-            else if (Input.GetKeyUp(KeyCode.F) && canAttack == true && attackTransition == attackTransitionMin)
+            else if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
-                attackstate = 2;
-                cooldown = maxCooldown;
-                attackTransition = attackTransitionMax;
-                chargedDamage = minChargedDamage;
+                if (Input.GetKeyUp(KeyCode.F))
+                {
+                    attackstate = 2;
+                    cooldown = maxCooldown;
+                    attackTransition = attackTransitionMax;
+                    StartCoroutine(SlashHit());
+                    chargedDamage = minChargedDamage;
+                }
             }
             if (Input.GetKeyUp(KeyCode.F))
             {
@@ -188,7 +194,7 @@ public class MeleeScript : MonoBehaviour
         {
             
         }
-        if (Input.GetKeyDown(KeyCode.R) && isReloading == false)
+        if (Input.GetKeyDown(KeyCode.R) && isReloading == false && swordBlades == 0)
         {
             StartCoroutine(Reload());
             isReloading = true;
@@ -212,18 +218,13 @@ public class MeleeScript : MonoBehaviour
         swordhitParticle.GetComponent<ParticleSystem>().Play();
 
     }
-    public void SlashHit()
+    public IEnumerator SlashHit()
     {
-        
+        yield return new WaitForSeconds(0.2f);
+        swordhitParticle.GetComponent<ParticleSystem>().Play();
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.layer == enemy)
-        {
-            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(10);
-        }
-    }
+    
 
 
     public IEnumerator Reload()
