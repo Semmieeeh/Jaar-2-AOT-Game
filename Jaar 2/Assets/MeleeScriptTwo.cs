@@ -31,13 +31,14 @@ public class MeleeScriptTwo : MonoBehaviour
     public GameObject blade;
     public WeaponSway weaponSway;
     public int swordBlades;
+    public bool disappeared;
     // Start is called before the first frame update
     void Start()
     {
 
         range = 3f;
         damage = 10;
-        maxCooldown = 2;
+        maxCooldown = 1;
         minCooldown = 0;
         attackstate = 0;
         attackStateResetResetMax = 1;
@@ -62,10 +63,7 @@ public class MeleeScriptTwo : MonoBehaviour
 
 
 
-        if (swordBlades == 0)
-        {
-            blade.SetActive(false);
-        }
+        
 
         cooldown -= 1 * Time.deltaTime;
 
@@ -113,36 +111,48 @@ public class MeleeScriptTwo : MonoBehaviour
             attackstate = 1;
 
         }
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            attackstate = 2;
+        }
+
+        if (swordBlades == 0 && disappeared == false)
+        {
+            StartCoroutine(BladeDisappear());
+        }
 
 
 
-
-        
-        
+        if (cooldown == minCooldown)
+        {
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range, enemy) && attackTransition == attackTransitionMin)
             {
-                if (Input.GetKeyUp(KeyCode.F) && canAttack == true && swordBlades >0)
+                if (Input.GetKeyUp(KeyCode.F) && canAttack == true && swordBlades > 0)
                 {
                     attackstate = 2;
                     finalDamage = damage + chargedDamage;
                     Slash();
                     chargedDamage = minChargedDamage;
                     attackTransition = attackTransitionMax;
+                    cooldown = maxCooldown;
                 }
             }
             else if (Input.GetKeyUp(KeyCode.F) && canAttack == true && attackTransition == attackTransitionMin)
             {
                 attackstate = 2;
+                cooldown = maxCooldown;
                 attackTransition = attackTransitionMax;
                 chargedDamage = minChargedDamage;
             }
             if (Input.GetKeyUp(KeyCode.F))
             {
                 attackstate = 2;
+                cooldown = maxCooldown;
                 attackTransition = attackTransitionMax;
                 chargedDamage = minChargedDamage;
             }
-        
+        }
+
 
 
 
@@ -187,6 +197,14 @@ public class MeleeScriptTwo : MonoBehaviour
 
     }
 
+    public IEnumerator BladeDisappear()
+    {
+
+        yield return new WaitForSeconds(0.2f);
+        disappeared = true;
+        blade.SetActive(false);
+        
+    }
 
     public void Slash()
     {
@@ -211,12 +229,13 @@ public class MeleeScriptTwo : MonoBehaviour
     public IEnumerator Reload()
     {
         weaponSway.canSway = false;
+        
         blade.SetActive(false);
         yield return new WaitForSeconds(1f);
         swordBlades = 3;
         blade.SetActive(true);
         yield return new WaitForSeconds(1.5f);
-        
+        disappeared = false;
         isReloading = false;
         weaponSway.canSway = true;
     }
