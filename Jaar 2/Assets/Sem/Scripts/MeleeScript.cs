@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class MeleeScript : MonoBehaviour
 {
     public float damage;
@@ -17,6 +18,7 @@ public class MeleeScript : MonoBehaviour
     public float minCooldown;
     public float maxCooldown;
     RaycastHit hit;
+    public ParticleSystem swordhitParticle;
     public GameObject fpsCam;
     public LayerMask enemy;
     public int attackstate;
@@ -128,7 +130,7 @@ public class MeleeScript : MonoBehaviour
                 {
                     attackstate = 2;
                     finalDamage = damage + chargedDamage;
-                    Slash();
+                    StartCoroutine(Slash());
                     chargedDamage = minChargedDamage;
                     attackTransition = attackTransitionMax;
                     cooldown = maxCooldown;
@@ -202,10 +204,12 @@ public class MeleeScript : MonoBehaviour
 
     }
 
-    public void Slash()
+    public IEnumerator Slash()
     {
+        yield return new WaitForSeconds(0.2f);
         hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(finalDamage);
         swordBlades -= 1;
+        swordhitParticle.GetComponent<ParticleSystem>().Play();
 
     }
     public void SlashHit()

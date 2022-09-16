@@ -23,7 +23,7 @@ public class MeleeScriptTwo : MonoBehaviour
     public float attackTransition;
     public float attackTransitionMax;
     public float attackTransitionMin;
-
+    public ParticleSystem swordhitParticle;
     public float attackStateReset;
     public float attackStateResetResetMax;
     public float attackStateResetResetMin;
@@ -131,7 +131,7 @@ public class MeleeScriptTwo : MonoBehaviour
                 {
                     attackstate = 2;
                     finalDamage = damage + chargedDamage;
-                    Slash();
+                    StartCoroutine(Slash());
                     chargedDamage = minChargedDamage;
                     attackTransition = attackTransitionMax;
                     cooldown = maxCooldown;
@@ -206,10 +206,12 @@ public class MeleeScriptTwo : MonoBehaviour
         
     }
 
-    public void Slash()
+    public IEnumerator Slash()
     {
+        yield return new WaitForSeconds(0.2f);
         hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(finalDamage);
         swordBlades -= 1;
+        swordhitParticle.GetComponent<ParticleSystem>().Play();
 
     }
     public void SlashHit()
