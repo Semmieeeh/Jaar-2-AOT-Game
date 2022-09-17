@@ -238,7 +238,7 @@ public class MeleeScriptTwo : MonoBehaviour
     {
         weaponSway.canSway = false;
         canAttack = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
         blade.SetActive(false);
         yield return new WaitForSeconds(1f);
         blade.SetActive(true);
