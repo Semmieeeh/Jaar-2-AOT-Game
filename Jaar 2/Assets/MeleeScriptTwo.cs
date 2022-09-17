@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class MeleeScriptTwo : MonoBehaviour
 {
     public float damage;
@@ -17,13 +18,15 @@ public class MeleeScriptTwo : MonoBehaviour
     public float minCooldown;
     public float maxCooldown;
     RaycastHit hit;
+    public ParticleSystem swordhitParticle;
+
     public GameObject fpsCam;
     public LayerMask enemy;
     public int attackstate;
     public float attackTransition;
     public float attackTransitionMax;
     public float attackTransitionMin;
-    public ParticleSystem swordhitParticle;
+
     public float attackStateReset;
     public float attackStateResetResetMax;
     public float attackStateResetResetMin;
@@ -33,10 +36,13 @@ public class MeleeScriptTwo : MonoBehaviour
     public int swordBlades;
     public bool disappeared;
     public LayerMask swordClink;
+    public ParticleSystem swordGroundhitParticle;
+    public bool reloadingWithSwords;
     // Start is called before the first frame update
     void Start()
     {
-
+        swordBlades = 3;
+        reloadingWithSwords = false;
         range = 3f;
         damage = 10;
         maxCooldown = 1;
@@ -49,23 +55,24 @@ public class MeleeScriptTwo : MonoBehaviour
         attackTransitionMax = 2;
         attackTransitionMin = 0f;
         weaponSway = GameObject.Find("LeftSwordHolder").GetComponent<WeaponSway>();
-        swordBlades = 3;
+
 
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        Animator anim = GameObject.Find("RightSwordHolder").GetComponent<Animator>();
+        Animator anim = GameObject.Find("LeftSwordHolder").GetComponent<Animator>();
         anim.SetInteger("AttackState", attackstate);
         anim.SetBool("isReloading", isReloading);
+        anim.SetBool("ReloadWithSwords", reloadingWithSwords);
 
 
-
-
-
-        
+        if (swordBlades == 0 && disappeared == false)
+        {
+            StartCoroutine(BladeDisappear());
+        }
 
         cooldown -= 1 * Time.deltaTime;
 
@@ -118,10 +125,7 @@ public class MeleeScriptTwo : MonoBehaviour
             attackstate = 2;
         }
 
-        if (swordBlades == 0 && disappeared == false)
-        {
-            StartCoroutine(BladeDisappear());
-        }
+
 
 
 
@@ -139,7 +143,7 @@ public class MeleeScriptTwo : MonoBehaviour
                     cooldown = maxCooldown;
                 }
             }
-            else if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range) )
+            else if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
                 if (Input.GetKeyUp(KeyCode.F))
                 {
@@ -186,10 +190,7 @@ public class MeleeScriptTwo : MonoBehaviour
             }
 
         }
-        if (chargedDamage > 15)
-        {
-            CameraShaker.Instance.ShakeOnce(0.1f, 5f, 1f, 0.1f);
-        }
+
 
         if (attackstate == 0)
         {
@@ -200,16 +201,20 @@ public class MeleeScriptTwo : MonoBehaviour
             StartCoroutine(Reload());
             isReloading = true;
         }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(ReloadWithSwords());
+            reloadingWithSwords = true;
+        }
 
     }
 
     public IEnumerator BladeDisappear()
     {
-
         yield return new WaitForSeconds(0.2f);
         disappeared = true;
         blade.SetActive(false);
-        
+
     }
 
     public IEnumerator Slash()
@@ -217,27 +222,43 @@ public class MeleeScriptTwo : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(finalDamage);
         swordBlades -= 1;
-        swordhitParticle.GetComponent<ParticleSystem>().Play();
+        Instantiate(swordhitParticle, hit.point, Quaternion.identity);
 
     }
     public IEnumerator SlashHit()
     {
         yield return new WaitForSeconds(0.2f);
-        swordhitParticle.GetComponent<ParticleSystem>().Play();
+        if (swordBlades > 0)
+        {
+            Instantiate(swordGroundhitParticle, hit.point, Quaternion.identity);
+        }
     }
 
-
+    public IEnumerator ReloadWithSwords()
+    {
+        weaponSway.canSway = false;
+        yield return new WaitForSeconds(1f);
+        blade.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        blade.SetActive(true);
+        disappeared = false;
+        yield return new WaitForSeconds(1.5f);
+        swordBlades = 3;
+        reloadingWithSwords = false;
+        weaponSway.canSway = true;
+    }
 
 
     public IEnumerator Reload()
     {
         weaponSway.canSway = false;
-        
+
         blade.SetActive(false);
         yield return new WaitForSeconds(1f);
-        swordBlades = 3;
+
         blade.SetActive(true);
         yield return new WaitForSeconds(1.5f);
+        swordBlades = 3;
         disappeared = false;
         isReloading = false;
         weaponSway.canSway = true;

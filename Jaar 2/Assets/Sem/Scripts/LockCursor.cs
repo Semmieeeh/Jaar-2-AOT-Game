@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class LockCursor : MonoBehaviour
 {
-    void Update()
+    void Start()
     {
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked; 
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked; 
     }
 }
