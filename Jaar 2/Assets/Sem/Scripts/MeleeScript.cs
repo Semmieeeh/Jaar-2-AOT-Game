@@ -19,7 +19,7 @@ public class MeleeScript : MonoBehaviour
     public float maxCooldown;
     RaycastHit hit;
     public ParticleSystem swordhitParticle;
-    
+
     public GameObject fpsCam;
     public LayerMask enemy;
     public int attackstate;
@@ -59,14 +59,14 @@ public class MeleeScript : MonoBehaviour
 
     }
 
-    
+
     // Update is called once per frame
     void Update()
     {
         Animator anim = GameObject.Find("RightSwordHolder").GetComponent<Animator>();
         anim.SetInteger("AttackState", attackstate);
         anim.SetBool("isReloading", isReloading);
-        anim.SetBool("ReloadingWithSwords", reloadingWithSwords);
+        anim.SetBool("ReloadWithSwords", reloadingWithSwords);
 
 
         if (swordBlades == 0 && disappeared == false)
@@ -74,18 +74,18 @@ public class MeleeScript : MonoBehaviour
             StartCoroutine(BladeDisappear());
         }
 
-        cooldown -= 1*Time.deltaTime;
+        cooldown -= 1 * Time.deltaTime;
 
         if (cooldown < minCooldown)
         {
             cooldown = minCooldown;
         }
 
-        if(cooldown > maxCooldown)
+        if (cooldown > maxCooldown)
         {
             cooldown = maxCooldown;
         }
-        if(cooldown == minCooldown)
+        if (cooldown == minCooldown)
         {
             canAttack = true;
         }
@@ -93,32 +93,32 @@ public class MeleeScript : MonoBehaviour
         {
             canAttack = false;
         }
-        
+
         attackStateReset -= 1 * Time.deltaTime;
         if (attackStateReset > attackStateResetResetMax)
         {
             attackStateReset = attackStateResetResetMax;
 
         }
-        if(attackStateReset < attackStateResetResetMin)
+        if (attackStateReset < attackStateResetResetMin)
         {
             attackStateReset = attackStateResetResetMin;
         }
-        
-        
-        if(chargedDamage > maxChargedDamage)
+
+
+        if (chargedDamage > maxChargedDamage)
         {
             chargedDamage = maxChargedDamage;
         }
 
 
 
-        
+
         if (Input.GetKey(KeyCode.F))
         {
             chargedDamage += 15 * Time.deltaTime;
             attackstate = 1;
-            
+
         }
         if (Input.GetKeyUp(KeyCode.F))
         {
@@ -185,23 +185,23 @@ public class MeleeScript : MonoBehaviour
             if (attackTransition == attackTransitionMin)
             {
                 attackstate = 0;
-                
-                
+
+
             }
 
         }
-        
 
-        if(attackstate == 0)
+
+        if (attackstate == 0)
         {
-            
+
         }
         if (Input.GetKeyDown(KeyCode.R) && isReloading == false && swordBlades == 0)
         {
             StartCoroutine(Reload());
             isReloading = true;
         }
-        else if (Input.GetKeyDown(KeyCode.R))
+        else if (Input.GetKeyDown(KeyCode.R) && reloadingWithSwords == false && swordBlades > 0)
         {
             StartCoroutine(ReloadWithSwords());
             reloadingWithSwords = true;
@@ -237,6 +237,7 @@ public class MeleeScript : MonoBehaviour
     public IEnumerator ReloadWithSwords()
     {
         weaponSway.canSway = false;
+        canAttack = false;
         yield return new WaitForSeconds(1f);
         blade.SetActive(false);
         yield return new WaitForSeconds(1f);
@@ -244,6 +245,7 @@ public class MeleeScript : MonoBehaviour
         disappeared = false;
         yield return new WaitForSeconds(1.5f);
         swordBlades = 3;
+        canAttack = true;
         reloadingWithSwords = false;
         weaponSway.canSway = true;
     }
@@ -252,7 +254,7 @@ public class MeleeScript : MonoBehaviour
     public IEnumerator Reload()
     {
         weaponSway.canSway = false;
-
+        canAttack = false;
         blade.SetActive(false);
         yield return new WaitForSeconds(1f);
 
@@ -260,6 +262,7 @@ public class MeleeScript : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         swordBlades = 3;
         disappeared = false;
+        canAttack = true;
         isReloading = false;
         weaponSway.canSway = true;
     }

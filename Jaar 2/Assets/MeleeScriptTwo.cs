@@ -201,7 +201,7 @@ public class MeleeScriptTwo : MonoBehaviour
             StartCoroutine(Reload());
             isReloading = true;
         }
-        else if (Input.GetKeyDown(KeyCode.R))
+        else if (Input.GetKeyDown(KeyCode.R) &&reloadingWithSwords == false &&swordBlades >0)
         {
             StartCoroutine(ReloadWithSwords());
             reloadingWithSwords = true;
@@ -237,6 +237,7 @@ public class MeleeScriptTwo : MonoBehaviour
     public IEnumerator ReloadWithSwords()
     {
         weaponSway.canSway = false;
+        canAttack = false;
         yield return new WaitForSeconds(1f);
         blade.SetActive(false);
         yield return new WaitForSeconds(1f);
@@ -244,6 +245,7 @@ public class MeleeScriptTwo : MonoBehaviour
         disappeared = false;
         yield return new WaitForSeconds(1.5f);
         swordBlades = 3;
+        canAttack = true;
         reloadingWithSwords = false;
         weaponSway.canSway = true;
     }
@@ -252,7 +254,7 @@ public class MeleeScriptTwo : MonoBehaviour
     public IEnumerator Reload()
     {
         weaponSway.canSway = false;
-
+        canAttack = false;
         blade.SetActive(false);
         yield return new WaitForSeconds(1f);
 
@@ -260,6 +262,7 @@ public class MeleeScriptTwo : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         swordBlades = 3;
         disappeared = false;
+        canAttack = true;
         isReloading = false;
         weaponSway.canSway = true;
     }
