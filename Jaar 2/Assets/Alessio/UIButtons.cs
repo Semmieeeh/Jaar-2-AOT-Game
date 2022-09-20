@@ -12,6 +12,7 @@ public class UIButtons : MonoBehaviour
     public GameObject music;
     public GameObject fullscreen, resolution;
     public GameObject canvasSem;
+    public GameObject currency;
 
     public void Start()
     {
@@ -24,6 +25,7 @@ public class UIButtons : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         //canvasSem.SetActive(false);
+        currency.SetActive(false);
     }
     public void Play()
     {
@@ -35,16 +37,19 @@ public class UIButtons : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         //canvasSem.SetActive(true);
+        currency.SetActive(true);
     }
     public void Escape()
     {
         mainMenu.SetActive(true);
         image.SetActive(true);
+        currency.SetActive(false);
     }
     public void ExitEscape()
     {
         mainMenu.SetActive(false);
         image.SetActive(false);
+        currency.SetActive(true);
 
     }
 

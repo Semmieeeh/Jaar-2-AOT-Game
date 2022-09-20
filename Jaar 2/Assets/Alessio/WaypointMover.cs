@@ -10,6 +10,10 @@ public class WaypointMover : MonoBehaviour
 
     [SerializeField] private float distanceTreshold = 0.1f;
 
+    public Transform wall;
+
+    [SerializeField] public float distanceToWall;
+
     private Transform currentWaypoint;
     // Start is called before the first frame update
     void Start()
@@ -30,5 +34,16 @@ public class WaypointMover : MonoBehaviour
             currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
             transform.LookAt(currentWaypoint);
         }
+
+        float dist = Vector3.Distance(wall.position, transform.position);
+        distanceToWall = dist;
+
+        if(distanceToWall < 5)
+        {
+            moveSpeed = 0f;
+            transform.LookAt(wall);
+            wall.GetComponent<Healthbarscript>().WallDamage(1f * Time.unscaledDeltaTime);
+        }
+
     }
 }
