@@ -44,7 +44,7 @@ public class MeleeScript : MonoBehaviour
         isShaking = false;
         swordBlades = 3;
         reloadingWithSwords = false;
-        range = 3f;
+        range = 4.5f;
         damage = 10;
         maxCooldown = 1;
         minCooldown = 0;
