@@ -11,18 +11,15 @@ public class Healthbarscript : MonoBehaviour
     public void Update()
     {
         UpdateHealthBar();
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            currentHeal -= 1f;
-        }
+        
     }
     public void UpdateHealthBar()
     {
         float fillAmount = (float)currentHeal/(float)maxHeal;
         healthbarSprite.fillAmount = fillAmount;
     }
-    public void DamageTitan(float amount)
+    public void WallDamage(float amount)
     {
-        amount = currentHeal;
+        currentHeal -= amount;
     }
 }
