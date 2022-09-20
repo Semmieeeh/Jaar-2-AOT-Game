@@ -4,12 +4,12 @@ using UnityEngine;
 
 
 
-public class AirAudio : MonoBehaviour
+public class SlashSounds : MonoBehaviour
 {
     public Sound[] sounds;
 
 
-    public static AirAudio instance;
+    public static SlashSounds instance;
 
     public void Awake()
     {
@@ -47,7 +47,7 @@ public class AirAudio : MonoBehaviour
 
         if (s == null)
         {
-            
+            Debug.LogWarning("Sound" + name + "not found!");
             return;
         }
 

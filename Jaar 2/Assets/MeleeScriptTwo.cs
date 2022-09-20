@@ -192,19 +192,18 @@ public class MeleeScriptTwo : MonoBehaviour
         }
 
 
-        if (attackstate == 0)
+        if(cooldown == minCooldown)
         {
-
-        }
-        if (Input.GetKeyDown(KeyCode.R) && isReloading == false && swordBlades == 0)
-        {
-            StartCoroutine(Reload());
-            isReloading = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.R) &&reloadingWithSwords == false &&swordBlades >0)
-        {
-            StartCoroutine(ReloadWithSwords());
-            reloadingWithSwords = true;
+            if (Input.GetKeyDown(KeyCode.R) && isReloading == false && swordBlades == 0)
+            {
+                StartCoroutine(Reload());
+                isReloading = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.R) && reloadingWithSwords == false && swordBlades > 0)
+            {
+                StartCoroutine(ReloadWithSwords());
+                reloadingWithSwords = true;
+            }
         }
 
     }

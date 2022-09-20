@@ -17,9 +17,11 @@ public class HealthScript : MonoBehaviour
     public float minHealth = 0;
     public bool healthRegeneration;
     public float healthRegenDelay;
-    public float maxDelay = 3f;
+    public float maxDelay = 10f;
     public float minDelay = 0f;
     public bool death;
+    public bool tookDamage;
+    public bool damageDelay;
     
 
 
@@ -44,7 +46,7 @@ public class HealthScript : MonoBehaviour
             getToCover.SetActive(false);
         }
 
-        healthRegenDelay -= 0.5f * Time.deltaTime;
+        healthRegenDelay -= 0.5f*Time.deltaTime;
         if(healthRegenDelay < minDelay)
         {
             healthRegenDelay = minDelay;
@@ -55,9 +57,20 @@ public class HealthScript : MonoBehaviour
             healthRegeneration = true;
             
         }
-        if(healthRegeneration == true)
+        else if(healthRegenDelay > minDelay)
+        {
+            healthRegeneration = false;
+        }
+
+
+
+        if (healthRegeneration == true)
         {
             health += 100 * Time.deltaTime;
+        }
+        else
+        {
+            health += 0 * Time.deltaTime;
         }
 
         if(health > maxHealth)
@@ -72,24 +85,26 @@ public class HealthScript : MonoBehaviour
         if(death == true)
         {
 
-            Time.timeScale = 0f;
+            
             deathUI.SetActive(true);
 
         }
-
-
-
-
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.name == ("Wall"))
+        if(tookDamage == true)
         {
+            
             healthRegenDelay = maxDelay;
-
+            healthRegeneration = false;
+            tookDamage = false;
         }
+
+
+
     }
+    
 
-
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+    }
 
 }

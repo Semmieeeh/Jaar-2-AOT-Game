@@ -23,8 +23,10 @@ public class GrapplingTest : MonoBehaviour
     public float maxDamperStrength;
     public GameObject grapplePointChild;
     public GameObject grapplePointParent;
+    public GameObject fpsCam;
     public float grappleTime;
-
+    public float zoom;
+    
     public RaycastHit hit;
     public GameObject childOfPoint;
     public bool fallEffect;
@@ -38,7 +40,7 @@ public class GrapplingTest : MonoBehaviour
         idleStrength = 4;
         
         minDamperStrength = 1f;
-        
+        zoom = 60f;
     }
 
     
@@ -74,10 +76,6 @@ public class GrapplingTest : MonoBehaviour
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) && Input.GetMouseButtonDown(0))
         {
             StartGrapple();
-            
-            
-            
-
         }
         
         else if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.LeftAlt))
@@ -97,13 +95,19 @@ public class GrapplingTest : MonoBehaviour
 
 
         }
+
+
         
-        if(isGrappling == false)
+
+
+
+
+        if (isGrappling == false)
         {
             return;
         }
 
-
+        
        
 
         if (isGrappling == true && Input.GetMouseButton(1))
@@ -119,9 +123,6 @@ public class GrapplingTest : MonoBehaviour
         }
 
         
-
-
-
 
 
         if (childOfPoint == null)

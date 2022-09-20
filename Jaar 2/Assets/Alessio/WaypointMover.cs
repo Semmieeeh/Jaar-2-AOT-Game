@@ -22,7 +22,7 @@ public class WaypointMover : MonoBehaviour
         transform.position = currentWaypoint.position;
 
         currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
-        transform.LookAt(currentWaypoint);
+        transform.LookAt(currentWaypoint.transform.position);
     }
 
     // Update is called once per frame
