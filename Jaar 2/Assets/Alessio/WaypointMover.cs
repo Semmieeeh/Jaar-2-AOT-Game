@@ -42,8 +42,7 @@ public class WaypointMover : MonoBehaviour
         {
             moveSpeed = 0f;
             transform.LookAt(wall);
-            wall.GetComponent<Healthbarscript>().WallDamage(1f * Time.unscaledDeltaTime);
+            wall.GetComponent<Healthbarscript>().WallDamage(20f * Time.unscaledDeltaTime);
         }
-
     }
 }

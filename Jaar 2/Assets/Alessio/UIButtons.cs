@@ -13,7 +13,6 @@ public class UIButtons : MonoBehaviour
     public GameObject fullscreen, resolution;
     public GameObject canvasSem;
     public GameObject currency;
-
     public void Start()
     {
         credits.SetActive(false);

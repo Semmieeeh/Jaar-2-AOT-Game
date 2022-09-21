@@ -26,7 +26,8 @@ public class PlayerJump : MonoBehaviour
             {
                 player.GetComponent<Dash>().mayDash = false;
 
-                GetComponent<Rigidbody>().velocity += jumpPower;        
+                GetComponent<Rigidbody>().velocity += jumpPower;
+                isGrounded = false;
             }
         }
     }

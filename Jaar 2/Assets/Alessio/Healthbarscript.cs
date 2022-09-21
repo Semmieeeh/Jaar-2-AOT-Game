@@ -11,7 +11,6 @@ public class Healthbarscript : MonoBehaviour
     public void Update()
     {
         UpdateHealthBar();
-        
     }
     public void UpdateHealthBar()
     {
