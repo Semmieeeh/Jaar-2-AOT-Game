@@ -7,9 +7,11 @@ public class Esc : MonoBehaviour
     public GameObject canvas;
     public GameObject canvasSem;
     public bool canvasActive;
+    public bool gameOverMenu;
 
     public GameObject gameOver;
     public GameObject image;
+    public GameObject currency;
 
     public Transform wall;
     // Start is called before the first frame update
@@ -17,6 +19,7 @@ public class Esc : MonoBehaviour
     {
         canvasActive = false;
         gameOver.SetActive(false);
+        gameOverMenu = true;
     }
 
     void Update()
@@ -28,32 +31,41 @@ public class Esc : MonoBehaviour
             Time.timeScale = 0f;
         }
 
-        if (canvasActive == false)
+        if(gameOver.activeSelf == true)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            currency.SetActive(false);
+            gameOverMenu = false;
+        }
+
+        if(gameOverMenu == true)
+        {
+            if (canvasActive == false)
             {
-                canvasActive = true;
-                Time.timeScale = 0f;
-                canvas.GetComponent<UIButtons>().Escape();
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                //canvasSem.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    canvasActive = true;
+                    Time.timeScale = 0f;
+                    canvas.GetComponent<UIButtons>().Escape();
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    //canvasSem.SetActive(true);
+
+                }
+            }
+            else if (canvasActive == true)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    canvasActive = false;
+                    Time.timeScale = 1f;
+                    canvas.GetComponent<UIButtons>().ExitEscape();
+                    canvas.GetComponent<UIButtons>().EscBack();
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    //canvasSem.SetActive(false);
+                }
 
             }
-        }
-        else if (canvasActive == true)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                canvasActive = false;
-                Time.timeScale = 1f;
-                canvas.GetComponent<UIButtons>().ExitEscape();
-                canvas.GetComponent<UIButtons>().EscBack();
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-                //canvasSem.SetActive(false);
-            }
-
-        }
+        }       
     }
 }
