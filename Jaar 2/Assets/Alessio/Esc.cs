@@ -7,16 +7,28 @@ public class Esc : MonoBehaviour
     public GameObject canvas;
     public GameObject canvasSem;
     public bool canvasActive;
+
+    public GameObject gameOver;
+    public GameObject image;
+
+    public Transform wall;
     // Start is called before the first frame update
     void Start()
     {
         canvasActive = false;
+        gameOver.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(canvasActive == false)
+        if(wall.GetComponent<Healthbarscript>().currentHeal < 0f)
+        {
+            gameOver.SetActive(true);
+            image.SetActive(true);
+            Time.timeScale = 0f;
+        }
+
+        if (canvasActive == false)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -26,10 +38,10 @@ public class Esc : MonoBehaviour
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 //canvasSem.SetActive(true);
-                
+
             }
         }
-        else if(canvasActive == true)
+        else if (canvasActive == true)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
