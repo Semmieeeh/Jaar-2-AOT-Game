@@ -86,7 +86,7 @@ public class HealthScript : MonoBehaviour
         {
 
             
-            deathUI.SetActive(true);
+            //deathUI.SetActive(true);
 
         }
         if(tookDamage == true)

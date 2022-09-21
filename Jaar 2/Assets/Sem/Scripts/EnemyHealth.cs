@@ -52,12 +52,10 @@ public class EnemyHealth : MonoBehaviour
 
     public IEnumerator DeathEffect()
     {
-        
-        
         navMesh.enabled = false;
         navMeshAgent.enabled = false;
         rb.freezeRotation = false;
-
+        //currency+
         rb.AddForce(fpsCam.transform.forward * knockback, ForceMode.Impulse);
         yield return new WaitForSeconds(10);
         Destroy(gameObject);
