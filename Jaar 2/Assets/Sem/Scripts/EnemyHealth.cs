@@ -57,6 +57,7 @@ public class EnemyHealth : MonoBehaviour
         navMesh.enabled = false;
         navMeshAgent.enabled = false;
         rb.freezeRotation = false;
+
         rb.AddForce(fpsCam.transform.forward * knockback, ForceMode.Impulse);
         yield return new WaitForSeconds(10);
         Destroy(gameObject);

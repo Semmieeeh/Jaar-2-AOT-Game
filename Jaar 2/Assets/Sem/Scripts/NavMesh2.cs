@@ -76,8 +76,9 @@ public class NavMesh2 : MonoBehaviour
                 if(Vector3.Distance(gameObject.transform.position, player.transform.position) < attackRange && attackCooldown < 0.1)
                 {
                     playerHealth.TakeDamage(damage);
-                    playerHealth.healthRegeneration = false;
+                    
                     playerHealth.tookDamage = true;
+                    playerHealth.healthRegeneration = false;
                     attackCooldown += 3;
                 }
 
