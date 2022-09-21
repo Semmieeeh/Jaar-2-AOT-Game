@@ -1990,7 +1990,7 @@ GameObject:
   - component: {fileID: 8697349250302226780}
   m_Layer: 5
   m_Name: MainMenu
-  m_TagString: Untagged
+  m_TagString: MainMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4385,8 +4385,10 @@ MonoBehaviour:
   canvas: {fileID: 8697349250302226770}
   canvasSem: {fileID: 0}
   canvasActive: 0
+  gameOverMenu: 1
   gameOver: {fileID: 1393491756}
   image: {fileID: 8697349250184768299}
+  currency: {fileID: 919599628}
   wall: {fileID: 1783035915}
 --- !u!114 &8697349251606530041
 MonoBehaviour:

@@ -9,6 +9,7 @@ TagManager:
   - Canisters
   - Kevin
   - Titan
+  - MainMenu
   layers:
   - Default
   - TransparentFX
