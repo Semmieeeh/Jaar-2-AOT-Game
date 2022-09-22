@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +31,7 @@ public class NavMesh2 : MonoBehaviour
         Patrolling,
         Chasing,
         Attacking,
-
+        Wandering,
     }
     public TitanState state = TitanState.Patrolling;
     public void Start()
@@ -107,11 +108,11 @@ public class NavMesh2 : MonoBehaviour
         }
 
 
-
+        
         
 
         
-
+        
 
 
 
