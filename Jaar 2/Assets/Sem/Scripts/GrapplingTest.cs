@@ -17,15 +17,15 @@ public class GrapplingTest : MonoBehaviour
     public bool isGrappling = false;
     public float grappleStrength;
     public float idleStrength;
-    public bool stillGrappling;
+   
     public float damperStrength;
     public float minDamperStrength;
     public float maxDamperStrength;
     public GameObject grapplePointChild;
     public GameObject grapplePointParent;
     public GameObject fpsCam;
-    public float grappleTime;
-    public float zoom;
+    
+    
     
     public RaycastHit hit;
     public GameObject childOfPoint;
@@ -40,7 +40,7 @@ public class GrapplingTest : MonoBehaviour
         idleStrength = 4;
         
         minDamperStrength = 1f;
-        zoom = 60f;
+        
     }
 
     
@@ -172,7 +172,7 @@ public class GrapplingTest : MonoBehaviour
             joint.connectedAnchor = grapplePoint;
             pm.airMultiplier = 15f;
             float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
-            stillGrappling = true;
+            
             joint.maxDistance = distanceFromPoint * 0.8f;
             joint.minDistance = distanceFromPoint * 0f;
 

@@ -22,6 +22,8 @@ public class MapGeneration : MonoBehaviour
             Vector3 pos = new Vector3(Random.Range(gameObject.transform.position.x + xMax, gameObject.transform.position.x - xMin), 0, Random.Range(gameObject.transform.position.z +zMax, gameObject.transform.position.z - zMin));
             Collider[] hitColliders = Physics.OverlapSphere(pos, minDistanceBetweenSpawns);
             bool canSpawn = true;
+
+
             for(int j = 0; j < hitColliders.Length; j++)
             {
                 if (hitColliders[j].tag != "Ground")
