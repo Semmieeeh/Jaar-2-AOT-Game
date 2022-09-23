@@ -465,7 +465,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189846681}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -253.92, y: 0.8, z: 0.84}
+  m_LocalPosition: {x: -250, y: 0.8, z: 0}
   m_LocalScale: {x: 163.66, y: 2.3673, z: 165.48001}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -481,7 +481,7 @@ BoxCollider:
   m_GameObject: {fileID: 189846681}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -920,7 +920,6 @@ GameObject:
   - component: {fileID: 266305395}
   - component: {fileID: 266305394}
   - component: {fileID: 266305397}
-  - component: {fileID: 266305398}
   - component: {fileID: 266305399}
   - component: {fileID: 266305400}
   - component: {fileID: 266305401}
@@ -1109,27 +1108,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &266305398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266305392}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d2f090697153b94fbc89ffb588db9c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunTip: {fileID: 1602310882}
-  cam: {fileID: 963194228}
-  player: {fileID: 1554603573}
-  aboutToGrapple: 0
-  isGrappling: 0
-  grappleRange: 0
-  grapplePoint: {x: 0, y: 0, z: 0}
-  grappleJump: 0
-  maxDistance: 30
 --- !u!114 &266305399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1152,15 +1130,12 @@ MonoBehaviour:
   isGrappling: 0
   grappleStrength: 0
   idleStrength: 0
-  stillGrappling: 0
   damperStrength: 0
   minDamperStrength: 0
   maxDamperStrength: 0
   grapplePointChild: {fileID: 55807967557140833, guid: e53439e531a0795488cdb2e4e3326877, type: 3}
   grapplePointParent: {fileID: 0}
   fpsCam: {fileID: 963194225}
-  grappleTime: 0
-  zoom: 0
   childOfPoint: {fileID: 0}
   fallEffect: 0
 --- !u!114 &266305400
@@ -1488,7 +1463,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381581506}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.095, y: -0.41, z: 0.54}
+  m_LocalPosition: {x: 0, y: -0.41, z: 0.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1794,7 +1769,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 559475458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -255.1, y: 0, z: 0}
+  m_LocalPosition: {x: -275, y: 0, z: -55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6158,6 +6133,7 @@ GameObject:
   - component: {fileID: 1648814040}
   - component: {fileID: 1648814039}
   - component: {fileID: 1648814041}
+  - component: {fileID: 1648814042}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -6172,14 +6148,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648814038}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ffb999342a6a494b93983d4eedd8164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnAbles:
   - {fileID: 2951354033380533727, guid: 7e9d7564f634be745b66804cc16e34c2, type: 3}
-  spawnAblesCount: 500
+  spawnAblesCount: 1000
   xMax: 75
   xMin: 75
   zMax: 75
@@ -6187,6 +6163,8 @@ MonoBehaviour:
   spawnAble:
     serializedVersion: 2
     m_Bits: 512
+  j: 0
+  minDistanceBetweenSpawns: 10
 --- !u!4 &1648814040
 Transform:
   m_ObjectHideFlags: 0
@@ -6214,12 +6192,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa5105afa4af7c0438d3ce41730de887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridX: 75
-  gridZ: 75
-  prefabToSpawn: {fileID: 2951354033380533727, guid: 7e9d7564f634be745b66804cc16e34c2, type: 3}
-  gridOrigin: {x: 0, y: 0, z: 0}
-  gridOffset: 2
-  generateOnEnable: 0
+  spawnAbles:
+  - {fileID: 2951354033380533727, guid: 7e9d7564f634be745b66804cc16e34c2, type: 3}
+  gridX: 5
+  gridZ: 5
+  gridSpacingOffset: 2
+  gridSpacingOffsetTwo: 2
+--- !u!114 &1648814042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648814038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b51140f82e7964d816b8580f2a244b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 2951354033380533727, guid: 7e9d7564f634be745b66804cc16e34c2, type: 3}
+  numberOfObjects: 50
+  radius: 30
+  minDistanceBetweenSpawns: 1.5
+  pressedSpace: 0
 --- !u!1 &1663097561
 GameObject:
   m_ObjectHideFlags: 0
@@ -6495,7 +6491,6 @@ GameObject:
   - component: {fileID: 1766412016}
   - component: {fileID: 1766412015}
   - component: {fileID: 1766412014}
-  - component: {fileID: 1766412013}
   - component: {fileID: 1766412012}
   - component: {fileID: 1766412018}
   - component: {fileID: 1766412019}
@@ -6544,38 +6539,14 @@ MonoBehaviour:
   isGrappling: 0
   grappleStrength: 0
   idleStrength: 0
-  stillGrappling: 0
   damperStrength: 0
   minDamperStrength: 0
   maxDamperStrength: 0
   grapplePointChild: {fileID: 55807967557140833, guid: e53439e531a0795488cdb2e4e3326877, type: 3}
   grapplePointParent: {fileID: 0}
   fpsCam: {fileID: 963194225}
-  grappleTime: 0
-  zoom: 0
   childOfPoint: {fileID: 0}
   fallEffect: 0
---- !u!114 &1766412013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766412010}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d2f090697153b94fbc89ffb588db9c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunTip: {fileID: 1896768038}
-  cam: {fileID: 963194228}
-  player: {fileID: 1554603573}
-  aboutToGrapple: 0
-  isGrappling: 0
-  grappleRange: 0
-  grapplePoint: {x: 0, y: 0, z: 0}
-  grappleJump: 0
-  maxDistance: 30
 --- !u!120 &1766412014
 LineRenderer:
   m_ObjectHideFlags: 0

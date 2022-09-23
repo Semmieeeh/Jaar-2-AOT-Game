@@ -1,40 +1,48 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class GridSpawner : MonoBehaviour
 {
 
-    public int gridX = 4;
-    public int gridZ = 4;
-    public GameObject prefabToSpawn;
-    public Vector3 gridOrigin = Vector3.zero;
-    public float gridOffset = 2f;
-    public bool generateOnEnable;
+    public GameObject[] spawnAbles;
+    public int gridX;
+    public int gridZ;
+    public float gridSpacingOffset;
+    public float gridSpacingOffsetTwo;
+    Vector3 gridOrigin;
 
 
-    void OnEnable()
+    public void Start()
     {
-        if (generateOnEnable)
-        {
-            Generate();
-        }
-    }
+        gridOrigin = transform.position;
 
-    public void Generate()
-    {
         SpawnGrid();
     }
-
-
-    void SpawnGrid()
+    public void SpawnGrid()
     {
-        for (int x = 0; x < gridX; x++)
+        for(int x = 0; x< gridX; x++)
         {
-            for (int z = 0; z < gridZ; z++)
+            for(int z = 0; z< gridZ; z++)
             {
-                GameObject clone = Instantiate(prefabToSpawn,transform.position + gridOrigin + new Vector3(gridOffset * x, 0, gridOffset * z), transform.rotation);
-
-                clone.transform.SetParent(this.transform);
+                //gridSpacingOffset = Random.Range(1, 4);
+                //gridSpacingOffsetTwo = Random.Range(1, 4);
+                Vector3 spawnPosition = new Vector3(x * gridSpacingOffset, 0, z * gridSpacingOffsetTwo) + gridOrigin;
+                //PickAndSpawn(spawnPosition, Quaternion.Euler(0, Random.Range(-100,100),0));
+                PickAndSpawn(spawnPosition,Quaternion.identity);
+                
             }
         }
     }
+
+
+    public void PickAndSpawn(Vector3 positionToSpawn,Quaternion rotationToSpawn)
+    {
+        
+        int randomIndex = Random.Range(0,spawnAbles.Length);
+        GameObject clone = Instantiate(spawnAbles[randomIndex],positionToSpawn, rotationToSpawn);
+    }
+
+
+
+
 }
