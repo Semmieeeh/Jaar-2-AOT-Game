@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class GridSpawner : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class GridSpawner : MonoBehaviour
     public float gridSpacingOffset;
     public float gridSpacingOffsetTwo;
     Vector3 gridOrigin;
+    public float cycle;
+    public Vector3 spawnPos;
+    public float distanceBetweenPrefabs;
+    
 
 
     public void Start()
@@ -24,12 +29,47 @@ public class GridSpawner : MonoBehaviour
         {
             for(int z = 0; z< gridZ; z++)
             {
-                //gridSpacingOffset = Random.Range(1, 4);
-                //gridSpacingOffsetTwo = Random.Range(1, 4);
-                Vector3 spawnPosition = new Vector3(x * gridSpacingOffset, 0, z * gridSpacingOffsetTwo) + gridOrigin;
-                //PickAndSpawn(spawnPosition, Quaternion.Euler(0, Random.Range(-100,100),0));
-                PickAndSpawn(spawnPosition,Quaternion.identity);
                 
+                
+                 spawnPos = new Vector3(x * gridSpacingOffset, 0,z * gridSpacingOffsetTwo) + gridOrigin;
+                spawnPos.z += 4;
+                
+                PickAndSpawn(spawnPos,Quaternion.identity);
+
+                spawnPos = new Vector3(x * gridSpacingOffset, 0, -z * gridSpacingOffsetTwo) + gridOrigin;
+                spawnPos.z -= 4;
+                PickAndSpawn(spawnPos, Quaternion.identity);
+
+
+
+                cycle += 1;
+                if(cycle > 110)
+                {
+
+                    
+
+                    if(gridZ == 10)
+                    {
+                        gridZ -= 2;
+                    }
+
+                    if(cycle > 130)
+                    {
+                        if (gridZ == 8)
+                        {
+                            gridZ -= 2;
+                        }
+                    }
+
+                    if(cycle > 140)
+                    {
+                        if(gridZ == 6)
+                        {
+                            gridZ -= 2;
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -39,7 +79,26 @@ public class GridSpawner : MonoBehaviour
     {
         
         int randomIndex = Random.Range(0,spawnAbles.Length);
-        GameObject clone = Instantiate(spawnAbles[randomIndex],positionToSpawn, rotationToSpawn);
+        Collider[] hitCollider = Physics.OverlapSphere(spawnPos,distanceBetweenPrefabs);
+        bool canSpawn = true;
+
+
+
+
+        for (int j = 0; j < hitCollider.Length; j++)
+        {
+            if (hitCollider[j].tag != "Ground")
+            {
+                canSpawn = false;
+                continue;
+            }
+        }
+        if (canSpawn)
+        {
+            GameObject g = Instantiate(spawnAbles[randomIndex], spawnPos, Quaternion.identity);
+            g.transform.parent = transform;
+        }
+        
     }
 
 

@@ -6187,17 +6187,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648814038}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa5105afa4af7c0438d3ce41730de887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnAbles:
   - {fileID: 2951354033380533727, guid: 7e9d7564f634be745b66804cc16e34c2, type: 3}
-  gridX: 5
-  gridZ: 5
-  gridSpacingOffset: 2
+  gridX: 15
+  gridZ: 10
+  gridSpacingOffset: 4
   gridSpacingOffsetTwo: 2
+  cycle: 0
+  spawnPos: {x: 0, y: 0, z: 0}
+  distanceBetweenPrefabs: 1.5
 --- !u!114 &1648814042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6205,7 +6208,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648814038}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95b51140f82e7964d816b8580f2a244b, type: 3}
   m_Name: 
