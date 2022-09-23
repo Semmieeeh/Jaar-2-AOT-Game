@@ -505,7 +505,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6d59b97275a19bb46baeeae4773363b2, type: 2}
+  - {fileID: 2100000, guid: 7d15adaf517b0b54aab8282d3630b156, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6194,13 +6194,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnAbles:
   - {fileID: 2951354033380533727, guid: 7e9d7564f634be745b66804cc16e34c2, type: 3}
-  gridX: 15
+  gridX: 14
   gridZ: 10
   gridSpacingOffset: 4
   gridSpacingOffsetTwo: 2
   cycle: 0
   spawnPos: {x: 0, y: 0, z: 0}
-  distanceBetweenPrefabs: 1.5
+  distanceBetweenPrefabs: 1
+  gridXFirstHalf: 0
+  gridXSecondHalf: 0
+  gridXLastHalf: 0
 --- !u!114 &1648814042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8522,6 +8525,8 @@ MonoBehaviour:
   gameOver: {fileID: 0}
   image: {fileID: 0}
   currency: {fileID: 0}
+  resume: {fileID: 0}
+  restart: {fileID: 0}
   wall: {fileID: 0}
 --- !u!1 &7490228804157802872
 GameObject:
@@ -9981,6 +9986,8 @@ MonoBehaviour:
   resolution: {fileID: 7490228805210555070}
   canvasSem: {fileID: 0}
   currency: {fileID: 0}
+  creditsbutton: {fileID: 0}
+  play: {fileID: 0}
 --- !u!224 &7490228804933910492
 RectTransform:
   m_ObjectHideFlags: 0

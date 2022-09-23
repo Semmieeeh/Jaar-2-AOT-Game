@@ -14,12 +14,16 @@ public class GridSpawner : MonoBehaviour
     public float cycle;
     public Vector3 spawnPos;
     public float distanceBetweenPrefabs;
+    public float gridXFirstHalf;
+    public float gridXSecondHalf;
+    public float gridXLastHalf;
     
 
 
     public void Start()
     {
         gridOrigin = transform.position;
+        gridXFirstHalf = gridZ;
 
         SpawnGrid();
     }
@@ -43,29 +47,37 @@ public class GridSpawner : MonoBehaviour
 
 
                 cycle += 1;
-                if(cycle > 110)
+                if(cycle > 120)
                 {
 
                     
 
-                    if(gridZ == 10)
+                    if(gridZ == gridXFirstHalf)
                     {
-                        gridZ -= 2;
+                        gridZ -= 1;
+                       
                     }
 
-                    if(cycle > 130)
+                    if(cycle > 125)
                     {
-                        if (gridZ == 8)
+                        if (gridZ == 9)
                         {
                             gridZ -= 2;
                         }
                     }
 
-                    if(cycle > 140)
+                    if(cycle > 130)
                     {
-                        if(gridZ == 6)
+                        if(gridZ == 7)
                         {
-                            gridZ -= 2;
+                            gridZ -= 3;
+                        }
+                    }
+                    if(cycle > 135)
+                    {
+                        if(gridZ == 4)
+                        {
+                            gridZ -= 4;
                         }
                     }
                 }
