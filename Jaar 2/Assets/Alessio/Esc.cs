@@ -12,6 +12,7 @@ public class Esc : MonoBehaviour
     public GameObject gameOver;
     public GameObject image;
     public GameObject currency;
+    public GameObject resume;
 
     public Transform wall;
     // Start is called before the first frame update
@@ -20,6 +21,7 @@ public class Esc : MonoBehaviour
         canvasActive = false;
         gameOver.SetActive(false);
         gameOverMenu = true;
+        resume.SetActive(false);
     }
 
     void Update()
@@ -66,6 +68,16 @@ public class Esc : MonoBehaviour
                 }
 
             }
-        }       
+        }   
+    }
+    public void Resume()
+    {
+        GameObject.Find("MainMenu").GetComponent<UIButtons>().Play();
+        resume.SetActive(false);
+    }
+
+    public void ResumeTrue()
+    {
+        resume.SetActive(true);
     }
 }

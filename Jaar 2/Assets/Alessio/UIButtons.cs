@@ -13,6 +13,10 @@ public class UIButtons : MonoBehaviour
     public GameObject fullscreen, resolution;
     public GameObject canvasSem;
     public GameObject currency;
+    public GameObject creditsbutton;
+
+    private bool playtrue;
+    public GameObject play;
     public void Start()
     {
         credits.SetActive(false);
@@ -25,9 +29,25 @@ public class UIButtons : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         //canvasSem.SetActive(false);
         currency.SetActive(false);
+        playtrue = false;
+    }
+    public void Update()
+    {
+        if(playtrue == false)
+        {
+            play.SetActive(true);
+        }
+
+        else if(playtrue == true)
+        {
+            creditsbutton.SetActive(false);
+            play.SetActive(false);
+            GameObject.Find("Canvas").GetComponent<Esc>().ResumeTrue();
+        }
     }
     public void Play()
     {
+        playtrue = true;
         mainMenu.SetActive(false);
         credits.SetActive(false);
         image.SetActive(false);
