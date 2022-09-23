@@ -15,9 +15,6 @@ public class Turrets : MonoBehaviour
     public float damageTurret;
     public float delay;
 
-    public float ShootingTrueTimer;
-    public float ShootingFalseTimer;
-
     //bools 
     public bool shooting;
     bool reloading;
@@ -53,9 +50,6 @@ public class Turrets : MonoBehaviour
         range = 15f;
 
         delay = 0.5f;
-
-        ShootingTrueTimer = 5f;
-        ShootingFalseTimer = 10f;
 
         invisibleStart = true;
 }
@@ -100,42 +94,23 @@ public class Turrets : MonoBehaviour
     }
     private void MyInput()
     {
-        if(invisible == false)
-        {
             transform.LookAt(player);
             Vector3 angles = transform.localEulerAngles;
             angles.x = 0;
             transform.localEulerAngles = angles;
 
-            if (Physics.Raycast(attackPoint.position, transform.forward, out rayHit, range))
-            {
-                if (rayHit.collider.CompareTag("Player"))
-                {
-                    shooting = true;
-                }
-
-                else
-                {
-                    shooting = false;
-                }
-
-            }
-        }
-
-        if (invisible == true)
+        if (Physics.Raycast(attackPoint.position, transform.forward, out rayHit, range))
         {
-            shooting = false;
-        }
-
-        if (invisibleStart == true)
-        {
-            if (Input.GetKeyDown(KeyCode.I))
+            if (rayHit.collider.CompareTag("Player"))
             {
-                invisible = true;
-                invisibleStart = false;
-
-                Invoke("ShootingTrue", ShootingTrueTimer);
+                shooting = true;
             }
+
+            else
+            {
+                shooting = false;
+            }
+
         }
 
         if (bulletsLeft == 0)
@@ -154,18 +129,6 @@ public class Turrets : MonoBehaviour
             gunShot.Play();
             muzzle.Play();
         }
-    }
-
-    private void ShootingTrue()
-    {
-        invisible = false;
-
-        Invoke("ShootingFalse", ShootingFalseTimer);
-    }
-
-    private void ShootingFalse()
-    {
-        invisibleStart = true;
     }
     private void Shoot()
     {
