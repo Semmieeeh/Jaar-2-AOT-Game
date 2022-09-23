@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Esc : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Esc : MonoBehaviour
     public GameObject image;
     public GameObject currency;
     public GameObject resume;
+    public GameObject restart;
 
     public Transform wall;
     // Start is called before the first frame update
@@ -22,12 +24,15 @@ public class Esc : MonoBehaviour
         gameOver.SetActive(false);
         gameOverMenu = true;
         resume.SetActive(false);
+        restart.SetActive(false);
     }
 
     void Update()
     {
         if(wall.GetComponent<Healthbarscript>().currentHeal < 0f)
         {
+            Cursor.lockState = CursorLockMode.None;
+            restart.SetActive(true);
             gameOver.SetActive(true);
             image.SetActive(true);
             Time.timeScale = 0f;
@@ -45,6 +50,7 @@ public class Esc : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
+                    restart.SetActive(true);
                     canvasActive = true;
                     Time.timeScale = 0f;
                     canvas.GetComponent<UIButtons>().Escape();
@@ -58,6 +64,7 @@ public class Esc : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
+                    restart.SetActive(false);
                     canvasActive = false;
                     Time.timeScale = 1f;
                     canvas.GetComponent<UIButtons>().ExitEscape();
@@ -74,10 +81,16 @@ public class Esc : MonoBehaviour
     {
         GameObject.Find("MainMenu").GetComponent<UIButtons>().Play();
         resume.SetActive(false);
+        restart.SetActive(false);
     }
 
     public void ResumeTrue()
     {
         resume.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Servey Corps");
     }
 }
