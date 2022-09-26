@@ -17,6 +17,7 @@ public class NavMesh2 : MonoBehaviour
     public int currentTargetIndex;
     public float inRange;
     public LayerMask playerMask;
+    public LayerMask trapMask;
     public Vector3 rotatie;
     public float xRotation = 0f;
     public string targetName;
@@ -24,14 +25,16 @@ public class NavMesh2 : MonoBehaviour
     public float attackRange;
     public float attackCooldown;
     public float damage;
+    public GameObject trap;
     public HealthScript playerHealth;
+    public bool trapped;
     
     public enum TitanState
     {
         Patrolling,
         Chasing,
         Attacking,
-        Wandering,
+        Trapped,
     }
     public TitanState state = TitanState.Patrolling;
     public void Start()
@@ -39,6 +42,7 @@ public class NavMesh2 : MonoBehaviour
         player = GameObject.Find("Player");
         navMeshAgent = GetComponent<NavMeshAgent>();
         idle = true;
+        trapped = false;
         damage = 50f;
         currentTargetIndex = 0;
         playerHealth = GameObject.Find("Player").GetComponent<HealthScript>();
@@ -84,7 +88,20 @@ public class NavMesh2 : MonoBehaviour
                 }
 
                 break;
-            
+            case TitanState.Trapped:
+
+                navMeshAgent.destination = trap.transform.position;
+                if (Vector3.Distance(gameObject.transform.position, trap.transform.position) < attackRange && attackCooldown < 0.1)
+                {
+
+                    trap.GetComponent<Trap>().TrapDamage(damage);
+                    attackCooldown += 3;
+
+                }
+
+
+
+                break;
 
         }
         attackCooldown -= 1 * Time.deltaTime;
@@ -98,30 +115,35 @@ public class NavMesh2 : MonoBehaviour
         }
 
 
-        if (Vector3.Distance(gameObject.transform.position, player.transform.position) < inRange)
+        if (Vector3.Distance(gameObject.transform.position, player.transform.position) < inRange &&trapped == false)
         {
             state = TitanState.Chasing;
         }
-        else
+        else if(trapped == false)
         {
             state = TitanState.Patrolling;
         }
-
-
-        
-        
-
-        
-        
-
-
-
-
-
-
-
+        else if(trapped == true)
+        {
+            state = TitanState.Trapped;
+        }
 
     }
+
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Trap")
+        {
+            
+            trap = collision.gameObject;
+            trapped = true;
+            state = TitanState.Trapped;
+        }
+    }
+
+
+
 }
 
 

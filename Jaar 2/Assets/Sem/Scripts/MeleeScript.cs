@@ -19,10 +19,11 @@ public class MeleeScript : MonoBehaviour
     public float maxCooldown;
     RaycastHit hit;
     public ParticleSystem swordhitParticle;
-    public CameraShake camShake;
+    public CameraShaker camShake;
     public GameObject fpsCam;
     public LayerMask enemy;
     public int attackstate;
+    
     public float attackTransition;
     public float attackTransitionMax;
     public float attackTransitionMin;
@@ -38,6 +39,7 @@ public class MeleeScript : MonoBehaviour
     public LayerMask swordClink;
     public ParticleSystem swordGroundhitParticle;
     public bool reloadingWithSwords;
+    public float duration, intensity;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +58,7 @@ public class MeleeScript : MonoBehaviour
         attackTransitionMax = 2;
         attackTransitionMin = 0f;
         weaponSway = GameObject.Find("RightSwordHolder").GetComponent<WeaponSway>();
-        camShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
+        camShake = GameObject.Find("Main Camera").GetComponent<CameraShaker>();
 
     }
 
@@ -221,6 +223,13 @@ public class MeleeScript : MonoBehaviour
             }
         }
 
+
+
+
+        if(chargedDamage > 10)
+        {
+            fpsCam.GetComponent<CameraShaker>().ShakeOnce(0.2f, 10f, 2, 0.1f);
+        }
     }
 
     public IEnumerator BladeDisappear()
