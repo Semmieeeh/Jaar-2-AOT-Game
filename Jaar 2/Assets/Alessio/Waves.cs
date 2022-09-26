@@ -9,24 +9,19 @@ public class Waves : MonoBehaviour
 
     float wave = 0;
     float timer = 90;
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         waveUi.text = "Wave:" + wave.ToString("00");
 
         timerUI.text = "Timer:" + timer.ToString("00");
 
-        timer -= 10 * Time.unscaledDeltaTime;
-        if(timer < 0f)
+        timer -= 10 * Time.deltaTime;
+        if (timer < 0f)
         {
             timer = 0f;
         }
 
-        if(timer == 0f)
+        if (timer == 0f)
         {
             wave += 1f;
             timer = 90f;

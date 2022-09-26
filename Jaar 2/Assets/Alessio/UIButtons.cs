@@ -8,17 +8,23 @@ public class UIButtons : MonoBehaviour
     public GameObject credits;
     public GameObject back;
     public GameObject image;
+    public GameObject imageEsc;
     public GameObject slider;
     public GameObject music;
     public GameObject fullscreen, resolution;
     public GameObject canvasSem;
     public GameObject currency;
     public GameObject creditsbutton;
+    public GameObject waves;
+    public GameObject resume;
+    public GameObject restart;
 
     private bool playtrue;
+    public bool escmenuon;
     public GameObject play;
     public void Start()
     {
+        imageEsc.SetActive(false);
         credits.SetActive(false);
         back.SetActive(false);
         slider.SetActive(false);
@@ -30,6 +36,7 @@ public class UIButtons : MonoBehaviour
         //canvasSem.SetActive(false);
         currency.SetActive(false);
         playtrue = false;
+        waves.SetActive(false);
     }
     public void Update()
     {
@@ -47,6 +54,7 @@ public class UIButtons : MonoBehaviour
     }
     public void Play()
     {
+        waves.SetActive(true);
         playtrue = true;
         mainMenu.SetActive(false);
         credits.SetActive(false);
@@ -57,19 +65,23 @@ public class UIButtons : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         //canvasSem.SetActive(true);
         currency.SetActive(true);
+        imageEsc.SetActive(false);
     }
     public void Escape()
     {
         mainMenu.SetActive(true);
-        image.SetActive(true);
         currency.SetActive(false);
+        waves.SetActive(false);
+        imageEsc.SetActive(true);
     }
     public void ExitEscape()
     {
         mainMenu.SetActive(false);
         image.SetActive(false);
         currency.SetActive(true);
-
+        waves.SetActive(true);
+        imageEsc.SetActive(false);
+        resume.SetActive(false);
     }
 
     public void Options()
@@ -79,6 +91,8 @@ public class UIButtons : MonoBehaviour
         slider.SetActive(true);
         fullscreen.SetActive(true);
         resolution.SetActive(true);
+        resume.SetActive(false);
+        restart.SetActive(false);
     }
 
     public void Credits()
@@ -95,6 +109,21 @@ public class UIButtons : MonoBehaviour
         slider.SetActive(false);
         fullscreen.SetActive(false);
         resolution.SetActive(false);
+
+        if(escmenuon == true)
+        {
+            resume.SetActive(true);
+            restart.SetActive(true);
+        }  
+    }
+    public void escmenu()
+    {
+        escmenuon = true;
+    }
+
+    public void escmenuoff()
+    {
+        escmenuon = false;
     }
     public void EscBack()
     {

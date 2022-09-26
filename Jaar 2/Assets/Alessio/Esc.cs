@@ -54,6 +54,7 @@ public class Esc : MonoBehaviour
                     canvasActive = true;
                     Time.timeScale = 0f;
                     canvas.GetComponent<UIButtons>().Escape();
+                    canvas.GetComponent<UIButtons>().escmenu();
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     //canvasSem.SetActive(true);
@@ -69,6 +70,7 @@ public class Esc : MonoBehaviour
                     Time.timeScale = 1f;
                     canvas.GetComponent<UIButtons>().ExitEscape();
                     canvas.GetComponent<UIButtons>().EscBack();
+                    canvas.GetComponent<UIButtons>().escmenuoff();
                     Cursor.visible = false;
                     Cursor.lockState = CursorLockMode.Locked;
                     //canvasSem.SetActive(false);
@@ -80,6 +82,7 @@ public class Esc : MonoBehaviour
     public void Resume()
     {
         GameObject.Find("MainMenu").GetComponent<UIButtons>().Play();
+        canvas.GetComponent<UIButtons>().escmenuoff();
         resume.SetActive(false);
         restart.SetActive(false);
     }
