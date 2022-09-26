@@ -21,7 +21,6 @@ public class Turrets : MonoBehaviour
     bool readyToShoot;
 
     public bool invisible;
-    private bool invisibleStart;
 
     //Reference
     public Transform attackPoint;
@@ -50,8 +49,6 @@ public class Turrets : MonoBehaviour
         range = 15f;
 
         delay = 0.5f;
-
-        invisibleStart = true;
 }
     public void TakeDamageTurret(int dmg)
     {
