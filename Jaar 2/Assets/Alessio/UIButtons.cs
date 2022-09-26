@@ -33,7 +33,7 @@ public class UIButtons : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        //canvasSem.SetActive(false);
+        canvasSem.SetActive(false);
         currency.SetActive(false);
         playtrue = false;
         waves.SetActive(false);
@@ -63,9 +63,10 @@ public class UIButtons : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        //canvasSem.SetActive(true);
+        canvasSem.SetActive(true);
         currency.SetActive(true);
         imageEsc.SetActive(false);
+        GameObject.Find("Canvas").GetComponent<Esc>().Played();
     }
     public void Escape()
     {
@@ -73,6 +74,12 @@ public class UIButtons : MonoBehaviour
         currency.SetActive(false);
         waves.SetActive(false);
         imageEsc.SetActive(true);
+        resume.SetActive(true);
+    }
+
+    public void Waves()
+    {
+        waves.SetActive(false);
     }
     public void ExitEscape()
     {

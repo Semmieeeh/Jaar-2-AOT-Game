@@ -15,6 +15,7 @@ public class Esc : MonoBehaviour
     public GameObject currency;
     public GameObject resume;
     public GameObject restart;
+    public bool played;
 
     public Transform wall;
     // Start is called before the first frame update
@@ -29,55 +30,62 @@ public class Esc : MonoBehaviour
 
     void Update()
     {
-        if(wall.GetComponent<Healthbarscript>().currentHeal < 0f)
+        if(played == true)
         {
-            Cursor.lockState = CursorLockMode.None;
-            restart.SetActive(true);
-            gameOver.SetActive(true);
-            image.SetActive(true);
-            Time.timeScale = 0f;
-        }
+            //if(wall.GetComponent<Healthbarscript>().currentHeal < 0f)
+            //{
+            //Cursor.lockState = CursorLockMode.None;
+            // restart.SetActive(true);
+            //gameOver.SetActive(true);
+            //image.SetActive(true);
+            //Time.timeScale = 0f;
+            //}
 
-        if(gameOver.activeSelf == true)
-        {
-            currency.SetActive(false);
-            gameOverMenu = false;
-        }
-
-        if(gameOverMenu == true)
-        {
-            if (canvasActive == false)
+            if (gameOver.activeSelf == true)
             {
-                if (Input.GetKeyDown(KeyCode.Escape))
+                currency.SetActive(false);
+                gameOverMenu = false;
+            }
+
+            if (gameOverMenu == true)
+            {
+                if (canvasActive == false)
                 {
-                    restart.SetActive(true);
-                    canvasActive = true;
-                    Time.timeScale = 0f;
-                    canvas.GetComponent<UIButtons>().Escape();
-                    canvas.GetComponent<UIButtons>().escmenu();
-                    Cursor.visible = true;
-                    Cursor.lockState = CursorLockMode.None;
-                    //canvasSem.SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        restart.SetActive(true);
+                        canvasActive = true;
+                        Time.timeScale = 0f;
+                        canvas.GetComponent<UIButtons>().Escape();
+                        canvas.GetComponent<UIButtons>().escmenu();
+                        Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
+                        canvasSem.SetActive(false);
+
+                    }
+                }
+                else if (canvasActive == true)
+                {
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        restart.SetActive(false);
+                        canvasActive = false;
+                        Time.timeScale = 1f;
+                        canvas.GetComponent<UIButtons>().ExitEscape();
+                        canvas.GetComponent<UIButtons>().EscBack();
+                        canvas.GetComponent<UIButtons>().escmenuoff();
+                        Cursor.visible = false;
+                        Cursor.lockState = CursorLockMode.Locked;
+                        canvasSem.SetActive(true);
+                    }
 
                 }
             }
-            else if (canvasActive == true)
-            {
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    restart.SetActive(false);
-                    canvasActive = false;
-                    Time.timeScale = 1f;
-                    canvas.GetComponent<UIButtons>().ExitEscape();
-                    canvas.GetComponent<UIButtons>().EscBack();
-                    canvas.GetComponent<UIButtons>().escmenuoff();
-                    Cursor.visible = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                    //canvasSem.SetActive(false);
-                }
-
-            }
-        }   
+        }  
+    }
+    public void Played()
+    {
+        played = true;
     }
     public void Resume()
     {
@@ -94,6 +102,6 @@ public class Esc : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("Servey Corps");
+        SceneManager.LoadScene("SampleScene");
     }
 }
