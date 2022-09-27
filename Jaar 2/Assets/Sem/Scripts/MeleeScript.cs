@@ -226,10 +226,7 @@ public class MeleeScript : MonoBehaviour
 
 
 
-        if(chargedDamage > 10)
-        {
-            fpsCam.GetComponent<CameraShaker>().ShakeOnce(0.2f, 10f, 2, 0.1f);
-        }
+        
     }
 
     public IEnumerator BladeDisappear()
