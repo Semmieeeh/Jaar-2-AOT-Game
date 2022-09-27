@@ -9,6 +9,7 @@ public class GrapplingTest : MonoBehaviour
 {
 
     public bool canFire = true;
+    public float retractionSpeed;
     private Vector3 grapplePoint;
     public LayerMask whatIsGrappleable;
     public Transform gunTip, playerCam, player;
@@ -113,7 +114,7 @@ public class GrapplingTest : MonoBehaviour
         if (isGrappling == true && Input.GetMouseButton(1))
         {
             
-            joint.maxDistance -= 15f * Time.deltaTime;
+            joint.maxDistance -= retractionSpeed * Time.deltaTime;
             
         }
         else if(isGrappling == true && Input.GetKey(KeyCode.Q))
