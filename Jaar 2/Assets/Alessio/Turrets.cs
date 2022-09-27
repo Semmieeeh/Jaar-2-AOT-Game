@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Turrets : MonoBehaviour
 {
-    public GameObject [] turrets;
-
-    public float health;
-
     //Gun stats
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
@@ -19,8 +15,6 @@ public class Turrets : MonoBehaviour
     public bool shooting;
     bool reloading;
     bool readyToShoot;
-
-    public bool invisible;
 
     //Reference
     public Transform attackPoint;
@@ -35,54 +29,19 @@ public class Turrets : MonoBehaviour
     public AudioSource gunReload;
     public ParticleSystem muzzle;
 
-    public Transform player;
+    public Transform titan;
 
     // Start is called before the first frame update
     void Start()
     {
-        health = 1000f;
-        turrets[1].SetActive(false);
-        turrets[2].SetActive(false);
-        damageTurret = 5f;
-        magazineSize = 5;
-        gunShot.volume = 0.75f;
-        range = 15f;
+        //gunShot.volume = 0.75f;
 
-        delay = 0.5f;
-}
-    public void TakeDamageTurret(int dmg)
-    {
-        health -= dmg;
-
-        if(health < 0)
-        {
-            health = 0;
-        }
-
-        if(health <= 500)
-        {
-            turrets[0].SetActive(false);
-            turrets[1].SetActive(true);
-            damageTurret = 3f;
-        }
-
-        if(health <= 100)
-        {
-            turrets[2].SetActive(true);
-            turrets[1].SetActive(false);
-            damageTurret = 1f;
-        }
-
-        if (health <= 0)
-        {
-            Destroy(turret);
-            damageTurret = 0f;
-        }
+        
     }
-
     public void Update()
     {
         MyInput();
+        titan = GameObject.FindObjectOfType<WaypointMover>().transform;
     }
     private void Awake()
     {
@@ -91,14 +50,14 @@ public class Turrets : MonoBehaviour
     }
     private void MyInput()
     {
-            transform.LookAt(player);
+            transform.LookAt(titan);
             Vector3 angles = transform.localEulerAngles;
             angles.x = 0;
             transform.localEulerAngles = angles;
 
         if (Physics.Raycast(attackPoint.position, transform.forward, out rayHit, range))
         {
-            if (rayHit.collider.CompareTag("Player"))
+            if (rayHit.collider.CompareTag("Titan"))
             {
                 shooting = true;
             }
@@ -123,8 +82,8 @@ public class Turrets : MonoBehaviour
 
             Invoke("Shoot", delay);
 
-            gunShot.Play();
-            muzzle.Play();
+            //gunShot.Play();
+            //uzzle.Play();
         }
     }
     private void Shoot()
@@ -132,13 +91,15 @@ public class Turrets : MonoBehaviour
         readyToShoot = false;
 
         //Raycast
-        PlayerHealth playerHealth = GameObject.Find("player").GetComponent<PlayerHealth>();
+        
 
         if (Physics.Raycast(attackPoint.position, transform.forward, out rayHit, range))
         {
-            if (rayHit.collider.CompareTag("Player"))
+            if (rayHit.transform.gameObject.tag == "Titan")
             {
-                playerHealth.AddjustCurrentHealth(damageTurret);
+                Healthbarscript hp = rayHit.transform.gameObject.GetComponent<Healthbarscript>();
+                hp.TitanDamage(damageTurret);
+                hp = null;
             }
         }
 

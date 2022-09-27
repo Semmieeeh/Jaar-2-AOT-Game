@@ -18,6 +18,9 @@ public class WaypointMover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        waypoints = GameObject.Find("Waypoints").GetComponent<Waypoint>();
+        wall = GameObject.Find("Wall").transform;
+
         currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
         transform.position = currentWaypoint.position;
 
@@ -42,7 +45,7 @@ public class WaypointMover : MonoBehaviour
         {
             moveSpeed = 0f;
             transform.LookAt(wall);
-            wall.GetComponent<Healthbarscript>().WallDamage(20f * Time.unscaledDeltaTime);
+            wall.GetComponent<Healthbarscript>().WallDamage(2f * Time.deltaTime);
         }
     }
 }

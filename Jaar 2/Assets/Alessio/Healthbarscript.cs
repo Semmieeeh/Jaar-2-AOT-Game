@@ -7,10 +7,17 @@ public class Healthbarscript : MonoBehaviour
 {
     public Image healthbarSprite;
 
-    public float maxHeal = 5f, currentHeal = 5f;
+    public float maxHeal = 1000f, currentHeal = 1000f;
+
+    public GameObject titan;
     public void Update()
     {
         UpdateHealthBar();
+
+        if(currentHeal == 0)
+        {
+            Destroy(titan);
+        }
     }
     public void UpdateHealthBar()
     {
@@ -20,5 +27,20 @@ public class Healthbarscript : MonoBehaviour
     public void WallDamage(float amount)
     {
         currentHeal -= amount;
+
+        if (currentHeal < 0f)
+        {
+            currentHeal = 0f;
+        }
+    }
+
+    public void TitanDamage(float amount)
+    {
+        currentHeal -= amount;
+
+        if(currentHeal < 0f)
+        {
+            currentHeal = 0f;
+        }
     }
 }

@@ -7,8 +7,6 @@ public class PlayerJump : MonoBehaviour
     public bool isGrounded;
     public bool canDashing;
 
-    public float jumpedFloat;
-
     public GameObject player;
     public Vector3 jumpPower;
 
