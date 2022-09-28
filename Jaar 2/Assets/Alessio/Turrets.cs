@@ -6,7 +6,7 @@ public class Turrets : MonoBehaviour
 {
     //Gun stats
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
-    public int magazineSize, bulletsPerTap;
+    public int magazineSize;
     int bulletsLeft, bulletsShot;
     public float damageTurret;
     public float delay;
@@ -34,14 +34,13 @@ public class Turrets : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //gunShot.volume = 0.75f;
-
-        
+        //gunShot.volume = 0.75f;   
     }
     public void Update()
     {
         MyInput();
-        titan = GameObject.FindObjectOfType<WaypointMover>().transform;
+        
+        
     }
     private void Awake()
     {
@@ -78,7 +77,6 @@ public class Turrets : MonoBehaviour
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
             readyToShoot = false;
-            bulletsShot = bulletsPerTap;
 
             Invoke("Shoot", delay);
 
@@ -99,7 +97,7 @@ public class Turrets : MonoBehaviour
             {
                 Healthbarscript hp = rayHit.transform.gameObject.GetComponent<Healthbarscript>();
                 hp.TitanDamage(damageTurret);
-                hp = null;
+                
             }
         }
 
@@ -130,5 +128,16 @@ public class Turrets : MonoBehaviour
     {
         bulletsLeft = magazineSize;
         reloading = false;
+    }
+
+
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Titan")
+        {
+            titan = other.gameObject.transform;
+            MyInput();
+        }
     }
 }

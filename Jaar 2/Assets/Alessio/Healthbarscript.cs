@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Healthbarscript : MonoBehaviour
 {
     public Image healthbarSprite;
-
     public float maxHeal = 1000f, currentHeal = 1000f;
 
     public GameObject titan;
