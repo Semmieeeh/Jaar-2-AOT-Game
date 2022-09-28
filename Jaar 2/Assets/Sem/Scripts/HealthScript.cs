@@ -36,7 +36,7 @@ public class HealthScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //healthSlider.value = health;
+        healthSlider.value = health;
         if(health < 250f)
         {
             getToCover.SetActive(true);
