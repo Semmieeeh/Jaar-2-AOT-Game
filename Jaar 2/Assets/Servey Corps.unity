@@ -651,7 +651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titan: {fileID: 734752191844327519, guid: 1d5a3cdbe3b03404ea3f167f51c24566, type: 3}
-  spawnTime: 7
+  spawnTime: 3
 --- !u!4 &622518232
 Transform:
   m_ObjectHideFlags: 0
@@ -1441,9 +1441,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbarSprite: {fileID: 24323379}
+  turrets: {fileID: 0}
   maxHeal: 100
   currentHeal: 100
   titan: {fileID: 734752191844327519, guid: 1d5a3cdbe3b03404ea3f167f51c24566, type: 3}
+  death: 0
+  reset: 0
 --- !u!54 &1783035917
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1474,6 +1477,7 @@ GameObject:
   - component: {fileID: 2044768115}
   - component: {fileID: 2044768114}
   - component: {fileID: 2044768119}
+  - component: {fileID: 2044768120}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -1493,15 +1497,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f70f14abb3cc14aa2402a22219f148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenShooting: 0.5
+  timeBetweenShooting: 0
   spread: 1
   range: 30
   reloadTime: 1
-  timeBetweenShots: 0.5
+  timeBetweenShots: 1
   magazineSize: 20
   bulletsPerTap: 1
-  damageTurret: 50
-  delay: 1
+  damageTurret: 34
+  delay: 0.5
   shooting: 0
   attackPoint: {fileID: 305885887}
   muzzleFlash: {fileID: 0}
@@ -1606,6 +1610,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &2044768120
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044768113}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 7.04
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2054362587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,9 +1792,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbarSprite: {fileID: 3670989950141242319}
+  turrets: {fileID: 0}
   maxHeal: 100
   currentHeal: 100
   titan: {fileID: 3670989949063495262}
+  death: 0
+  reset: 0
 --- !u!54 &3670989949063495256
 Rigidbody:
   m_ObjectHideFlags: 0

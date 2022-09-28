@@ -6,17 +6,33 @@ using UnityEngine.UI;
 public class Healthbarscript : MonoBehaviour
 {
     public Image healthbarSprite;
+    public Turrets turrets;
 
     public float maxHeal = 1000f, currentHeal = 1000f;
 
     public GameObject titan;
+    public bool death;
+    public bool reset;
+
+    public void Start()
+    {
+        reset = false;
+    }
     public void Update()
     {
         UpdateHealthBar();
 
-        if(currentHeal == 0)
+        if(death == true)
         {
-            Destroy(titan);
+            
+            death = false;
+            reset = true;
+            Death();
+
+        }
+        if(currentHeal <= 0)
+        {
+            death = true;
         }
     }
     public void UpdateHealthBar()
@@ -42,5 +58,10 @@ public class Healthbarscript : MonoBehaviour
         {
             currentHeal = 0f;
         }
+    }
+    public void Death()
+    {
+        
+        Destroy(gameObject);
     }
 }

@@ -34,14 +34,11 @@ public class Turrets : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //gunShot.volume = 0.75f;
-
-        
+        //gunShot.volume = 0.75f; 
     }
     public void Update()
     {
-        MyInput();
-        titan = GameObject.FindObjectOfType<WaypointMover>().transform;
+   
     }
     private void Awake()
     {
@@ -50,10 +47,10 @@ public class Turrets : MonoBehaviour
     }
     private void MyInput()
     {
-            transform.LookAt(titan);
-            Vector3 angles = transform.localEulerAngles;
-            angles.x = 0;
-            transform.localEulerAngles = angles;
+        transform.LookAt(titan);
+        Vector3 angles = transform.localEulerAngles;
+        angles.x = 0;
+        transform.localEulerAngles = angles;
 
         if (Physics.Raycast(attackPoint.position, transform.forward, out rayHit, range))
         {
@@ -91,15 +88,12 @@ public class Turrets : MonoBehaviour
         readyToShoot = false;
 
         //Raycast
-        
-
         if (Physics.Raycast(attackPoint.position, transform.forward, out rayHit, range))
         {
             if (rayHit.transform.gameObject.tag == "Titan")
             {
                 Healthbarscript hp = rayHit.transform.gameObject.GetComponent<Healthbarscript>();
                 hp.TitanDamage(damageTurret);
-                hp = null;
             }
         }
 
@@ -131,4 +125,15 @@ public class Turrets : MonoBehaviour
         bulletsLeft = magazineSize;
         reloading = false;
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Titan")
+        {
+            titan = other.gameObject.transform;
+            MyInput();
+        }
+    }
+
+
 }
