@@ -21,7 +21,6 @@ public class TitanSpawner : MonoBehaviour
             maySpawn = false;
         }
     }
-
     void Spawner()
     {
         maySpawn = true;

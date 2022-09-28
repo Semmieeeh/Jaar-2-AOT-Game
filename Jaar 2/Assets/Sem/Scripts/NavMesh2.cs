@@ -46,7 +46,18 @@ public class NavMesh2 : MonoBehaviour
         damage = 50f;
         currentTargetIndex = 0;
         playerHealth = GameObject.Find("Player").GetComponent<HealthScript>();
-        
+
+        target[0] = GameObject.Find("Waypoint").transform;  
+        target[1] = GameObject.Find("Waypoint1").transform;
+        target[2] = GameObject.Find("Waypoint2").transform;
+        target[3] = GameObject.Find("Waypoint3").transform;
+
+
+
+
+
+
+
     }
 
     public void Update()
