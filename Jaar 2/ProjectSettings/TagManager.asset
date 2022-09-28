@@ -10,6 +10,7 @@ TagManager:
   - Kevin
   - Titan
   - MainMenu
+  - Platform
   layers:
   - Default
   - TransparentFX

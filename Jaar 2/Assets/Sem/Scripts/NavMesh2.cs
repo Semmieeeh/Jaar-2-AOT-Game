@@ -58,14 +58,22 @@ public class NavMesh2 : MonoBehaviour
 
 
 
+        Vector3 pos = new Vector3(target[currentTargetIndex].transform.position.x, target[currentTargetIndex].transform.position.y, 0);
+        Vector3 playerPos = new Vector3(player.transform.position.x, player.transform.position.y, 0);
+
+
+
         switch (state)
         {
             case TitanState.Patrolling:
                 navMeshAgent.destination = target[currentTargetIndex].position;
-                transform.LookAt(target[currentTargetIndex].position);
+                transform.LookAt(pos);
                 if (Vector3.Distance(gameObject.transform.position, target[currentTargetIndex].position) < targetRange)
                 {
-                    currentTargetIndex++;
+                    if(currentTargetIndex < 22)
+                    {
+                        currentTargetIndex++;
+                    }
                 }
                 if (currentTargetIndex >= target.Length)
                 {
@@ -76,13 +84,13 @@ public class NavMesh2 : MonoBehaviour
                 break;
             case TitanState.Chasing:
                 navMeshAgent.destination = player.transform.position;
-                transform.LookAt(player.transform.position);
+                transform.LookAt(playerPos);
 
                 if(Vector3.Distance(gameObject.transform.position, player.transform.position) < attackRange && attackCooldown < 0.1)
                 {
                     playerHealth.TakeDamage(damage);
-                    
-                    playerHealth.tookDamage = true;
+                                        playerHealth.tookDamage = true;
+
                     playerHealth.healthRegeneration = false;
                     attackCooldown += 3;
                 }
@@ -145,14 +153,3 @@ public class NavMesh2 : MonoBehaviour
 
 
 }
-
-
-
-
-
-
-
-
-
-
-

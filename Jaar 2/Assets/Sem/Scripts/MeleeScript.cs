@@ -40,6 +40,11 @@ public class MeleeScript : MonoBehaviour
     public ParticleSystem swordGroundhitParticle;
     public bool reloadingWithSwords;
     public float duration, intensity;
+    public Quaternion SpawnRot;
+    public Economy economy;
+
+
+    public GameObject turret;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +64,7 @@ public class MeleeScript : MonoBehaviour
         attackTransitionMin = 0f;
         weaponSway = GameObject.Find("RightSwordHolder").GetComponent<WeaponSway>();
         camShake = GameObject.Find("Main Camera").GetComponent<CameraShaker>();
+        economy = GameObject.Find("Player").GetComponent<Economy>();
 
     }
 
@@ -160,13 +166,34 @@ public class MeleeScript : MonoBehaviour
             }
             else if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
+                if(hit.transform.gameObject.tag == "Platform")
+                {
+                    PlaceTurret place = hit.transform.gameObject.GetComponent<PlaceTurret>();
+                    Vector3 pos = hit.transform.gameObject.transform.position;
+                    
+                    pos.y += 1f;
+                    
+                    if (Input.GetKeyDown(KeyCode.E)&& place.obstructed == false && economy.metal >=economy.turretCost)
+                    {
+                        Instantiate(turret,pos,Quaternion.identity);
+                        
+                        place.obstructed = true;
+                        economy.metal -= economy.turretCost;
+                    }
+                }
+
+
+
                 if (Input.GetKeyUp(KeyCode.F))
                 {
                     attackstate = 2;
                     cooldown = maxCooldown;
                     attackTransition = attackTransitionMax;
                     StartCoroutine(SlashHit());
-                    FindObjectOfType<SlashSounds>().Play("HitGround");
+                    if(swordBlades > 0)
+                    {
+                        FindObjectOfType<SlashSounds>().Play("HitGround");
+                    }
                     chargedDamage = minChargedDamage;
                 }
             }

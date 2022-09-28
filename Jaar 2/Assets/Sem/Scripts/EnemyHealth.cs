@@ -16,11 +16,13 @@ public class EnemyHealth : MonoBehaviour
     public NavMeshAgent navMeshAgent;
     public float knockback;
     public MeleeScript melee;
+    public Economy eco;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        eco = GameObject.Find("Player").GetComponent<Economy>();
         melee = FindObjectOfType<MeleeScript>().GetComponent<MeleeScript>();
         minHealth = 0f;
         maxHealth = 100f;
@@ -37,6 +39,7 @@ public class EnemyHealth : MonoBehaviour
         if(death == true)
         {
             StartCoroutine(DeathEffect());
+            eco.metal += 10;
             death = false;
         }
     }
