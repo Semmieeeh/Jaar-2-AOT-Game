@@ -651,7 +651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titan: {fileID: 734752191844327519, guid: 1d5a3cdbe3b03404ea3f167f51c24566, type: 3}
-  spawnTime: 3
+  spawnTime: 7
 --- !u!4 &622518232
 Transform:
   m_ObjectHideFlags: 0
@@ -1497,14 +1497,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f70f14abb3cc14aa2402a22219f148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenShooting: 0
+  timeBetweenShooting: 1
   spread: 1
   range: 30
   reloadTime: 1
   timeBetweenShots: 1
   magazineSize: 20
   bulletsPerTap: 1
-  damageTurret: 34
+  damageTurret: 50
   delay: 0.5
   shooting: 0
   attackPoint: {fileID: 305885887}
@@ -1621,7 +1621,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 7.04
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2054362587
 GameObject:
@@ -1663,15 +1663,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9040042313566676487, guid: be17487bff2f1d14eb1c1f89abac122d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9040042313566676487, guid: be17487bff2f1d14eb1c1f89abac122d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9040042313566676487, guid: be17487bff2f1d14eb1c1f89abac122d, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9040042315370476272, guid: be17487bff2f1d14eb1c1f89abac122d, type: 3}
       propertyPath: wall
@@ -1767,15 +1767,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9040042315370476287, guid: be17487bff2f1d14eb1c1f89abac122d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9040042315541567366, guid: be17487bff2f1d14eb1c1f89abac122d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9040042315541567366, guid: be17487bff2f1d14eb1c1f89abac122d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be17487bff2f1d14eb1c1f89abac122d, type: 3}
@@ -1821,7 +1821,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3670989949063495262}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db71eb8c47a6fe046973a94b379b3f7f, type: 3}
   m_Name: 
@@ -1839,7 +1839,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3670989949063495262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 428.8, y: 1, z: 563.9}
+  m_LocalPosition: {x: 457.4, y: 1, z: 577.1}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

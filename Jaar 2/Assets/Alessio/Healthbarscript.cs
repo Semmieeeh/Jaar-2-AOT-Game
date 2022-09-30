@@ -58,10 +58,14 @@ public class Healthbarscript : MonoBehaviour
         {
             currentHeal = 0f;
         }
+
+        if(currentHeal == 0f)
+        {
+            GameObject.Find("Canvas").GetComponent<Currency>().metal += 1f;
+        }
     }
     public void Death()
-    {
-        
+    {     
         Destroy(gameObject);
     }
 }

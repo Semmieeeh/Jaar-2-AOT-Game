@@ -7,7 +7,7 @@ using TMPro;
 public class Currency : MonoBehaviour
 {
     public TMP_Text metalUi;
-    float metal = 3;
+    public float metal;
     // Start is called before the first frame update
     void Start()
     {

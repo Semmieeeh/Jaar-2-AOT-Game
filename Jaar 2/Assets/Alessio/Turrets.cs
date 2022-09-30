@@ -38,7 +38,11 @@ public class Turrets : MonoBehaviour
     }
     public void Update()
     {
-   
+       
+        if(titan != null)
+        {
+            MyInput();
+        }
     }
     private void Awake()
     {
@@ -134,6 +138,4 @@ public class Turrets : MonoBehaviour
             MyInput();
         }
     }
-
-
 }

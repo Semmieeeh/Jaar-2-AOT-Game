@@ -87,10 +87,10 @@ GameObject:
   - component: {fileID: 734752191844327515}
   - component: {fileID: 734752191844327514}
   - component: {fileID: 734752191844327517}
-  - component: {fileID: 734752191844327516}
   - component: {fileID: 734752191844327512}
   - component: {fileID: 734752191844327513}
   - component: {fileID: 734752191844327510}
+  - component: {fileID: 4003748652650938240}
   m_Layer: 0
   m_Name: Titan
   m_TagString: Titan
@@ -164,19 +164,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &734752191844327516
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734752191844327519}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &734752191844327512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,9 +210,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbarSprite: {fileID: 734752191278335438}
+  turrets: {fileID: 0}
   maxHeal: 100
   currentHeal: 100
   titan: {fileID: 734752191844327519}
+  death: 0
+  reset: 0
+--- !u!65 &4003748652650938240
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734752191844327519}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &734752192173626397
 GameObject:
   m_ObjectHideFlags: 0
