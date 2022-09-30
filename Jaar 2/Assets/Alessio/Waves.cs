@@ -15,7 +15,7 @@ public class Waves : MonoBehaviour
 
         timerUI.text = "Timer:" + timer.ToString("00");
 
-        timer -= 10 * Time.deltaTime;
+        timer -= 1 * Time.deltaTime;
         if (timer < 0f)
         {
             timer = 0f;
@@ -25,6 +25,7 @@ public class Waves : MonoBehaviour
         {
             wave += 1f;
             timer = 90f;
+            GameObject.Find("TitanSpawner").GetComponent<TitanSpawner>().spawnTime -= 1f;
         }
     }
 }

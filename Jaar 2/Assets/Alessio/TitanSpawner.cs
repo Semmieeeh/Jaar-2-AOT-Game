@@ -11,6 +11,7 @@ public class TitanSpawner : MonoBehaviour
     private void Start()
     {
         maySpawn = true;
+        spawnTime = 20f;
     }
     void Update()
     {
