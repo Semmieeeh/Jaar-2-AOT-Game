@@ -16,6 +16,10 @@ public class Economy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            metal += 20f;
+        }
         //slider. value = metal
     }
 }
