@@ -21,8 +21,6 @@ public class Turrets : MonoBehaviour
     public RaycastHit rayHit;
 
     //Graphics
-    public GameObject muzzleFlash;
-
     public GameObject playerObject;
     public GameObject turret;
     public AudioSource gunShot;
@@ -34,7 +32,7 @@ public class Turrets : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //gunShot.volume = 0.75f; 
+        gunShot.volume = 0.75f; 
     }
     public void Update()
     {
@@ -83,8 +81,8 @@ public class Turrets : MonoBehaviour
 
             Invoke("Shoot", delay);
 
-            //gunShot.Play();
-            //uzzle.Play();
+            gunShot.Play();
+            muzzle.Play();
         }
     }
     private void Shoot()
