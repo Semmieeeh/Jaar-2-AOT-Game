@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.XR;
@@ -18,6 +19,7 @@ public class EnemyHealth : MonoBehaviour
     public MeleeScript melee;
     public Economy eco;
     public bool playerKilled;
+    public TagAttribute def;
     public GameObject gettingShotBy;
 
 
@@ -43,20 +45,14 @@ public class EnemyHealth : MonoBehaviour
             StartCoroutine(DeathEffect());
             
             death = false;
-            if(gettingShotBy != null)
-            {
-                gettingShotBy.GetComponent<Turrets>().shooting = false;
-            }
+            
         }
         else if(death == true && playerKilled == false)
         {
             eco.metal += eco.payment;
             StartCoroutine(DeathEffectNotCausedByPlayer());
             death = false;
-            if (gettingShotBy != null)
-            {
-                gettingShotBy.GetComponent<Turrets>().shooting = false;
-            }
+            
         }
     }
 
@@ -78,7 +74,14 @@ public class EnemyHealth : MonoBehaviour
         rb.freezeRotation = false;
         eco.metal += eco.payment;
         rb.AddForce(fpsCam.transform.forward * knockback, ForceMode.Impulse);
+        if (gettingShotBy != null)
+        {
+            Turrets turret = gettingShotBy.GetComponent<Turrets>();
+            turret.titan = null;
+        }
+        gameObject.tag = "Dead";
         yield return new WaitForSeconds(10);
+        
         Destroy(gameObject);
     }
 
@@ -88,8 +91,14 @@ public class EnemyHealth : MonoBehaviour
         navMeshAgent.enabled = false;
         rb.freezeRotation = false;
         eco.metal += eco.payment;
-        
+        if(gettingShotBy != null)
+        {
+            Turrets turret = gettingShotBy.GetComponent<Turrets>();
+            turret.titan = null;
+        }
+        gameObject.tag = "Dead";
         yield return new WaitForSeconds(10);
         Destroy(gameObject);
+
     }
 }

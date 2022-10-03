@@ -19,6 +19,7 @@ public class Turrets : MonoBehaviour
     //Reference
     public Transform attackPoint;
     public RaycastHit rayHit;
+    public RaycastHit hit;
 
     //Graphics
 
@@ -26,7 +27,7 @@ public class Turrets : MonoBehaviour
     public AudioSource gunReload;
     public ParticleSystem muzzle;
     public EnemyHealth enemyHp;
-
+    public LayerMask titanMask;
     public Transform titan;
 
     // Start is called before the first frame update
@@ -41,6 +42,21 @@ public class Turrets : MonoBehaviour
         {
             MyInput();
         }
+        else if(titan == null)
+        {
+            gameObject.GetComponent<SphereCollider>().radius += 50 * Time.deltaTime;
+        }
+        if(gameObject.GetComponent<SphereCollider>().radius > 30)
+        {
+            gameObject.GetComponent<SphereCollider>().radius = 1;
+        }
+        
+        
+
+
+
+
+
     }
     private void Awake()
     {
@@ -130,7 +146,7 @@ public class Turrets : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Titan")
+        if (other.gameObject.tag == "Titan" && titan == null)
         {
             titan = other.gameObject.transform;
             titan.GetComponent<EnemyHealth>().gettingShotBy = gameObject;

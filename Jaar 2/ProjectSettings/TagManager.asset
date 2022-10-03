@@ -11,6 +11,7 @@ TagManager:
   - Titan
   - MainMenu
   - Platform
+  - Dead
   layers:
   - Default
   - TransparentFX

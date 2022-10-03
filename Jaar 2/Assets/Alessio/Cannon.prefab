@@ -114,9 +114,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenShooting: 1
   spread: 0
-  range: 20
-  reloadTime: 0
-  timeBetweenShots: 0
+  range: 30
+  reloadTime: 1
+  timeBetweenShots: 1
   magazineSize: 20
   bulletsPerTap: 0
   damageTurret: 50
@@ -127,6 +127,9 @@ MonoBehaviour:
   gunReload: {fileID: 0}
   muzzle: {fileID: 0}
   enemyHp: {fileID: 0}
+  titanMask:
+    serializedVersion: 2
+    m_Bits: 0
   titan: {fileID: 0}
 --- !u!135 &8160849674956030811
 SphereCollider:

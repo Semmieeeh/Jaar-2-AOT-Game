@@ -12573,7 +12573,7 @@ MonoBehaviour:
   disappeared: 0
   swordClink:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 1727
   swordGroundhitParticle: {fileID: 5426226664670895849, guid: ed29ab0e81562964abfed29065390b2d, type: 3}
   reloadingWithSwords: 0
 --- !u!1 &2121405935
@@ -13226,7 +13226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   metalUi: {fileID: 8072398896466143219}
-  metal: 0
+  eco: {fileID: 0}
 --- !u!1 &627650811900795401
 GameObject:
   m_ObjectHideFlags: 0
@@ -17775,7 +17775,7 @@ MonoBehaviour:
   disappeared: 0
   swordClink:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 1727
   swordGroundhitParticle: {fileID: 5426226664670895849, guid: ed29ab0e81562964abfed29065390b2d, type: 3}
   reloadingWithSwords: 0
   duration: 4

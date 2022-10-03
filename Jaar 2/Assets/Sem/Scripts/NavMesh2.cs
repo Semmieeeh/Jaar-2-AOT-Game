@@ -93,81 +93,86 @@ public class NavMesh2 : MonoBehaviour
         Vector3 pos = new Vector3(target[currentTargetIndex].transform.position.x, target[currentTargetIndex].transform.position.y, 0);
         Vector3 playerPos = new Vector3(player.transform.position.x, player.transform.position.y, 0);
 
-        
 
-        switch (state)
+        EnemyHealth enemyhealth = gameObject.GetComponent<EnemyHealth>();
+        if(titanHolder != null)
         {
-            case TitanState.Patrolling:
-                
-                navMeshAgent.destination = target[currentTargetIndex].position;
-                transform.LookAt(pos);
-                if (Vector3.Distance(titanHolder.transform.position, target[currentTargetIndex].position) < targetRange)
-                {
-                    if(currentTargetIndex < 22)
+            switch (state)
+            {
+                case TitanState.Patrolling:
+
+                    navMeshAgent.destination = target[currentTargetIndex].position;
+                    transform.LookAt(pos);
+                    if (Vector3.Distance(titanHolder.transform.position, target[currentTargetIndex].position) < targetRange)
                     {
-                        currentTargetIndex++;
+                        if (currentTargetIndex < 22)
+                        {
+                            currentTargetIndex++;
+                        }
                     }
-                }
-                if (currentTargetIndex >= target.Length)
-                {
-                    currentTargetIndex = 0;
-                }
+                    if (currentTargetIndex >= target.Length)
+                    {
+                        currentTargetIndex = 0;
+                    }
 
 
-                break;
-            case TitanState.Chasing:
-                navMeshAgent.destination = player.transform.position;
-                transform.LookAt(playerPos);
+                    break;
+                case TitanState.Chasing:
+                    navMeshAgent.destination = player.transform.position;
+                    transform.LookAt(playerPos);
 
-                if(Vector3.Distance(titanHolder.transform.position, player.transform.position) < attackRange && attackCooldown < 0.1)
-                {
-                    playerHealth.TakeDamage(damage);
-                                        playerHealth.tookDamage = true;
+                    if (Vector3.Distance(titanHolder.transform.position, player.transform.position) < attackRange && attackCooldown < 0.1)
+                    {
+                        playerHealth.TakeDamage(damage);
+                        playerHealth.tookDamage = true;
 
-                    playerHealth.healthRegeneration = false;
-                    attackCooldown += 3;
-                }
+                        playerHealth.healthRegeneration = false;
+                        attackCooldown += 3;
+                    }
 
-                break;
-            case TitanState.Trapped:
+                    break;
+                case TitanState.Trapped:
 
-                navMeshAgent.destination = trap.transform.position;
-                if (Vector3.Distance(titanHolder.transform.position, trap.transform.position) < attackRange && attackCooldown < 0.1)
-                {
+                    navMeshAgent.destination = trap.transform.position;
+                    if (Vector3.Distance(titanHolder.transform.position, trap.transform.position) < attackRange && attackCooldown < 0.1)
+                    {
 
-                    trap.GetComponent<Trap>().TrapDamage(damage);
-                    attackCooldown += 3;
+                        trap.GetComponent<Trap>().TrapDamage(damage);
+                        attackCooldown += 3;
 
-                }
+                    }
 
 
 
-                break;
+                    break;
 
+            }
+            attackCooldown -= 1 * Time.deltaTime;
+            if (attackCooldown > 3)
+            {
+                attackCooldown = 3;
+            }
+            else if (attackCooldown < 0)
+            {
+                attackCooldown = 0;
+            }
+
+
+            if (Vector3.Distance(titanHolder.transform.position, player.transform.position) < inRange && trapped == false)
+            {
+                state = TitanState.Chasing;
+            }
+            else if (trapped == false)
+            {
+                state = TitanState.Patrolling;
+            }
+            else if (trapped == true)
+            {
+                state = TitanState.Trapped;
+            }
         }
-        attackCooldown -= 1 * Time.deltaTime;
-        if (attackCooldown > 3)
-        {
-            attackCooldown = 3;
-        }
-        else if (attackCooldown < 0)
-        {
-            attackCooldown = 0;
-        }
-
-
-        if (Vector3.Distance(titanHolder.transform.position, player.transform.position) < inRange &&trapped == false)
-        {
-            state = TitanState.Chasing;
-        }
-        else if(trapped == false)
-        {
-            state = TitanState.Patrolling;
-        }
-        else if(trapped == true)
-        {
-            state = TitanState.Trapped;
-        }
+        
+        
 
     }
 
