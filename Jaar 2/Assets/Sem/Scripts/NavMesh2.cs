@@ -28,8 +28,12 @@ public class NavMesh2 : MonoBehaviour
     public GameObject trap;
     public HealthScript playerHealth;
     public bool trapped;
-    public GameObject titanHolder;
+    public GameObject titanHolder,wall;
     public bool gameStart;
+    public bool closeToWall;
+    public bool wallBroken;
+    public bool stateTwo;
+
     
     public enum TitanState
     {
@@ -37,6 +41,7 @@ public class NavMesh2 : MonoBehaviour
         Chasing,
         Attacking,
         Trapped,
+        AttackingWall,
     }
     public TitanState state = TitanState.Patrolling;
     public void Start()
@@ -73,6 +78,8 @@ public class NavMesh2 : MonoBehaviour
         target[20] = GameObject.Find("Waypoint21").transform;
         target[21] = GameObject.Find("Waypoint22").transform;
         target[22] = GameObject.Find("Waypoint23").transform;
+        wall = GameObject.Find("WallToAttack");
+        attackRange = 10;
     }
 
     public void Update()
@@ -145,6 +152,33 @@ public class NavMesh2 : MonoBehaviour
 
 
                     break;
+                case TitanState.AttackingWall:
+
+
+                    
+                    if(stateTwo == false)
+                    {
+                        if (wall.GetComponent<Healthbarscript>().death == true)
+                        {
+                            stateTwo = true;
+                            state = TitanState.Patrolling;
+
+                        }
+                        navMeshAgent.destination = wall.transform.position;
+                        wall.GetComponent<Healthbarscript>().titan = gameObject;
+                        if (Vector3.Distance(titanHolder.transform.position, wall.transform.position) < 20 && attackCooldown < 0.1)
+                        {
+
+                            wall.GetComponent<Healthbarscript>().WallDamage(damage);
+                            attackCooldown += 3;
+
+                        }
+                    }
+                    if(stateTwo == true)
+                    {
+                        state = TitanState.Patrolling;
+                    }
+                    break;
 
             }
             attackCooldown -= 1 * Time.deltaTime;
@@ -160,15 +194,42 @@ public class NavMesh2 : MonoBehaviour
 
             if (Vector3.Distance(titanHolder.transform.position, player.transform.position) < inRange && trapped == false)
             {
-                state = TitanState.Chasing;
+                //state = TitanState.Chasing;
             }
-            else if (trapped == false)
+            else if (trapped == false && Vector3.Distance(gameObject.transform.position, player.transform.position) >inRange && closeToWall == false)
             {
                 state = TitanState.Patrolling;
             }
             else if (trapped == true)
             {
                 state = TitanState.Trapped;
+            }
+            if(wall != null)
+            {
+                if (Vector3.Distance(titanHolder.transform.position, wall.transform.position) < 20 && closeToWall == true && wallBroken == false)
+                {
+                    state = TitanState.AttackingWall;
+                }
+            }
+            else
+            {
+                state = TitanState.Patrolling;
+            }
+            
+
+
+
+
+            if(wall != null)
+            {
+                if (Vector3.Distance(titanHolder.transform.position, wall.transform.position) < 20)
+                {
+                    closeToWall = true;
+                }
+                else if (Vector3.Distance(titanHolder.transform.position, wall.transform.position) > 20)
+                {
+                    closeToWall = false;
+                }
             }
         }
         
@@ -187,35 +248,4 @@ public class NavMesh2 : MonoBehaviour
             state = TitanState.Trapped;
         }
     }
-
-
-
-
-
-
-
-
-
-
-    public void AssignPath()
-    {
-        
-        
-        
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

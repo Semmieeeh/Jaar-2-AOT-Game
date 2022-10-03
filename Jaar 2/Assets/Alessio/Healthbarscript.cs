@@ -13,6 +13,8 @@ public class Healthbarscript : MonoBehaviour
     public GameObject titan;
     public bool death;
     public bool reset;
+    public Slider slider;
+    public NavMesh2 navMesh;
 
     public void Start()
     {
@@ -21,12 +23,13 @@ public class Healthbarscript : MonoBehaviour
     public void Update()
     {
         UpdateHealthBar();
-
+        slider.value = currentHeal;
         if(death == true)
         {
             
-            death = false;
+            
             reset = true;
+            
             Death();
 
         }
@@ -38,7 +41,7 @@ public class Healthbarscript : MonoBehaviour
     public void UpdateHealthBar()
     {
         float fillAmount = (float)currentHeal/(float)maxHeal;
-        healthbarSprite.fillAmount = fillAmount;
+        ;
     }
     public void WallDamage(float amount)
     {
@@ -66,6 +69,7 @@ public class Healthbarscript : MonoBehaviour
     }
     public void Death()
     {     
+        
         Destroy(gameObject);
     }
 }
