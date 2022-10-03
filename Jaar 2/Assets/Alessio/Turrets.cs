@@ -21,13 +21,11 @@ public class Turrets : MonoBehaviour
     public RaycastHit rayHit;
 
     //Graphics
-    public GameObject muzzleFlash;
 
-    public GameObject playerObject;
-    public GameObject turret;
     public AudioSource gunShot;
     public AudioSource gunReload;
     public ParticleSystem muzzle;
+    public EnemyHealth enemyHp;
 
     public Transform titan;
 
@@ -96,8 +94,8 @@ public class Turrets : MonoBehaviour
         {
             if (rayHit.transform.gameObject.tag == "Titan")
             {
-                Healthbarscript hp = rayHit.transform.gameObject.GetComponent<Healthbarscript>();
-                hp.TitanDamage(damageTurret);
+                EnemyHealth hp = rayHit.transform.gameObject.GetComponent<EnemyHealth>();
+                hp.TakeDamage(damageTurret);
             }
         }
 
@@ -135,6 +133,7 @@ public class Turrets : MonoBehaviour
         if (other.gameObject.tag == "Titan")
         {
             titan = other.gameObject.transform;
+            titan.GetComponent<EnemyHealth>().gettingShotBy = gameObject;
             MyInput();
         }
     }

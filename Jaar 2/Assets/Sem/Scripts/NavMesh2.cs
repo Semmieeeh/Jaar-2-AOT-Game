@@ -28,6 +28,8 @@ public class NavMesh2 : MonoBehaviour
     public GameObject trap;
     public HealthScript playerHealth;
     public bool trapped;
+    public GameObject titanHolder;
+    public bool gameStart;
     
     public enum TitanState
     {
@@ -45,14 +47,44 @@ public class NavMesh2 : MonoBehaviour
         trapped = false;
         damage = 50f;
         currentTargetIndex = 0;
-        playerHealth = GameObject.Find("Player").GetComponent<HealthScript>();
         
+        playerHealth = GameObject.Find("Player").GetComponent<HealthScript>();
+        titanHolder = GameObject.Find("TitanHolder");
+        target[0] = GameObject.Find("Waypoint1").transform;
+        target[1] = GameObject.Find("Waypoint2").transform;
+        target[2] = GameObject.Find("Waypoint3").transform;
+        target[3] = GameObject.Find("Waypoint4").transform;
+        target[4] = GameObject.Find("Waypoint5").transform;
+        target[5] = GameObject.Find("Waypoint6").transform;
+        target[6] = GameObject.Find("Waypoint7").transform;
+        target[7] = GameObject.Find("Waypoint8").transform;
+        target[8] = GameObject.Find("Waypoint9").transform;
+        target[9] = GameObject.Find("Waypoint10").transform;
+        target[10] = GameObject.Find("Waypoint11").transform;
+        target[11] = GameObject.Find("Waypoint12").transform;
+        target[12] = GameObject.Find("Waypoint13").transform;
+        target[13] = GameObject.Find("Waypoint14").transform;
+        target[14] = GameObject.Find("Waypoint15").transform;
+        target[15] = GameObject.Find("Waypoint16").transform;
+        target[16] = GameObject.Find("Waypoint17").transform;
+        target[17] = GameObject.Find("Waypoint18").transform;
+        target[18] = GameObject.Find("Waypoint19").transform;
+        target[19] = GameObject.Find("Waypoint20").transform;
+        target[20] = GameObject.Find("Waypoint21").transform;
+        target[21] = GameObject.Find("Waypoint22").transform;
+        target[22] = GameObject.Find("Waypoint23").transform;
     }
 
     public void Update()
     {
-        targetName = target[currentTargetIndex].name;
-        distance = Vector3.Distance(player.transform.position, transform.position);
+        if(gameStart == false)
+        {
+            targetName = target[currentTargetIndex].name;
+        }
+        if(titanHolder != null)
+        {
+            distance = Vector3.Distance(player.transform.position, titanHolder.transform.position);
+        }
         dir = player.transform.position - transform.position;
         angle = Vector3.Angle(dir, transform.forward);
 
@@ -61,14 +93,15 @@ public class NavMesh2 : MonoBehaviour
         Vector3 pos = new Vector3(target[currentTargetIndex].transform.position.x, target[currentTargetIndex].transform.position.y, 0);
         Vector3 playerPos = new Vector3(player.transform.position.x, player.transform.position.y, 0);
 
-
+        
 
         switch (state)
         {
             case TitanState.Patrolling:
+                
                 navMeshAgent.destination = target[currentTargetIndex].position;
                 transform.LookAt(pos);
-                if (Vector3.Distance(gameObject.transform.position, target[currentTargetIndex].position) < targetRange)
+                if (Vector3.Distance(titanHolder.transform.position, target[currentTargetIndex].position) < targetRange)
                 {
                     if(currentTargetIndex < 22)
                     {
@@ -86,7 +119,7 @@ public class NavMesh2 : MonoBehaviour
                 navMeshAgent.destination = player.transform.position;
                 transform.LookAt(playerPos);
 
-                if(Vector3.Distance(gameObject.transform.position, player.transform.position) < attackRange && attackCooldown < 0.1)
+                if(Vector3.Distance(titanHolder.transform.position, player.transform.position) < attackRange && attackCooldown < 0.1)
                 {
                     playerHealth.TakeDamage(damage);
                                         playerHealth.tookDamage = true;
@@ -99,7 +132,7 @@ public class NavMesh2 : MonoBehaviour
             case TitanState.Trapped:
 
                 navMeshAgent.destination = trap.transform.position;
-                if (Vector3.Distance(gameObject.transform.position, trap.transform.position) < attackRange && attackCooldown < 0.1)
+                if (Vector3.Distance(titanHolder.transform.position, trap.transform.position) < attackRange && attackCooldown < 0.1)
                 {
 
                     trap.GetComponent<Trap>().TrapDamage(damage);
@@ -123,7 +156,7 @@ public class NavMesh2 : MonoBehaviour
         }
 
 
-        if (Vector3.Distance(gameObject.transform.position, player.transform.position) < inRange &&trapped == false)
+        if (Vector3.Distance(titanHolder.transform.position, player.transform.position) < inRange &&trapped == false)
         {
             state = TitanState.Chasing;
         }
@@ -149,6 +182,34 @@ public class NavMesh2 : MonoBehaviour
             state = TitanState.Trapped;
         }
     }
+
+
+
+
+
+
+
+
+
+
+    public void AssignPath()
+    {
+        
+        
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

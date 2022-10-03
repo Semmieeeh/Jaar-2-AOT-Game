@@ -17,6 +17,8 @@ public class EnemyHealth : MonoBehaviour
     public float knockback;
     public MeleeScript melee;
     public Economy eco;
+    public bool playerKilled;
+    public GameObject gettingShotBy;
 
 
     // Start is called before the first frame update
@@ -36,11 +38,25 @@ public class EnemyHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(death == true)
+        if(death == true && playerKilled == true)
         {
             StartCoroutine(DeathEffect());
-            eco.metal += 10;
+            
             death = false;
+            if(gettingShotBy != null)
+            {
+                gettingShotBy.GetComponent<Turrets>().shooting = false;
+            }
+        }
+        else if(death == true && playerKilled == false)
+        {
+            eco.metal += eco.payment;
+            StartCoroutine(DeathEffectNotCausedByPlayer());
+            death = false;
+            if (gettingShotBy != null)
+            {
+                gettingShotBy.GetComponent<Turrets>().shooting = false;
+            }
         }
     }
 
@@ -60,8 +76,19 @@ public class EnemyHealth : MonoBehaviour
         navMesh.enabled = false;
         navMeshAgent.enabled = false;
         rb.freezeRotation = false;
-        //currency+
+        eco.metal += eco.payment;
         rb.AddForce(fpsCam.transform.forward * knockback, ForceMode.Impulse);
+        yield return new WaitForSeconds(10);
+        Destroy(gameObject);
+    }
+
+    public IEnumerator DeathEffectNotCausedByPlayer()
+    {
+        navMesh.enabled = false;
+        navMeshAgent.enabled = false;
+        rb.freezeRotation = false;
+        eco.metal += eco.payment;
+        
         yield return new WaitForSeconds(10);
         Destroy(gameObject);
     }

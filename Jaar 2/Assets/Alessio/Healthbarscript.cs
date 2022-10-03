@@ -61,7 +61,7 @@ public class Healthbarscript : MonoBehaviour
 
         if(currentHeal == 0f)
         {
-            GameObject.Find("Canvas").GetComponent<Currency>().metal += 1f;
+            GameObject.Find("Canvas").GetComponent<Currency>().eco.metal += 1f;
         }
     }
     public void Death()

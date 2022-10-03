@@ -5,21 +5,26 @@ using UnityEngine;
 public class TitanSpawner : MonoBehaviour
 {
     public GameObject titan;
-    private bool maySpawn;
+    public bool maySpawn;
     public float spawnTime;
 
     private void Start()
     {
-        maySpawn = true;
-        spawnTime = 20f;
+        
+        
     }
     void Update()
     {
         if(maySpawn == true)
         {
-            Instantiate(titan);
             Invoke("Spawner", spawnTime);
+            Instantiate(titan);
+            
             maySpawn = false;
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            maySpawn = true;
         }
     }
 
