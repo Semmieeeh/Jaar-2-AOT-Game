@@ -14,7 +14,7 @@ public class Esc : MonoBehaviour
     public GameObject image;
     public GameObject currency;
     public GameObject resume;
-    public GameObject restart;
+    public GameObject restart,restart2;
     public bool played;
 
     public Transform wall;
@@ -26,6 +26,10 @@ public class Esc : MonoBehaviour
         gameOverMenu = true;
         resume.SetActive(false);
         restart.SetActive(false);
+        if(restart2 != null)
+        {
+            restart2.SetActive(true);
+        }
     }
 
     void Update()

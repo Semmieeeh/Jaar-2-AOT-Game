@@ -10,14 +10,14 @@ public class TitanSpawner : MonoBehaviour
 
     private void Start()
     {
-        
+        maySpawn = false;
         
     }
     void Update()
     {
         if(maySpawn == true)
         {
-            Invoke("Spawner", spawnTime);
+            //Invoke("Spawner", spawnTime);
             Instantiate(titan);
             
             maySpawn = false;
@@ -28,8 +28,5 @@ public class TitanSpawner : MonoBehaviour
         }
     }
 
-    void Spawner()
-    {
-        maySpawn = true;
-    }
+    
 }

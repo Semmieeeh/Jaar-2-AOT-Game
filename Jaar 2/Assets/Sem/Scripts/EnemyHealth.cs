@@ -21,15 +21,17 @@ public class EnemyHealth : MonoBehaviour
     public bool playerKilled;
     public TagAttribute def;
     public GameObject gettingShotBy;
+    HealthScript playerHp;
 
 
     // Start is called before the first frame update
     void Start()
-    {
+    {       
+        playerHp = GameObject.Find("Player").GetComponent<HealthScript>();
         eco = GameObject.Find("Player").GetComponent<Economy>();
         melee = FindObjectOfType<MeleeScript>().GetComponent<MeleeScript>();
         minHealth = 0f;
-        maxHealth = 100f;
+        maxHealth = 200;
         enemyHealth = maxHealth;
         fpsCam = GameObject.Find("Main Camera");
         rb = gameObject.GetComponent<Rigidbody>();
@@ -42,15 +44,28 @@ public class EnemyHealth : MonoBehaviour
     {
         if(death == true && playerKilled == true)
         {
-            StartCoroutine(DeathEffect());
-            
+            // StartCoroutine(DeathEffect());
+            if (gettingShotBy != null)
+            {
+                Turrets turret = gettingShotBy.GetComponent<Turrets>();
+                turret.titan = null;
+            }
+            Destroy(gameObject);
             death = false;
             
         }
         else if(death == true && playerKilled == false)
         {
             eco.metal += eco.payment;
-            StartCoroutine(DeathEffectNotCausedByPlayer());
+            if (gettingShotBy != null)
+            {
+                Turrets turret = gettingShotBy.GetComponent<Turrets>();
+                turret.titan = null;
+            }
+            Destroy(gameObject);
+            
+            //StartCoroutine(DeathEffectNotCausedByPlayer());
+
             death = false;
             
         }
@@ -80,8 +95,9 @@ public class EnemyHealth : MonoBehaviour
             turret.titan = null;
         }
         gameObject.tag = "Dead";
-        yield return new WaitForSeconds(10);
         
+        yield return new WaitForSeconds(10);
+        playerHp.titansKilled += 1;
         Destroy(gameObject);
     }
 
@@ -97,6 +113,7 @@ public class EnemyHealth : MonoBehaviour
             turret.titan = null;
         }
         gameObject.tag = "Dead";
+        playerHp.titansKilled += 1;
         yield return new WaitForSeconds(10);
         Destroy(gameObject);
 

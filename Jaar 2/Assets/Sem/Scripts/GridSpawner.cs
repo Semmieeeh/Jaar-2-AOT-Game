@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+
 
 public class GridSpawner : MonoBehaviour
 {

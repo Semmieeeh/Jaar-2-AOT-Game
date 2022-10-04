@@ -50,11 +50,11 @@ public class NavMesh2 : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         idle = true;
         trapped = false;
-        damage = 50f;
+        damage = 100f;
         currentTargetIndex = 0;
         
         playerHealth = GameObject.Find("Player").GetComponent<HealthScript>();
-        titanHolder = GameObject.Find("TitanHolder");
+        titanHolder = gameObject.transform.GetChild(0).gameObject;
         target[0] = GameObject.Find("Waypoint1").transform;
         target[1] = GameObject.Find("Waypoint2").transform;
         target[2] = GameObject.Find("Waypoint3").transform;

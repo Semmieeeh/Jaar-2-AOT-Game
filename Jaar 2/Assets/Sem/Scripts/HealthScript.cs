@@ -9,7 +9,7 @@ public class HealthScript : MonoBehaviour
     [Header("User Interface")]
     public Slider healthSlider;
     public GameObject getToCover;
-    public GameObject deathUI;
+    public GameObject deathUI,winUI;
 
     [Header("Health")]
     public float health;
@@ -22,6 +22,7 @@ public class HealthScript : MonoBehaviour
     public bool death;
     public bool tookDamage;
     public bool damageDelay;
+    public float titansKilled;
     
 
 
@@ -86,7 +87,9 @@ public class HealthScript : MonoBehaviour
         {
 
             
-            //deathUI.SetActive(true);
+            deathUI.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            death = false;
 
         }
         if(tookDamage == true)
@@ -97,7 +100,12 @@ public class HealthScript : MonoBehaviour
             tookDamage = false;
         }
 
-
+        if(titansKilled >= 5)
+        {
+            winUI.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            titansKilled = 0;
+        }
 
     }
     

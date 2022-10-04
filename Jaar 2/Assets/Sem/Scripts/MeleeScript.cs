@@ -171,7 +171,7 @@ public class MeleeScript : MonoBehaviour
                     PlaceTurret place = hit.transform.gameObject.GetComponent<PlaceTurret>();
                     Vector3 pos = hit.transform.gameObject.transform.position;
                     
-                    pos.y += 1f;
+                   
                     
                     if (Input.GetKeyDown(KeyCode.E)&& place.obstructed == false && economy.metal >=economy.turretCost)
                     {

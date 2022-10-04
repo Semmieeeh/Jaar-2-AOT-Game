@@ -34,6 +34,7 @@ public class Turrets : MonoBehaviour
     void Start()
     {
         //gunShot.volume = 0.75f; 
+        readyToShoot = true;
     }
     public void Update()
     {
@@ -65,65 +66,48 @@ public class Turrets : MonoBehaviour
     }
     private void MyInput()
     {
-        transform.LookAt(titan);
-        Vector3 angles = transform.localEulerAngles;
-        angles.x = 0;
-        transform.localEulerAngles = angles;
 
-        if (Physics.Raycast(attackPoint.position, transform.forward, out rayHit, range))
-        {
-            if (rayHit.collider.CompareTag("Titan"))
-            {
-                shooting = true;
-            }
-
-            else
-            {
-                shooting = false;
-            }
-
-        }
-
-        if (bulletsLeft == 0)
-        {
-            Reload();
-        }
+        
 
         //Shoot
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        if(titan != null)
         {
-            readyToShoot = false;
-            bulletsShot = bulletsPerTap;
+            transform.LookAt(titan);
+            titan.GetComponent<EnemyHealth>().gettingShotBy = gameObject;
+            Vector3 angles = transform.localEulerAngles;
+            angles.x = 0;
+            transform.localEulerAngles = angles;
 
-            Invoke("Shoot", delay);
 
-            //gunShot.Play();
-            //uzzle.Play();
+
+            if (bulletsLeft == 0)
+            {
+                Reload();
+            }
+            if (readyToShoot && !reloading && bulletsLeft > 0 && Vector3.Distance(gameObject.transform.position, titan.transform.position) < range)
+            {
+                readyToShoot = false;
+                bulletsShot = bulletsPerTap;
+                
+                Invoke("Shoot", delay);
+                
+                //gunShot.Play();
+                //uzzle.Play();
+            }
         }
     }
     private void Shoot()
     {
-        readyToShoot = false;
 
-        //Raycast
-        if (Physics.Raycast(attackPoint.position, transform.forward, out rayHit, range))
+        if (titan != null)
         {
-            if (rayHit.transform.gameObject.tag == "Titan")
-            {
-                EnemyHealth hp = rayHit.transform.gameObject.GetComponent<EnemyHealth>();
-                hp.TakeDamage(damageTurret);
-            }
+            EnemyHealth hp = titan.GetComponent<EnemyHealth>();
+            hp.TakeDamage(damageTurret);
+            readyToShoot = true;
+            bulletsLeft--;
+            bulletsShot--;
         }
 
-        bulletsLeft--;
-        bulletsShot--;
-
-        Invoke("ResetShot", timeBetweenShooting);
-
-        if (bulletsShot > 0 && bulletsLeft > 0)
-        {
-            Invoke("Shoot", timeBetweenShots);
-        }
     }
     private void ReadyToShoot()
     {
