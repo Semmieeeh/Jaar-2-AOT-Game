@@ -10,23 +10,20 @@ public class TitanSpawner : MonoBehaviour
 
     private void Start()
     {
-        maySpawn = false;
-        
+        maySpawn = true;
     }
     void Update()
     {
         if(maySpawn == true)
         {
-            //Invoke("Spawner", spawnTime);
+            Invoke("Spawner", spawnTime);
             Instantiate(titan);
             
             maySpawn = false;
         }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            maySpawn = true;
-        }
     }
-
-    
+    void Spawner()
+    {
+        maySpawn = true;
+    }
 }

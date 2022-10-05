@@ -216,6 +216,8 @@ MonoBehaviour:
   titan: {fileID: 734752191844327519}
   death: 0
   reset: 0
+  slider: {fileID: 0}
+  navMesh: {fileID: 0}
 --- !u!65 &4003748652650938240
 BoxCollider:
   m_ObjectHideFlags: 0

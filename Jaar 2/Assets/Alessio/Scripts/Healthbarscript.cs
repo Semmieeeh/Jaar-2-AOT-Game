@@ -23,7 +23,7 @@ public class Healthbarscript : MonoBehaviour
     public void Update()
     {
         UpdateHealthBar();
-        slider.value = currentHeal;
+        //slider.value = currentHeal;
         if(death == true)
         {
             
@@ -41,7 +41,6 @@ public class Healthbarscript : MonoBehaviour
     public void UpdateHealthBar()
     {
         float fillAmount = (float)currentHeal/(float)maxHeal;
-        ;
     }
     public void WallDamage(float amount)
     {
