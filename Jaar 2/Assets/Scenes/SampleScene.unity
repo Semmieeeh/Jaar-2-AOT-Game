@@ -1815,7 +1815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titan: {fileID: 5463039039180928348, guid: 1d8027c396ea56d449de949b9b6605e3, type: 3}
   maySpawn: 0
-  spawnTime: 10
+  spawnTime: 20
 --- !u!4 &255902361
 Transform:
   m_ObjectHideFlags: 0

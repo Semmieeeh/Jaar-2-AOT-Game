@@ -37,7 +37,7 @@ public class GrapplingTest : MonoBehaviour
 
     public void Start()
     {
-        
+
         idleStrength = 4;
         
         minDamperStrength = 1f;
