@@ -19,6 +19,7 @@ public class UIButtons : MonoBehaviour
     public GameObject resume;
     public GameObject restart;
     public GameObject cam;
+    public GameObject maincam;
 
     private bool playtrue;
     public bool escmenuon;
@@ -38,6 +39,7 @@ public class UIButtons : MonoBehaviour
         currency.SetActive(false);
         playtrue = false;
         waves.SetActive(false);
+        maincam.SetActive(false);
     }
     public void Update()
     {
@@ -69,6 +71,7 @@ public class UIButtons : MonoBehaviour
         imageEsc.SetActive(false);
         GameObject.Find("Canvas").GetComponent<Esc>().Played();
         cam.SetActive(false);
+        maincam.SetActive(true);
     }
     public void Escape()
     {
@@ -78,6 +81,7 @@ public class UIButtons : MonoBehaviour
         imageEsc.SetActive(true);
         resume.SetActive(true);
         cam.SetActive(true);
+        maincam.SetActive(false);
     }
 
     public void Waves()
@@ -93,6 +97,7 @@ public class UIButtons : MonoBehaviour
         imageEsc.SetActive(false);
         resume.SetActive(false);
         cam.SetActive(false);
+        maincam.SetActive(true);
     }
 
     public void Options()
