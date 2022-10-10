@@ -6,7 +6,8 @@ public class Camzoom2 : MonoBehaviour
 {
     public float fieldOfView;
     public GameObject menuCam;
-    public bool fovmax;
+    private bool fovmax;
+    private bool may;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,23 +19,31 @@ public class Camzoom2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(fovmax == false)
+        menuCam.GetComponent<Camera>().fieldOfView = fieldOfView;
+
+        if(may == true)
         {
-            fieldOfView -= 1 * Time.unscaledDeltaTime;
+            if (fovmax == false)
+            {
+                fieldOfView -= 1 * Time.unscaledDeltaTime;
+            }
+        }
+        
+        else if(fovmax == true)
+        {
+            fieldOfView += 1 * Time.unscaledDeltaTime;
         }
 
         if(fieldOfView < 45)
         {
-            fovmax = true;
-            fieldOfView += 1 * Time.unscaledDeltaTime;
+            may = false;
+            fovmax = true;  
         }
 
-        if (fieldOfView > 50)
+        if(fieldOfView >= 60)
         {
+            may = true;
             fovmax = false;
-            fieldOfView -= 1 * Time.unscaledDeltaTime;
         }
-
-        menuCam.GetComponent<Camera>().fieldOfView = fieldOfView;
     }
 }
