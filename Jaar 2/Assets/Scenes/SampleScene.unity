@@ -17109,7 +17109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1715130895
@@ -24161,6 +24161,8 @@ MonoBehaviour:
   fovSlider: {fileID: 71249669}
   panels: {fileID: 1643377633}
   scale: {x: 0.3, y: 0.8, z: 0}
+  panelFront: {fileID: 1643377633}
+  panelBack: {fileID: 1643377633}
   escmenuon: 0
   play: {fileID: 627650812567467009}
 --- !u!1 &627650813205376172

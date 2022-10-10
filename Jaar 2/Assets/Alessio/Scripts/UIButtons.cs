@@ -23,7 +23,7 @@ public class UIButtons : MonoBehaviour
     public GameObject panels;
     //public GameObject maincam;
     public Vector3 scale;
-
+    public GameObject panelFront, panelBack;
     private bool playtrue;
     public bool escmenuon;
     public GameObject play;
@@ -118,7 +118,9 @@ public class UIButtons : MonoBehaviour
         resume.SetActive(false);
         restart.SetActive(false);
         fovSlider.SetActive(true);
-        scale.x = 0.6f;
+        panelFront.transform.localScale = new Vector3(0.6f, 0.8f, 1);
+        
+        
     }
 
     public void Credits()
@@ -127,6 +129,7 @@ public class UIButtons : MonoBehaviour
         credits.SetActive(true);
         back.SetActive(true);
         scale.x = 0.3f;
+        panelFront.transform.localScale = new Vector3(0.3f, 0.8f, 1);
     }
     public void Back()
     {
@@ -137,8 +140,8 @@ public class UIButtons : MonoBehaviour
         fullscreen.SetActive(false);
         resolution.SetActive(false);
         fovSlider.SetActive(false);
-
-        if(escmenuon == true)
+        panelFront.transform.localScale = new Vector3(0.3f, 0.8f, 1);
+        if (escmenuon == true)
         {
             resume.SetActive(true);
             restart.SetActive(true);
@@ -160,7 +163,9 @@ public class UIButtons : MonoBehaviour
         back.SetActive(false);
         slider.SetActive(false);
         fullscreen.SetActive(false);
+        panelFront.transform.localScale = new Vector3(0.3f, 0.8f, 1);
         resolution.SetActive(false);
+
     }
 
     List<int> widhts = new List<int>() { 568, 960, 1280, 1920 };
