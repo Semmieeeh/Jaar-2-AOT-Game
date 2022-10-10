@@ -27,6 +27,7 @@ public class UIButtons : MonoBehaviour
     private bool playtrue;
     public bool escmenuon;
     public GameObject play;
+    public GameObject titel;
     public void Start()
     {
         imageEsc.SetActive(false);
@@ -78,6 +79,7 @@ public class UIButtons : MonoBehaviour
         cam.SetActive(false);
         //maincam.SetActive(true);
         panels.SetActive(false);
+        titel.SetActive(false);
     }
     public void Escape()
     {
@@ -89,6 +91,7 @@ public class UIButtons : MonoBehaviour
         cam.SetActive(true);
         //maincam.SetActive(false);
         panels.SetActive(true);
+        titel.SetActive(true);
     }
 
     public void Waves()
@@ -106,6 +109,7 @@ public class UIButtons : MonoBehaviour
         cam.SetActive(false);
         //maincam.SetActive(true);
         panels.SetActive(false);
+        titel.SetActive(false);
     }
 
     public void Options()
@@ -118,9 +122,8 @@ public class UIButtons : MonoBehaviour
         resume.SetActive(false);
         restart.SetActive(false);
         fovSlider.SetActive(true);
-        panelFront.transform.localScale = new Vector3(0.6f, 0.8f, 1);
-        
-        
+        panelFront.transform.localScale = new Vector3(0.5f, 0.8f, 1);
+        titel.SetActive(false);
     }
 
     public void Credits()
@@ -130,6 +133,7 @@ public class UIButtons : MonoBehaviour
         back.SetActive(true);
         scale.x = 0.3f;
         panelFront.transform.localScale = new Vector3(0.3f, 0.8f, 1);
+        titel.SetActive(false);
     }
     public void Back()
     {
@@ -145,7 +149,8 @@ public class UIButtons : MonoBehaviour
         {
             resume.SetActive(true);
             restart.SetActive(true);
-        }  
+        }
+        titel.SetActive(true);
     }
     public void escmenu()
     {
