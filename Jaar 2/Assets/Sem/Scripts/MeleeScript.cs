@@ -45,7 +45,7 @@ public class MeleeScript : MonoBehaviour
     public Economy economy;
     public GameObject sellUi;
     public GameObject[] cannons;
-
+    public GameObject place;
     public GameObject turret;
     // Start is called before the first frame update
     void Start()
@@ -181,17 +181,29 @@ public class MeleeScript : MonoBehaviour
             {
                 if(hit.transform.gameObject.tag == "Platform")
                 {
-                    PlaceTurret place = hit.transform.gameObject.GetComponent<PlaceTurret>();
+                    place = hit.transform.gameObject;
                     Vector3 pos = hit.transform.gameObject.transform.position;
                     
                    
                     
-                    if (Input.GetKeyDown(KeyCode.E)&& place.obstructed == false && economy.metal >=economy.turretCost)
+                    if (Input.GetKeyDown(KeyCode.E)&& place.GetComponent<PlaceTurret>().obstructed == false && economy.metal >=economy.turretCost)
                     {
                         Instantiate(turret,pos,Quaternion.identity);
                         
-                        place.obstructed = true;
+                        
+                        place.GetComponent<PlaceTurret>().cannon = turret;
                         economy.metal -= economy.turretCost;
+                    }
+                }
+
+                if(hit.transform.gameObject.tag == "Cannon")
+                {
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        Debug.Log(hit.transform.gameObject.name);
+                        hit.transform.gameObject.GetComponentInParent<Turrets>().destroyed = true;
+                        economy.metal += 10;
+                        
                     }
                 }
 

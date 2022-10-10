@@ -22,26 +22,39 @@ public class Turrets : MonoBehaviour
     public RaycastHit hit;
 
     //Graphics
-
+    public GameObject platform;
     public AudioSource gunShot;
     public AudioSource gunReload;
     public ParticleSystem muzzle;
     public EnemyHealth enemyHp;
     public LayerMask titanMask;
     public Transform titan;
+    public MeleeScript ml;
+    public bool destroyed;
 
     // Start is called before the first frame update
     void Start()
     {
         //gunShot.volume = 0.75f; 
+        ml = GameObject.Find("handheld ODM gear_fixed_ow 2").GetComponent<MeleeScript>();
         readyToShoot = true;
+        platform = ml.place;
+        range = 20;
+
+
     }
     public void Update()
     {
-       
+       if(destroyed == true)
+       {
+            platform.GetComponent<PlaceTurret>().cannon = null;
+            Destroy(gameObject);
+       }
+
         if(titan != null)
         {
             MyInput();
+
         }
         else if(titan == null)
         {
@@ -78,6 +91,7 @@ public class Turrets : MonoBehaviour
             angles.x = 0;
             transform.localEulerAngles = angles;
 
+            
 
 
             if (bulletsLeft == 0)
@@ -93,6 +107,17 @@ public class Turrets : MonoBehaviour
                 
                 //gunShot.Play();
                 //uzzle.Play();
+            }
+            
+        }
+    }
+    public void LateUpdate()
+    {
+        if(titan != null)
+        {
+            if (Vector3.Distance(gameObject.transform.position, titan.transform.position) > 20)
+            {
+                titan = null;
             }
         }
     }
