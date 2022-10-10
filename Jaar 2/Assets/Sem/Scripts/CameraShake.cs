@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
+    public GameObject fpsCam;
+    public Vector3 originalPos;
+
+    public void Start()
+    {
+        
+    }
+    public void Update()
+    {
+        originalPos = transform.position;
+    }
     public IEnumerator Shake(float duration, float magnitude)
     {
-        Vector3 originalPos = transform.localPosition;
+         
 
         float elapsed = 0.0f;
 
@@ -24,6 +35,6 @@ public class CameraShake : MonoBehaviour
                 
         }
 
-        transform.localPosition = originalPos;
+        fpsCam.transform.position = originalPos;
     }
 }

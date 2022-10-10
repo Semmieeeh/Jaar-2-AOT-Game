@@ -47,7 +47,7 @@ public class AirAudio : MonoBehaviour
 
         if (s == null)
         {
-            Debug.LogWarning("Sound" + name + "not found!");
+            
             return;
         }
 

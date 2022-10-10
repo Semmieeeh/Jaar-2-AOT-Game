@@ -9,6 +9,9 @@ TagManager:
   - Canisters
   - Kevin
   - Titan
+  - MainMenu
+  - Platform
+  - Dead
   layers:
   - Default
   - TransparentFX
@@ -16,11 +19,11 @@ TagManager:
   - Ground
   - Water
   - UI
-  - enemy
+  - Enemy
   - Gear
-  - 
-  - 
-  - 
+  - Player
+  - SpawnAble
+  - Trap
   - 
   - 
   - 

@@ -6,27 +6,12 @@ namespace EZCameraShake
     [AddComponentMenu("EZ Camera Shake/Camera Shaker")]
     public class CameraShaker : MonoBehaviour
     {
-        /// <summary>
-        /// The single instance of the CameraShaker in the current scene. Do not use if you have multiple instances.
-        /// </summary>
+        
         public static CameraShaker Instance;
-        static Dictionary<string, CameraShaker> instanceList = new Dictionary<string, CameraShaker>();
-
-        /// <summary>
-        /// The default position influcence of all shakes created by this shaker.
-        /// </summary>
-        public Vector3 DefaultPosInfluence = new Vector3(0.15f, 0.15f, 0.15f);
-        /// <summary>
-        /// The default rotation influcence of all shakes created by this shaker.
-        /// </summary>
-        public Vector3 DefaultRotInfluence = new Vector3(1, 1, 1);
-        /// <summary>
-        /// Offset that will be applied to the camera's default (0,0,0) rest position
-        /// </summary>
-        public Vector3 RestPositionOffset = new Vector3(0, 0, 0);
-        /// <summary>
-        /// Offset that will be applied to the camera's default (0,0,0) rest rotation
-        /// </summary>
+        static Dictionary<string, CameraShaker> instanceList = new Dictionary<string, CameraShaker>();        
+        public Vector3 DefaultPosInfluence = new Vector3(0.15f, 0.15f, 0.15f);        
+        public Vector3 DefaultRotInfluence = new Vector3(1, 1, 1);        
+        public Vector3 RestPositionOffset = new Vector3(0, 0, 0);        
         public Vector3 RestRotationOffset = new Vector3(0, 0, 0);
 
         Vector3 posAddShake, rotAddShake;

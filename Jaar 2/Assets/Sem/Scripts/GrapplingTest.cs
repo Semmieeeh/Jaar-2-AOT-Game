@@ -9,6 +9,7 @@ public class GrapplingTest : MonoBehaviour
 {
 
     public bool canFire = true;
+    public float retractionSpeed;
     private Vector3 grapplePoint;
     public LayerMask whatIsGrappleable;
     public Transform gunTip, playerCam, player;
@@ -17,14 +18,16 @@ public class GrapplingTest : MonoBehaviour
     public bool isGrappling = false;
     public float grappleStrength;
     public float idleStrength;
-    public bool stillGrappling;
+   
     public float damperStrength;
     public float minDamperStrength;
     public float maxDamperStrength;
     public GameObject grapplePointChild;
     public GameObject grapplePointParent;
-    public float grappleTime;
-
+    public GameObject fpsCam;
+    
+    
+    
     public RaycastHit hit;
     public GameObject childOfPoint;
     public bool fallEffect;
@@ -34,7 +37,7 @@ public class GrapplingTest : MonoBehaviour
 
     public void Start()
     {
-        
+
         idleStrength = 4;
         
         minDamperStrength = 1f;
@@ -74,10 +77,6 @@ public class GrapplingTest : MonoBehaviour
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) && Input.GetMouseButtonDown(0))
         {
             StartGrapple();
-            
-            
-            
-
         }
         
         else if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.LeftAlt))
@@ -97,19 +96,25 @@ public class GrapplingTest : MonoBehaviour
 
 
         }
+
+
         
-        if(isGrappling == false)
+
+
+
+
+        if (isGrappling == false)
         {
             return;
         }
 
-
+        
        
 
         if (isGrappling == true && Input.GetMouseButton(1))
         {
             
-            joint.maxDistance -= 15f * Time.deltaTime;
+            joint.maxDistance -= retractionSpeed * Time.deltaTime;
             
         }
         else if(isGrappling == true && Input.GetKey(KeyCode.Q))
@@ -119,9 +124,6 @@ public class GrapplingTest : MonoBehaviour
         }
 
         
-
-
-
 
 
         if (childOfPoint == null)
@@ -171,7 +173,7 @@ public class GrapplingTest : MonoBehaviour
             joint.connectedAnchor = grapplePoint;
             pm.airMultiplier = 15f;
             float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
-            stillGrappling = true;
+            
             joint.maxDistance = distanceFromPoint * 0.8f;
             joint.minDistance = distanceFromPoint * 0f;
 

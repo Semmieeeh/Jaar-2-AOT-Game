@@ -19,14 +19,15 @@ public class MeleeScript : MonoBehaviour
     public float maxCooldown;
     RaycastHit hit;
     public ParticleSystem swordhitParticle;
-
+    public CameraShaker camShake;
     public GameObject fpsCam;
     public LayerMask enemy;
     public int attackstate;
+    
     public float attackTransition;
     public float attackTransitionMax;
     public float attackTransitionMin;
-
+    public bool isShaking;
     public float attackStateReset;
     public float attackStateResetResetMax;
     public float attackStateResetResetMin;
@@ -38,12 +39,19 @@ public class MeleeScript : MonoBehaviour
     public LayerMask swordClink;
     public ParticleSystem swordGroundhitParticle;
     public bool reloadingWithSwords;
+    public float duration, intensity;
+    public Quaternion SpawnRot;
+    public Economy economy;
+
+
+    public GameObject turret;
     // Start is called before the first frame update
     void Start()
     {
+        isShaking = false;
         swordBlades = 3;
         reloadingWithSwords = false;
-        range = 3f;
+        range = 4.5f;
         damage = 10;
         maxCooldown = 1;
         minCooldown = 0;
@@ -55,7 +63,8 @@ public class MeleeScript : MonoBehaviour
         attackTransitionMax = 2;
         attackTransitionMin = 0f;
         weaponSway = GameObject.Find("RightSwordHolder").GetComponent<WeaponSway>();
-
+        camShake = GameObject.Find("Main Camera").GetComponent<CameraShaker>();
+        economy = GameObject.Find("Player").GetComponent<Economy>();
 
     }
 
@@ -67,6 +76,8 @@ public class MeleeScript : MonoBehaviour
         anim.SetInteger("AttackState", attackstate);
         anim.SetBool("isReloading", isReloading);
         anim.SetBool("ReloadWithSwords", reloadingWithSwords);
+
+        
 
 
         if (swordBlades == 0 && disappeared == false)
@@ -141,16 +152,48 @@ public class MeleeScript : MonoBehaviour
                     chargedDamage = minChargedDamage;
                     attackTransition = attackTransitionMax;
                     cooldown = maxCooldown;
+
+
+                    if(finalDamage > 20)
+                    {
+                        FindObjectOfType<SlashSounds>().Play("ChargedSlash");
+                    }
+                    else
+                    {
+                        FindObjectOfType<SlashSounds>().Play("RegularSlash");
+                    }
                 }
             }
             else if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
+                if(hit.transform.gameObject.tag == "Platform")
+                {
+                    PlaceTurret place = hit.transform.gameObject.GetComponent<PlaceTurret>();
+                    Vector3 pos = hit.transform.gameObject.transform.position;
+                    
+                   
+                    
+                    if (Input.GetKeyDown(KeyCode.E)&& place.obstructed == false && economy.metal >=economy.turretCost)
+                    {
+                        Instantiate(turret,pos,Quaternion.identity);
+                        
+                        place.obstructed = true;
+                        economy.metal -= economy.turretCost;
+                    }
+                }
+
+
+
                 if (Input.GetKeyUp(KeyCode.F))
                 {
                     attackstate = 2;
                     cooldown = maxCooldown;
                     attackTransition = attackTransitionMax;
                     StartCoroutine(SlashHit());
+                    if(swordBlades > 0)
+                    {
+                        FindObjectOfType<SlashSounds>().Play("HitGround");
+                    }
                     chargedDamage = minChargedDamage;
                 }
             }
@@ -163,7 +206,7 @@ public class MeleeScript : MonoBehaviour
             }
         }
 
-
+        
 
 
 
@@ -192,21 +235,25 @@ public class MeleeScript : MonoBehaviour
         }
 
 
-        if (attackstate == 0)
+        
+        if(cooldown == minCooldown)
         {
+            if (Input.GetKeyDown(KeyCode.R) && isReloading == false && swordBlades == 0)
+            {
+                StartCoroutine(Reload());
+                isReloading = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.R) && reloadingWithSwords == false && swordBlades > 0)
+            {
+                StartCoroutine(ReloadWithSwords());
+                reloadingWithSwords = true;
+            }
+        }
 
-        }
-        if (Input.GetKeyDown(KeyCode.R) && isReloading == false && swordBlades == 0)
-        {
-            StartCoroutine(Reload());
-            isReloading = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.R) && reloadingWithSwords == false && swordBlades > 0)
-        {
-            StartCoroutine(ReloadWithSwords());
-            reloadingWithSwords = true;
-        }
 
+
+
+        
     }
 
     public IEnumerator BladeDisappear()
