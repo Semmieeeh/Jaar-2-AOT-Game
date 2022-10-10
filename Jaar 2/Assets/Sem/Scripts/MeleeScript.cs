@@ -1,4 +1,5 @@
 using EZCameraShake;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,7 +43,8 @@ public class MeleeScript : MonoBehaviour
     public float duration, intensity;
     public Quaternion SpawnRot;
     public Economy economy;
-
+    public GameObject sellUi;
+    public GameObject[] cannons;
 
     public GameObject turret;
     // Start is called before the first frame update
@@ -76,6 +78,17 @@ public class MeleeScript : MonoBehaviour
         anim.SetInteger("AttackState", attackstate);
         anim.SetBool("isReloading", isReloading);
         anim.SetBool("ReloadWithSwords", reloadingWithSwords);
+
+        cannons = GameObject.FindGameObjectsWithTag("Cannon");
+
+
+
+
+
+
+
+
+
 
         
 
@@ -182,7 +195,7 @@ public class MeleeScript : MonoBehaviour
                     }
                 }
 
-
+                
 
                 if (Input.GetKeyUp(KeyCode.F))
                 {

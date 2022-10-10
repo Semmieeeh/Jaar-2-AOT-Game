@@ -11,7 +11,7 @@ public class Waves : MonoBehaviour
     float timer = 90;
     void Update()
     {
-        waveUi.text = "Wave:" + wave.ToString("00");
+        
 
         timerUI.text = "Timer:" + timer.ToString("00");
 
