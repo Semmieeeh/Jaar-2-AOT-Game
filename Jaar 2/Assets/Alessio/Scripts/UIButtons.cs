@@ -20,7 +20,9 @@ public class UIButtons : MonoBehaviour
     public GameObject restart;
     public GameObject cam;
     public GameObject fovSlider;
+    public GameObject panels;
     //public GameObject maincam;
+    public Vector3 scale;
 
     private bool playtrue;
     public bool escmenuon;
@@ -42,6 +44,7 @@ public class UIButtons : MonoBehaviour
         waves.SetActive(false);
         //maincam.SetActive(false);
         fovSlider.SetActive(false);
+        panels.transform.localScale = scale;
     }
     public void Update()
     {
@@ -74,6 +77,7 @@ public class UIButtons : MonoBehaviour
         GameObject.Find("Canvas").GetComponent<Esc>().Played();
         cam.SetActive(false);
         //maincam.SetActive(true);
+        panels.SetActive(false);
     }
     public void Escape()
     {
@@ -84,6 +88,7 @@ public class UIButtons : MonoBehaviour
         resume.SetActive(true);
         cam.SetActive(true);
         //maincam.SetActive(false);
+        panels.SetActive(true);
     }
 
     public void Waves()
@@ -100,6 +105,7 @@ public class UIButtons : MonoBehaviour
         resume.SetActive(false);
         cam.SetActive(false);
         //maincam.SetActive(true);
+        panels.SetActive(false);
     }
 
     public void Options()
@@ -112,6 +118,7 @@ public class UIButtons : MonoBehaviour
         resume.SetActive(false);
         restart.SetActive(false);
         fovSlider.SetActive(true);
+        scale.x = 0.6f;
     }
 
     public void Credits()
@@ -119,6 +126,7 @@ public class UIButtons : MonoBehaviour
         mainMenu.SetActive(false);
         credits.SetActive(true);
         back.SetActive(true);
+        scale.x = 0.3f;
     }
     public void Back()
     {
