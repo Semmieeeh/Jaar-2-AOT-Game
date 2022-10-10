@@ -8250,7 +8250,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Servey Corps
+  m_text: Survey Corps
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bfb83760822a8e14f8338c248c820152, type: 2}
   m_sharedMaterial: {fileID: 3809198033004898326, guid: bfb83760822a8e14f8338c248c820152, type: 2}
@@ -8277,8 +8277,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -15194,9 +15194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27cf8a19f90cc7348a903e42117efaf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 3
-  sprintSpeed: 8
-  groundDrag: 4
+  walkSpeed: 8
+  sprintSpeed: 14
+  groundDrag: 2
   jumpForce: 9
   maxJumpForce: 0
   minJumpForce: 8
@@ -17644,7 +17644,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Servey Corps
+  m_text: Survey Corps
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bfb83760822a8e14f8338c248c820152, type: 2}
   m_sharedMaterial: {fileID: 3809198033004898326, guid: bfb83760822a8e14f8338c248c820152, type: 2}
@@ -17671,8 +17671,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -26618,7 +26618,7 @@ MonoBehaviour:
   economy: {fileID: 0}
   sellUi: {fileID: 0}
   cannons: []
-  turret: {fileID: 3173852794330648892, guid: 3eaf94118b63fac40b8431768e6fd360, type: 3}
+  turret: {fileID: 4318426833116009437, guid: 631a324f85e2bc248b3f1de488e1269c, type: 3}
 --- !u!65 &9076519332492569363
 BoxCollider:
   m_ObjectHideFlags: 0
