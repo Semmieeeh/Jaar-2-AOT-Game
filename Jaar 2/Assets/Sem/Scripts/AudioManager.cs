@@ -2,6 +2,7 @@ using UnityEngine.Audio;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
@@ -16,10 +17,13 @@ public class AudioManager : MonoBehaviour
         audioSources[toPLay].Play();
         currentlyPlaying = toPLay;
     }
-    public void StopAUdio(int toStop)
+    public void StopAudio(int toStop)
     {
         audioSources[toStop].Stop();
+
     }
+
+    
 
     
 }

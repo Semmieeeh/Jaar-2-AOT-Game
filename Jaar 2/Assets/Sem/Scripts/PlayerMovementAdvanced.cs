@@ -12,7 +12,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public bool groundHitParticle;
 
     public float groundDrag;
-
+    public bool smallGroundHit;
     [Header("Jumping")]
     public float jumpForce;
     public float maxJumpForce;
@@ -60,11 +60,12 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public float dashCoolDownMin;
     public float dashCoolDownMax;
     public bool airDash;
-
+    public bool canPlay;
     public GrapplingTest grapplingTest;
     public GameObject cannotJump;
     public MovementState state;
     public ParticleSystem groundparticle;
+    public bool canPlayGroundSound;
 
 
 
@@ -88,7 +89,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
         dashForceMin = 3;
         startYScale = transform.localScale.y;
         dashCoolDownMax = 3f;
-        
+        canPlay = false;
     }
 
     private void Update()
@@ -106,22 +107,22 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
         if(grounded == false)
         {
-            
+            canPlay = true;
 
-            if (rb.velocity.x >10 && rb.velocity.x < 15 || rb.velocity.y >10 && rb.velocity.y < 15 || rb.velocity.z > 10 && rb.velocity.z < 15)
+            if (canPlay == true && rb.velocity.x >10 && rb.velocity.x < 15 || rb.velocity.y >10 && rb.velocity.y < 15 || rb.velocity.z > 10 && rb.velocity.z < 15)
             {
-                
-                
+                FindObjectOfType<AudioManager>().PlayAudio(3, 0.8f, 1.2f);
             }
             
-
-
-
         }
         else if(grounded == true)
         {
+            canPlay = false;
+            FindObjectOfType<AudioManager>().StopAudio(3);
             
         }
+
+        
 
 
 
@@ -144,7 +145,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
             {
 
                 rb.velocity = new Vector3(0f, 0f, 0f);
-
+                
                 Dash();
                 dashForce = dashForceMin;
                 dashCoolDown += 3f;
@@ -163,6 +164,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftAlt))
         {
             dashForce = dashForceMin;
+            
         }
 
         
@@ -221,13 +223,16 @@ public class PlayerMovementAdvanced : MonoBehaviour
         {
             groundHitParticle = true;
         }
-
+        
+        
         if(groundHitParticle == true &&grounded == true)
         {
             groundHitParticle = false;
             groundparticle.Play();
-            FindObjectOfType<AudioManager>().PlayAudio(0,0.8f,1.2f);
+            FindObjectOfType<AudioManager>().PlayAudio(0, 0.9f, 1.1f);
+
         }
+        
 
 
     }
@@ -258,6 +263,11 @@ public class PlayerMovementAdvanced : MonoBehaviour
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
+
+            
+
+
+
             jumpForce = 8;
         }
 
@@ -369,7 +379,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
         Vector3 vel = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
 
         rb.AddForce(fpsCam.transform.forward * dashForce * + 2f + vel, ForceMode.Impulse);
-        
+        FindObjectOfType<AudioManager>().PlayAudio(9, 0.8f, 1.2f);
+
     }
 
     private void Jump()
@@ -380,13 +391,13 @@ public class PlayerMovementAdvanced : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        if(jumpForce < 15f)
+        if (jumpForce >= 15)
         {
-            
+            FindObjectOfType<AudioManager>().PlayAudio(11, 0.8f, 1.2f);
         }
-        if(jumpForce > 15)
+        else if (jumpForce < 15)
         {
-            
+            FindObjectOfType<AudioManager>().PlayAudio(10, 0.8f, 1.2f);
         }
         cannotJump.SetActive(true);
 
