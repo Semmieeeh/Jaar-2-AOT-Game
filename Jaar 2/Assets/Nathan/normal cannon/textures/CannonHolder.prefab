@@ -192,15 +192,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f70f14abb3cc14aa2402a22219f148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenShooting: 0.5
+  timeBetweenShooting: 1
   spread: 0
   range: 20
-  reloadTime: 1
+  reloadTime: 0
   timeBetweenShots: 0.5
   magazineSize: 9999
-  bulletsPerTap: 0
+  bulletsPerTap: 1
   damageTurret: 100
-  delay: 0.5
+  delay: 1
   shooting: 0
   attackPoint: {fileID: 1882621233778833759}
   platform: {fileID: 0}

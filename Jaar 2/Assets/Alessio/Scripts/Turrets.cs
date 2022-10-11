@@ -14,7 +14,7 @@ public class Turrets : MonoBehaviour
     //bools 
     public bool shooting;
     bool reloading;
-    bool readyToShoot;
+    public bool readyToShoot;
 
     //Reference
     public Transform attackPoint;
@@ -39,7 +39,7 @@ public class Turrets : MonoBehaviour
         ml = GameObject.Find("handheld ODM gear_fixed_ow 2").GetComponent<MeleeScript>();
         readyToShoot = true;
         platform = ml.place;
-        range = 20;
+        range = 40;
 
 
     }
@@ -56,13 +56,14 @@ public class Turrets : MonoBehaviour
             MyInput();
 
         }
+
         else if(titan == null)
         {
-            gameObject.GetComponent<SphereCollider>().radius += 50 * Time.deltaTime;
+            gameObject.GetComponent<SphereCollider>().radius += 75 * Time.deltaTime;
         }
-        if(gameObject.GetComponent<SphereCollider>().radius > 30)
+        if(gameObject.GetComponent<SphereCollider>().radius > range)
         {
-            gameObject.GetComponent<SphereCollider>().radius = 1;
+            gameObject.GetComponent<SphereCollider>().radius = 0;
         }
         
         
@@ -79,9 +80,6 @@ public class Turrets : MonoBehaviour
     }
     private void MyInput()
     {
-
-        
-
         //Shoot
         if(titan != null)
         {
@@ -98,15 +96,11 @@ public class Turrets : MonoBehaviour
             {
                 Reload();
             }
-            if (readyToShoot && !reloading && bulletsLeft > 0 && Vector3.Distance(gameObject.transform.position, titan.transform.position) < range)
-            {
-                readyToShoot = false;
-                bulletsShot = bulletsPerTap;
+            if (readyToShoot && Vector3.Distance(gameObject.transform.position, titan.transform.position) < range)
+            {                             
+                readyToShoot=false;
+                Invoke("Shoot", delay);       
                 
-                Invoke("Shoot", delay);
-                
-                //gunShot.Play();
-                //uzzle.Play();
             }
             
         }
@@ -115,9 +109,10 @@ public class Turrets : MonoBehaviour
     {
         if(titan != null)
         {
-            if (Vector3.Distance(gameObject.transform.position, titan.transform.position) > 20)
+            if (Vector3.Distance(gameObject.transform.position, titan.transform.position) > range)
             {
                 titan = null;
+                
             }
         }
     }
@@ -129,19 +124,12 @@ public class Turrets : MonoBehaviour
             EnemyHealth hp = titan.GetComponent<EnemyHealth>();
             hp.TakeDamage(damageTurret);
             readyToShoot = true;
-            bulletsLeft--;
-            bulletsShot--;
+            
+            
         }
 
     }
-    private void ReadyToShoot()
-    {
-        readyToShoot = false;
-    }
-    private void ResetShot()
-    {
-        readyToShoot = true;
-    }
+    
     private void Reload()
     {
         reloading = true;
@@ -160,6 +148,7 @@ public class Turrets : MonoBehaviour
             titan = other.gameObject.transform;
             titan.GetComponent<EnemyHealth>().gettingShotBy = gameObject;
             MyInput();
+            readyToShoot = true;
         }
     }
 }
