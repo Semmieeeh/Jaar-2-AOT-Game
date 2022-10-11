@@ -184,7 +184,7 @@ public class GrapplingTest : MonoBehaviour
 
             grapplePointParent = hit.transform.gameObject;
             
-            FindObjectOfType<EquipmentSounds>().Play("GrapplingFire");
+            
             childOfPoint = Instantiate(grapplePointChild, grapplePoint, Quaternion.identity) as GameObject;
 
             
@@ -197,7 +197,7 @@ public class GrapplingTest : MonoBehaviour
     {
         
         Destroy(joint);
-        FindObjectOfType<EquipmentSounds>().GetComponent<AudioSource>().Stop();
+        
         grapplePointParent = null;
 
     }

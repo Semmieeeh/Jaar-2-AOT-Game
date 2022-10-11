@@ -1,8 +1,7 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
-
-
+using Random = UnityEngine.Random;
 
 public class AirAudio : MonoBehaviour
 {
@@ -29,6 +28,10 @@ public class AirAudio : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
+
+            s.pitch = Random.Range(0.9f, 1.1f);
+
+
 
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;

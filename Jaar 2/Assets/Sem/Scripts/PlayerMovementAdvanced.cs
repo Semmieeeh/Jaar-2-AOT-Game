@@ -9,6 +9,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
     private float moveSpeed;
     public float walkSpeed;
     public float sprintSpeed;
+    public bool groundHitParticle;
 
     public float groundDrag;
 
@@ -63,6 +64,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public GrapplingTest grapplingTest;
     public GameObject cannotJump;
     public MovementState state;
+    public ParticleSystem groundparticle;
 
 
 
@@ -109,7 +111,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
             if (rb.velocity.x >10 && rb.velocity.x < 15 || rb.velocity.y >10 && rb.velocity.y < 15 || rb.velocity.z > 10 && rb.velocity.z < 15)
             {
                 
-                FindObjectOfType<AirAudio>().Play("AirWhoosh");
+                
             }
             
 
@@ -118,7 +120,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
         }
         else if(grounded == true)
         {
-            FindObjectOfType<AirAudio>().GetComponent<AudioSource>().Stop();
+            
         }
 
 
@@ -215,9 +217,17 @@ public class PlayerMovementAdvanced : MonoBehaviour
             jumpForce = minJumpForce;
         }
 
+        if(rb.velocity.y > 20)
+        {
+            groundHitParticle = true;
+        }
 
-
-        
+        if(groundHitParticle == true &&grounded == true)
+        {
+            groundHitParticle = false;
+            groundparticle.Play();
+            FindObjectOfType<AudioManager>().PlayAudio(0,0.8f,1.2f);
+        }
 
 
     }
@@ -359,7 +369,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
         Vector3 vel = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
 
         rb.AddForce(fpsCam.transform.forward * dashForce * + 2f + vel, ForceMode.Impulse);
-        FindObjectOfType<AudioManager>().Play("DashSound");
+        
     }
 
     private void Jump()
@@ -372,11 +382,11 @@ public class PlayerMovementAdvanced : MonoBehaviour
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         if(jumpForce < 15f)
         {
-            FindObjectOfType<AudioManager>().Play("JumpSound");
+            
         }
         if(jumpForce > 15)
         {
-            FindObjectOfType<AudioManager>().Play("ChargedJumpSound");
+            
         }
         cannotJump.SetActive(true);
 
