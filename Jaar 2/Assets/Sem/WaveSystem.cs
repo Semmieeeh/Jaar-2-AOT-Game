@@ -19,10 +19,12 @@ public class WaveSystem : MonoBehaviour
     public bool three;
     public bool four;
     public bool five;
+    public TMP_Text waveUi;
+    public float wave;
 
     void Start()
     {
-        
+        wave = 0f; 
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class WaveSystem : MonoBehaviour
         {
             titan = GameObject.FindGameObjectsWithTag("Titan");
         }
+
 
         if (tut.tutorialFinished == true)
         {
@@ -48,13 +51,9 @@ public class WaveSystem : MonoBehaviour
             tut.tutorialFinished = false;
         }
 
-        
+        waveUi.text = "Wave:" + wave.ToString("00");
 
-
-
-
-
-        if(one == true)
+        if (one == true)
         {
             ui.GetComponent<TextMeshProUGUI>().text = "Wave: 1";
         }
@@ -78,19 +77,25 @@ public class WaveSystem : MonoBehaviour
         {
             ui.GetComponent<TextMeshProUGUI>().text = "Wave: 5";
         }
-
-
     }
     public IEnumerator WaveOne()
     {
         one = true;
         for(int one =0; one<3; one++)
         {
+            WaveTwo();
             Instantiate(titan[Random.Range(0, titan.Length)]);
             yield return new WaitForSeconds(waveTime);
         }
     }
 
-    
-
+    public IEnumerator WaveTwo()
+    {
+        two = true;
+        for (int one = 0; one < 3; one++)
+        {
+            Instantiate(titan[Random.Range(0, titan.Length)]);
+            yield return new WaitForSeconds(waveTime);
+        }
+    }
 }

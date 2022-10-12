@@ -4,28 +4,29 @@ using UnityEngine;
 using TMPro;
 public class Waves : MonoBehaviour
 {
-    public TMP_Text waveUi;
     public TMP_Text timerUI;
+    public bool time;
 
-    float wave = 0;
-    float timer = 90;
+    float timer = 20;
     void Update()
     {
-        
+        timerUI.text = "Timer:" + "/";
 
-        timerUI.text = "Timer:" + timer.ToString("00");
-
-        timer -= 1 * Time.deltaTime;
-        if (timer < 0f)
+        if(time == true)
         {
-            timer = 0f;
-        }
+            timerUI.text = "Timer:" + timer.ToString("00");
 
-        if (timer == 0f)
-        {
-            wave += 1f;
-            timer = 90f;
-            GameObject.Find("TitanSpawner").GetComponent<TitanSpawner>().spawnTime -= 1f;
+            timer -= 1 * Time.deltaTime;
+
+            if (timer < 0f)
+            {
+                timer = 0f;
+            }
+
+            if (timer == 0f)
+            {
+                timer = 20f;
+            }
         }
     }
 }
