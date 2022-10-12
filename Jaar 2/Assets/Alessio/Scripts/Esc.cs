@@ -97,6 +97,7 @@ public class Esc : MonoBehaviour
         canvas.GetComponent<UIButtons>().escmenuoff();
         resume.SetActive(false);
         restart.SetActive(false);
+        canvasActive = false;
     }
 
     public void ResumeTrue()

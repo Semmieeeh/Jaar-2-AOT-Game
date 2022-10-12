@@ -21,13 +21,14 @@ public class UIButtons : MonoBehaviour
     public GameObject cam;
     public GameObject fovSlider;
     public GameObject panels;
-    //public GameObject maincam;
+    public GameObject maincam;
     public Vector3 scale;
     public GameObject panelFront, panelBack;
     private bool playtrue;
     public bool escmenuon;
     public GameObject play;
     public GameObject titel;
+    public GameObject slidersensitivity;
     public void Start()
     {
         imageEsc.SetActive(false);
@@ -43,9 +44,9 @@ public class UIButtons : MonoBehaviour
         currency.SetActive(false);
         playtrue = false;
         waves.SetActive(false);
-        //maincam.SetActive(false);
         fovSlider.SetActive(false);
         panels.transform.localScale = scale;
+        slidersensitivity.SetActive(false);
     }
     public void Update()
     {
@@ -77,7 +78,6 @@ public class UIButtons : MonoBehaviour
         imageEsc.SetActive(false);
         GameObject.Find("Canvas").GetComponent<Esc>().Played();
         cam.SetActive(false);
-        //maincam.SetActive(true);
         panels.SetActive(false);
         titel.SetActive(false);
     }
@@ -89,9 +89,9 @@ public class UIButtons : MonoBehaviour
         imageEsc.SetActive(true);
         resume.SetActive(true);
         //cam.SetActive(true);
-        //maincam.SetActive(false);
         panels.SetActive(true);
         titel.SetActive(true);
+        slidersensitivity.SetActive(false);
     }
 
     public void Waves()
@@ -107,9 +107,9 @@ public class UIButtons : MonoBehaviour
         imageEsc.SetActive(false);
         resume.SetActive(false);
         //cam.SetActive(false);
-        //maincam.SetActive(true);
         panels.SetActive(false);
         titel.SetActive(false);
+        slidersensitivity.SetActive(false);
     }
 
     public void Options()
@@ -124,8 +124,8 @@ public class UIButtons : MonoBehaviour
         fovSlider.SetActive(true);
         panelFront.transform.localScale = new Vector3(0.5f, 0.8f, 1);
         titel.SetActive(false);
+        slidersensitivity.SetActive(true);
     }
-
     public void Credits()
     {
         mainMenu.SetActive(false);
@@ -151,6 +151,7 @@ public class UIButtons : MonoBehaviour
             restart.SetActive(true);
         }
         titel.SetActive(true);
+        slidersensitivity.SetActive(false);
     }
     public void escmenu()
     {

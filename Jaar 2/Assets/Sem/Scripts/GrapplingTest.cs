@@ -31,7 +31,7 @@ public class GrapplingTest : MonoBehaviour
     public RaycastHit hit;
     public GameObject childOfPoint;
     public bool fallEffect;
-    
+    public Esc esc;
    
 
 
@@ -161,8 +161,9 @@ public class GrapplingTest : MonoBehaviour
     void StartGrapple()
     {
         PlayerMovementAdvanced pm = GameObject.Find("Player").GetComponent<PlayerMovementAdvanced>();
+       
         
-        if (Physics.Raycast(playerCam.position, playerCam.forward, out hit, maxDistance, whatIsGrappleable))
+        if (Physics.Raycast(playerCam.position, playerCam.forward, out hit, maxDistance, whatIsGrappleable)&& esc.canvasActive == false)
         {
             isGrappling = true;
             pm.airDash = true;
