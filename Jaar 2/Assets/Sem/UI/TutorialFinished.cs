@@ -16,7 +16,7 @@ public class TutorialFinished : MonoBehaviour
     public bool canPickUpGas;
     public bool canPickUpSwords;
     public float skipTime;
-    public GameObject fpsCam, player, grapplinghook1, grapplinghook2, grappleHolder;
+    public GameObject fpsCam, player, grapplinghook1, grapplinghook2, swordHolder,grappleHolder;
 
     public enum TutorialState
     {
@@ -309,7 +309,7 @@ public class TutorialFinished : MonoBehaviour
         objectiveStateImage = 0;
         objectiveStateText = 0;
 
-        grappleHolder.SetActive(true);
+        swordHolder.SetActive(true);
         
         yield return new WaitForSeconds(1.5f);
         textBox.GetComponent<TextMeshProUGUI>().text = "Huh? you already grabbed your Swords?";
@@ -335,7 +335,7 @@ public class TutorialFinished : MonoBehaviour
         objectiveStateImage = 0;
         objectiveStateText = 0;
         tutorialState = 1;
-        grappleHolder.SetActive(true);
+        swordHolder.SetActive(true);
         stateTwo = true;
         
         
@@ -571,23 +571,32 @@ public class TutorialFinished : MonoBehaviour
     {
         if(tutorialFinished == true)
         {
-            player.GetComponent<TutorialMovement>().enabled = false;
-            player.GetComponent<PlayerMovementAdvanced>().enabled = true;
+            swordHolder.SetActive(true);
+            grappleHolder.SetActive(true);
+
             grapplinghook1.GetComponent<GrapplingTest>().enabled = true;
-            grapplinghook1.GetComponent<RotateGun>().enabled = true;
+            //grapplinghook1.GetComponent<RotateGun>().enabled = true;
             grapplinghook1.GetComponent<GrappleRope>().enabled = true;
             grapplinghook1.GetComponent<LineRenderer>().enabled = true;
+
             grapplinghook2.GetComponent<LineRenderer>().enabled = true;
             grapplinghook2.GetComponent<GrapplingTest>().enabled = true;
-            grapplinghook2.GetComponent<RotateGun>().enabled = true;
+           // grapplinghook2.GetComponent<RotateGun>().enabled = true;
             grapplinghook2.GetComponent<GrappleRope>().enabled = true;
+
+            player.GetComponent<TutorialMovement>().enabled = false;
+            player.GetComponent<PlayerMovementAdvanced>().enabled = true;
+
+
+
             jumpBar.SetActive(true);
             dashbar.SetActive(true);
-            
+            textBox.GetComponent<TextMeshProUGUI>().text = " ";
             equipmentClicked = false;
-            grappleHolder.SetActive(true);
+
             canSkip = false;
-            
+            StopAllCoroutines();
+
         }
     }
 
@@ -687,21 +696,29 @@ public class TutorialFinished : MonoBehaviour
 
         if (skipTime == 3)
         {
-            player.GetComponent<TutorialMovement>().enabled = false;
-            player.GetComponent<PlayerMovementAdvanced>().enabled = true;
+            swordHolder.SetActive(true);
+            grappleHolder.SetActive(true);
+            
             grapplinghook1.GetComponent<GrapplingTest>().enabled = true;
             grapplinghook1.GetComponent<RotateGun>().enabled = true;
             grapplinghook1.GetComponent<GrappleRope>().enabled = true;
             grapplinghook1.GetComponent<LineRenderer>().enabled = true;
+
             grapplinghook2.GetComponent<LineRenderer>().enabled = true;
             grapplinghook2.GetComponent<GrapplingTest>().enabled = true;
             grapplinghook2.GetComponent<RotateGun>().enabled = true;
             grapplinghook2.GetComponent<GrappleRope>().enabled = true;
+
+            player.GetComponent<TutorialMovement>().enabled = false;
+            player.GetComponent<PlayerMovementAdvanced>().enabled = true;
+            
+            
+
             jumpBar.SetActive(true);
             dashbar.SetActive(true);
             textBox.GetComponent<TextMeshProUGUI>().text = " ";
             equipmentClicked = false;
-            grappleHolder.SetActive(true);
+            
             canSkip = false;
             StopAllCoroutines();
 

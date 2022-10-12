@@ -203,7 +203,7 @@ public class GrapplingTest : MonoBehaviour
 
 
     
-    void StopGrapple()
+    public void StopGrapple()
     {
         
         Destroy(joint);

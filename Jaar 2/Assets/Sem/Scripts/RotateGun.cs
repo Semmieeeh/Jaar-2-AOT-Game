@@ -11,16 +11,19 @@ public class RotateGun : MonoBehaviour
     {
         GrapplingTest grappling = GameObject.Find("GrapplingGun").GetComponent<GrapplingTest>();
 
-        if (!grappling.IsGrappling())
+        if(grappling != null)
         {
-            desiredRotation = transform.parent.rotation;
-        }
-        else
-        {
-            desiredRotation = Quaternion.LookRotation(grappling.GetGrapplePoint() - transform.position);
-        }
+            if (!grappling.IsGrappling())
+            {
+                desiredRotation = transform.parent.rotation;
+            }
+            else
+            {
+                desiredRotation = Quaternion.LookRotation(grappling.GetGrapplePoint() - transform.position);
+            }
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);
+        }
     }
 
 }

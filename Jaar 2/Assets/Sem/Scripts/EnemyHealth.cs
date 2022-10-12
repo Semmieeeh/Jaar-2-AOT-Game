@@ -60,6 +60,11 @@ public class EnemyHealth : MonoBehaviour
             if (gettingShotBy != null)
             {
                 Turrets turret = gettingShotBy.GetComponent<Turrets>();
+                GrapplingTest gt1 = GameObject.Find("GrapplingGun").GetComponent<GrapplingTest>();
+                GrapplingTest gt2 = GameObject.Find("GrapplingGun2").GetComponent<GrapplingTest>();
+
+                gt1.StopGrapple();
+                gt2.StopGrapple();
                 turret.titan = null;
             }
             Destroy(gameObject);
