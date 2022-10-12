@@ -22,6 +22,15 @@ public class AudioManager : MonoBehaviour
         audioSources[toStop].Stop();
 
     }
+    public void StopAllAudio()
+    {
+        for(int i =0; i < audioSources.Length; i++)
+        {
+            audioSources[i].Stop();
+        }
+
+
+    }
 
     
 

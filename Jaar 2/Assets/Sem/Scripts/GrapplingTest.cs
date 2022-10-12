@@ -32,7 +32,9 @@ public class GrapplingTest : MonoBehaviour
     public GameObject childOfPoint;
     public bool fallEffect;
     public Esc esc;
-   
+    public GameObject hookParticle;
+    public GameObject odmParticle,particlePos;
+
 
 
     public void Start()
@@ -135,7 +137,10 @@ public class GrapplingTest : MonoBehaviour
         joint.connectedAnchor = grapplePoint;
 
 
-        
+        if(particlePos != null)
+        {
+            particlePos.transform.position = gunTip.transform.position;
+        }
 
     }
 
@@ -174,7 +179,7 @@ public class GrapplingTest : MonoBehaviour
             joint.connectedAnchor = grapplePoint;
             pm.airMultiplier = 15f;
             float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
-
+            
             FindObjectOfType<AudioManager>().PlayAudio(4, 0.9f, 1.1f);
             joint.maxDistance = distanceFromPoint * 0.8f;
             joint.minDistance = distanceFromPoint * 0f;
@@ -188,8 +193,11 @@ public class GrapplingTest : MonoBehaviour
             
             
             childOfPoint = Instantiate(grapplePointChild, grapplePoint, Quaternion.identity) as GameObject;
+            Instantiate(hookParticle, childOfPoint.transform.position, Quaternion.identity);
+            Quaternion rot = gunTip.rotation;
+            particlePos = Instantiate(odmParticle, gunTip.transform.position, rot);
 
-            
+
         }
     }
 

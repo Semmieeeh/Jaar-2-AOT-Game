@@ -2239,7 +2239,7 @@ GameObject:
   - component: {fileID: 266305400}
   - component: {fileID: 266305401}
   m_Layer: 0
-  m_Name: GrapplingGun
+  m_Name: GrapplingGun2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2455,6 +2455,9 @@ MonoBehaviour:
   childOfPoint: {fileID: 0}
   fallEffect: 0
   esc: {fileID: 627650811900795398}
+  hookParticle: {fileID: 2140030391106823179, guid: ad8fe1afa6d0ab64cb239e33afcc43c4, type: 3}
+  odmParticle: {fileID: 699273330757205775, guid: 4be5456ff2d46d64abc673ac0e9e449b, type: 3}
+  particlePos: {fileID: 0}
 --- !u!114 &266305400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4468,7 +4471,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e2c79d407dbe13842933d11b07a41939, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -21126,7 +21129,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -21940,7 +21943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1602310882}
   m_Layer: 0
-  m_Name: GunTip
+  m_Name: GunTip2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23977,7 +23980,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -24492,6 +24495,9 @@ MonoBehaviour:
   childOfPoint: {fileID: 0}
   fallEffect: 0
   esc: {fileID: 627650811900795398}
+  hookParticle: {fileID: 2140030391106823179, guid: ad8fe1afa6d0ab64cb239e33afcc43c4, type: 3}
+  odmParticle: {fileID: 699273330757205775, guid: 4be5456ff2d46d64abc673ac0e9e449b, type: 3}
+  particlePos: {fileID: 0}
 --- !u!120 &1766412014
 LineRenderer:
   m_ObjectHideFlags: 0

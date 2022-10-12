@@ -60,6 +60,8 @@ public class Esc : MonoBehaviour
                         restart.SetActive(true);
                         canvasActive = true;
                         Time.timeScale = 0f;
+                        FindObjectOfType<AudioManager>().StopAllAudio();
+
                         canvas.GetComponent<UIButtons>().Escape();
                         canvas.GetComponent<UIButtons>().escmenu();
                         Cursor.visible = true;

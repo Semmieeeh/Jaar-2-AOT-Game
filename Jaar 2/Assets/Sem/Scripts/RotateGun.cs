@@ -9,7 +9,7 @@ public class RotateGun : MonoBehaviour
 
     void Update()
     {
-        GrapplingTest grappling = gameObject.GetComponent<GrapplingTest>();
+        GrapplingTest grappling = GameObject.Find("GrapplingGun").GetComponent<GrapplingTest>();
 
         if (!grappling.IsGrappling())
         {
