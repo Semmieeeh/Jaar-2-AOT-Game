@@ -132,14 +132,19 @@ public class GrapplingTest : MonoBehaviour
         {
             return;
         }
-        childOfPoint.transform.parent = grapplePointParent.transform;
-        grapplePoint = childOfPoint.transform.position;
-        joint.connectedAnchor = grapplePoint;
 
 
-        if(particlePos != null)
+        if(childOfPoint != null && grapplePointParent != null)
         {
-            particlePos.transform.position = gunTip.transform.position;
+            childOfPoint.transform.parent = grapplePointParent.transform;
+            grapplePoint = childOfPoint.transform.position;
+            joint.connectedAnchor = grapplePoint;
+
+
+            if (particlePos != null)
+            {
+                particlePos.transform.position = gunTip.transform.position;
+            }
         }
 
     }
