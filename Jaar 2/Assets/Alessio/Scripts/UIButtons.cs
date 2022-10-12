@@ -88,7 +88,7 @@ public class UIButtons : MonoBehaviour
         waves.SetActive(false);
         imageEsc.SetActive(true);
         resume.SetActive(true);
-        cam.SetActive(true);
+        //cam.SetActive(true);
         //maincam.SetActive(false);
         panels.SetActive(true);
         titel.SetActive(true);
@@ -106,7 +106,7 @@ public class UIButtons : MonoBehaviour
         waves.SetActive(true);
         imageEsc.SetActive(false);
         resume.SetActive(false);
-        cam.SetActive(false);
+        //cam.SetActive(false);
         //maincam.SetActive(true);
         panels.SetActive(false);
         titel.SetActive(false);

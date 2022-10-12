@@ -169,11 +169,11 @@ public class MeleeScript : MonoBehaviour
 
                     if(finalDamage > 20)
                     {
-                        FindObjectOfType<SlashSounds>().Play("ChargedSlash");
+                        FindObjectOfType<AudioManager>().PlayAudio(2, 0.8f, 1.2f);
                     }
                     else
                     {
-                        FindObjectOfType<SlashSounds>().Play("RegularSlash");
+                        FindObjectOfType<AudioManager>().PlayAudio(1,0.8f,1.2f);
                     }
                 }
             }
@@ -217,7 +217,7 @@ public class MeleeScript : MonoBehaviour
                     StartCoroutine(SlashHit());
                     if(swordBlades > 0)
                     {
-                        FindObjectOfType<SlashSounds>().Play("HitGround");
+                        FindObjectOfType<AudioManager>().PlayAudio(6, 0.8f, 1.2f);
                     }
                     chargedDamage = minChargedDamage;
                 }

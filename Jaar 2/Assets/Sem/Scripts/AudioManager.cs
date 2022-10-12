@@ -1,57 +1,29 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
-
-
+using Random = UnityEngine.Random;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
+    public AudioSource[] audioSources;
+    public int currentlyPlaying;
 
-
-    public static AudioManager instance;
-
-    public void Awake()
+    public void PlayAudio(int toPLay, float minimalPitch, float maximumPitch)
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
 
-
-        DontDestroyOnLoad(gameObject);
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-        }
+        float newPitch = Random.Range(minimalPitch, maximumPitch);
+        audioSources[toPLay].pitch = newPitch;
+        audioSources[toPLay].Play();
+        currentlyPlaying = toPLay;
     }
-    private void Start()
+    public void StopAudio(int toStop)
     {
-        Play(null);
+        audioSources[toStop].Stop();
+
     }
 
+    
 
-    public void Play (string name)
-    {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-
-        if (s == null)
-        {
-            Debug.LogWarning("Sound" + name + "not found!");
-            return;
-        }   
-
-        s.source.Play();
-        
-    }
+    
 }

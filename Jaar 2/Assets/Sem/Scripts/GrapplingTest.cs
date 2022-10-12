@@ -173,7 +173,8 @@ public class GrapplingTest : MonoBehaviour
             joint.connectedAnchor = grapplePoint;
             pm.airMultiplier = 15f;
             float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
-            
+
+            FindObjectOfType<AudioManager>().PlayAudio(4, 0.9f, 1.1f);
             joint.maxDistance = distanceFromPoint * 0.8f;
             joint.minDistance = distanceFromPoint * 0f;
 
@@ -184,7 +185,7 @@ public class GrapplingTest : MonoBehaviour
 
             grapplePointParent = hit.transform.gameObject;
             
-            FindObjectOfType<EquipmentSounds>().Play("GrapplingFire");
+            
             childOfPoint = Instantiate(grapplePointChild, grapplePoint, Quaternion.identity) as GameObject;
 
             
@@ -197,17 +198,11 @@ public class GrapplingTest : MonoBehaviour
     {
         
         Destroy(joint);
-        FindObjectOfType<EquipmentSounds>().GetComponent<AudioSource>().Stop();
+        
         grapplePointParent = null;
+        FindObjectOfType<AudioManager>().StopAudio(4);
 
     }
-
-
-    public void JumpEffect()
-    {
-
-    }
-
 
 
 
