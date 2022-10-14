@@ -109,7 +109,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
         {
             canPlay = true;
 
-            if (canPlay == true && rb.velocity.x >10 && rb.velocity.y < 10 || rb.velocity.y >10 && rb.velocity.y < 10 || rb.velocity.z > 10 && rb.velocity.z < 10)
+            if (canPlay == true && rb.velocity.x >5 && rb.velocity.y < 5 || rb.velocity.y >5 && rb.velocity.y < 5 || rb.velocity.z > 5 && rb.velocity.z < 5)
             {
                 FindObjectOfType<AudioManager>().PlayAudio(3, 0.8f, 1.2f);
             }

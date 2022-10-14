@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 4031253971382744816}
   m_Layer: 0
   m_Name: CannonHolder
-  m_TagString: Untagged
+  m_TagString: Cannon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -202,6 +202,7 @@ MonoBehaviour:
   damageTurret: 100
   delay: 1
   shooting: 0
+  readyToShoot: 0
   attackPoint: {fileID: 1882621233778833759}
   platform: {fileID: 0}
   gunShot: {fileID: 0}
