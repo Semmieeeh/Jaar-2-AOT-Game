@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44732475, g: 0.3869334, b: 0.31288034, a: 1}
+  m_IndirectSpecularColor: {r: 0.44731623, g: 0.3869282, b: 0.3128779, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1539,7 +1539,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255902359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -816.8, y: 0, z: -591.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1564,15 +1564,13 @@ MonoBehaviour:
   - {fileID: 5463039039180928348, guid: 1d8027c396ea56d449de949b9b6605e3, type: 3}
   enemiesInScene: []
   ui: {fileID: 8072398896467126336}
-  waves: {fileID: 0}
   waveTime: 5
   one: 0
   two: 0
   three: 0
   four: 0
   five: 0
-  waveUi: {fileID: 8072398896467126335}
-  wave: 0
+  finished: 0
 --- !u!114 &255902363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1587,6 +1585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerUI: {fileID: 1391767874}
   time: 0
+  wave: {fileID: 0}
 --- !u!1 &257387409
 GameObject:
   m_ObjectHideFlags: 0
@@ -6975,7 +6974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &958455527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15126,7 +15125,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -227, y: 0}
+  m_AnchoredPosition: {x: -251, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1392608106
@@ -17130,6 +17129,7 @@ MonoBehaviour:
   stateThreeFinished: 0
   canSkip: 0
   skipped: 0
+  waveSystem: {fileID: 0}
 --- !u!1 &1622345937
 GameObject:
   m_ObjectHideFlags: 0

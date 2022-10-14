@@ -12,19 +12,20 @@ public class WaveSystem : MonoBehaviour
     public GameObject[] titan;
     public GameObject[] enemiesInScene;
     public GameObject ui;
-    public GameObject waves;
+    
     public float waveTime;
     public bool one;
     public bool two;
     public bool three;
     public bool four;
     public bool five;
-    public TMP_Text waveUi;
-    public float wave;
+    public bool finished;
+    
+    
 
     void Start()
     {
-        wave = 0f; 
+        
     }
 
     // Update is called once per frame
@@ -46,12 +47,11 @@ public class WaveSystem : MonoBehaviour
 
         if (tut.tutorialFinished == true &&canSpawnWaveOne == true)
         {
-            StartCoroutine(WaveOne());
+            
             canSpawnWaveOne = false;
             tut.tutorialFinished = false;
+            StartCoroutine(WaveOne());
         }
-
-        waveUi.text = "Wave:" + wave.ToString("00");
 
         if (one == true)
         {
@@ -61,21 +61,31 @@ public class WaveSystem : MonoBehaviour
         if (two == true)
         {
             ui.GetComponent<TextMeshProUGUI>().text = "Wave: 2";
+            one = false;
         }
         
         if (three == true)
         {
             ui.GetComponent<TextMeshProUGUI>().text = "Wave: 3";
+            two = false;
         }
 
         if (four == true)
         {
             ui.GetComponent<TextMeshProUGUI>().text = "Wave: 4";
+            three = false;
         }
 
         if (five == true)
-        {
+        {          
             ui.GetComponent<TextMeshProUGUI>().text = "Wave: 5";
+            four = false;
+        }
+
+        if(finished == true)
+        {
+            ui.GetComponent<TextMeshProUGUI>().text = "Wave: Finished";
+            five = false;
         }
     }
     public IEnumerator WaveOne()
@@ -83,10 +93,12 @@ public class WaveSystem : MonoBehaviour
         one = true;
         for(int one =0; one<3; one++)
         {
-            WaveTwo();
+            
             Instantiate(titan[Random.Range(0, titan.Length)]);
             yield return new WaitForSeconds(waveTime);
+            continue;
         }
+        GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
     }
 
     public IEnumerator WaveTwo()
@@ -96,6 +108,44 @@ public class WaveSystem : MonoBehaviour
         {
             Instantiate(titan[Random.Range(0, titan.Length)]);
             yield return new WaitForSeconds(waveTime);
+            continue;
         }
+        GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
+    }
+
+    public IEnumerator WaveThree()
+    {
+        three = true;
+        for (int one = 0; one < 3; one++)
+        {
+            Instantiate(titan[Random.Range(0, titan.Length)]);
+            yield return new WaitForSeconds(waveTime);
+            continue;
+        }
+        GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
+    }
+
+    public IEnumerator WaveFour()
+    {
+        four = true;
+        for (int one = 0; one < 3; one++)
+        {
+            Instantiate(titan[Random.Range(0, titan.Length)]);
+            yield return new WaitForSeconds(waveTime);
+            continue;
+        }
+        GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
+    }
+
+    public IEnumerator WaveFive()
+    {
+        five = true;
+        for (int one = 0; one < 3; one++)
+        {
+            Instantiate(titan[Random.Range(0, titan.Length)]);
+            yield return new WaitForSeconds(waveTime);
+            continue;
+        }
+        GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
     }
 }

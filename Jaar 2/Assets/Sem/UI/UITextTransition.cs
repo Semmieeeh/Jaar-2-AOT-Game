@@ -29,10 +29,11 @@ public class UITextTransition : MonoBehaviour
     public bool stateThreeFinished;
     public bool canSkip;
     public bool skipped;
-
+    public GameObject waveSystem;
 
     public void Start()
     {
+        waveSystem = GameObject.Find("TitanSpawner");
         canSkip = true;
         stateOneFinished = false;
         stateTwoFinished = false;
@@ -81,7 +82,7 @@ public class UITextTransition : MonoBehaviour
             StopAllCoroutines();
             equipmentClicked = false;
             StartCoroutine(TheThirdSequence());
-            
+            waveSystem.GetComponent<WaveSystem>().one = true;
 
         }
         TutorialSkip();
@@ -230,8 +231,9 @@ public class UITextTransition : MonoBehaviour
             equipmentClicked = false;
             grappleHolder.SetActive(true);
             StopAllCoroutines();
-            
-            
+            waveSystem.GetComponent<WaveSystem>().one = true;
+
+
         }
 
 
