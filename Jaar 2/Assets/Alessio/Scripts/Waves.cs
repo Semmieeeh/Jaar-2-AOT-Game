@@ -17,7 +17,7 @@ public class Waves : MonoBehaviour
     }
     void Update()
     {
-        timerUI.text = "Timer:" + "/";
+        timerUI.text = "" + "";
 
         if(time == true)
         {
