@@ -21,7 +21,7 @@ public class Waves : MonoBehaviour
 
         if(time == true)
         {
-            timerUI.text = "Timer:" + timer.ToString("00");
+            timerUI.text = "Time to next wave:" + timer.ToString("00");
 
             timer -= 1 * Time.deltaTime;
 
