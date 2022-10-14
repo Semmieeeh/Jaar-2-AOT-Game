@@ -12,6 +12,7 @@ TagManager:
   - MainMenu
   - Platform
   - Dead
+  - Cannon
   layers:
   - Default
   - TransparentFX

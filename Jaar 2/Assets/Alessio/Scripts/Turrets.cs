@@ -32,6 +32,7 @@ public class Turrets : MonoBehaviour
     public MeleeScript ml;
     public bool destroyed;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +41,7 @@ public class Turrets : MonoBehaviour
         readyToShoot = true;
         platform = ml.place;
         range = 40;
-
+        attackPoint = gameObject.transform.GetChild(0);
 
     }
     public void Update()
