@@ -110,10 +110,10 @@ public class GrapplingTest : MonoBehaviour
             return;
         }
 
-        
-       
 
-        if (isGrappling == true && Input.GetMouseButton(1))
+
+
+        if (isGrappling == true && Input.GetMouseButton(1) && joint != null)
         {
             
             joint.maxDistance -= retractionSpeed * Time.deltaTime;

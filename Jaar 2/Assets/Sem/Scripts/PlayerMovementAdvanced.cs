@@ -66,10 +66,6 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public MovementState state;
     public ParticleSystem groundparticle;
     public bool canPlayGroundSound;
-
-
-
-    
     public enum MovementState
     {
         walking,

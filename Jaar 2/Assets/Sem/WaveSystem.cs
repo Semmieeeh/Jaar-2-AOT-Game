@@ -15,10 +15,15 @@ public class WaveSystem : MonoBehaviour
     
     public float waveTime;
     public bool one;
+    public bool oneFinished;
     public bool two;
+    public bool twoFinished;
     public bool three;
+    public bool threeFinished;
     public bool four;
+    public bool fourFinished;
     public bool five;
+    public bool fiveFinished;
     public bool finished;
     
     
@@ -51,41 +56,63 @@ public class WaveSystem : MonoBehaviour
             canSpawnWaveOne = false;
             tut.tutorialFinished = false;
             StartCoroutine(WaveOne());
+            
         }
-
+        
         if (one == true)
         {
             ui.GetComponent<TextMeshProUGUI>().text = "Wave: 1";
+            if(enemiesInScene == null)
+            {
+                oneFinished = true;
+            }
         }
 
         if (two == true)
         {
             ui.GetComponent<TextMeshProUGUI>().text = "Wave: 2";
             one = false;
+            if (enemiesInScene == null)
+            {
+                twoFinished = true;
+            }
         }
         
         if (three == true)
         {
             ui.GetComponent<TextMeshProUGUI>().text = "Wave: 3";
             two = false;
+            if (enemiesInScene == null)
+            {
+                threeFinished = true;
+            }
         }
 
         if (four == true)
         {
             ui.GetComponent<TextMeshProUGUI>().text = "Wave: 4";
             three = false;
+            if (enemiesInScene == null)
+            {
+                fourFinished = true;
+            }
         }
 
         if (five == true)
         {          
             ui.GetComponent<TextMeshProUGUI>().text = "Wave: 5";
             four = false;
+            if (enemiesInScene == null)
+            {
+                fiveFinished = true;
+            }
         }
 
         if(finished == true)
         {
             ui.GetComponent<TextMeshProUGUI>().text = "Wave: Finished";
             five = false;
+
         }
     }
     public IEnumerator WaveOne()
@@ -99,6 +126,7 @@ public class WaveSystem : MonoBehaviour
             continue;
         }
         GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
+        
     }
 
     public IEnumerator WaveTwo()
@@ -111,6 +139,7 @@ public class WaveSystem : MonoBehaviour
             continue;
         }
         GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
+        
     }
 
     public IEnumerator WaveThree()
@@ -123,6 +152,7 @@ public class WaveSystem : MonoBehaviour
             continue;
         }
         GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
+        
     }
 
     public IEnumerator WaveFour()

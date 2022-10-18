@@ -22,6 +22,7 @@ public class UIButtons : MonoBehaviour
     public GameObject fovSlider;
     public GameObject panels;
     public GameObject maincam;
+    public GameObject shopUI;
     public Vector3 scale;
     public GameObject panelFront, panelBack;
     private bool playtrue;
@@ -193,4 +194,42 @@ public class UIButtons : MonoBehaviour
     {
         Application.Quit();
     }
+
+
+    public void BuyTurret()
+    {
+        Economy eco = GameObject.Find("Player").GetComponent<Economy>();
+        if (eco.metal >= 10)
+        {
+            eco.turrets += 1;
+        }
+        else if(eco.metal < 10)
+        {
+            //cant buy
+        }
+
+        
+    }
+
+    public void BuyTrap()
+    {
+        Economy eco = GameObject.Find("Player").GetComponent<Economy>();
+        if(eco.metal >= 5)
+        {
+            eco.traps += 1;
+        }
+        else if (eco.metal < 5)
+        {
+            //cant buy
+        }
+    }
+
+    public void ExitShopMenu()
+    {
+        shopUI.SetActive(false);
+    }
+
+
+
+
 }

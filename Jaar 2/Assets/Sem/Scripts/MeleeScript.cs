@@ -33,7 +33,7 @@ public class MeleeScript : MonoBehaviour
     public float attackStateResetResetMax;
     public float attackStateResetResetMin;
     public bool isReloading;
-    public GameObject blade;
+    public GameObject blade,blade2;
     public WeaponSway weaponSway;
     public int swordBlades;
     public bool disappeared;
@@ -46,7 +46,8 @@ public class MeleeScript : MonoBehaviour
     public GameObject sellUi;
     public GameObject[] cannons;
     public GameObject place;
-    public GameObject turret;
+    public GameObject turret, buyUi;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -75,9 +76,18 @@ public class MeleeScript : MonoBehaviour
     void Update()
     {
         Animator anim = GameObject.Find("RightSwordHolder").GetComponent<Animator>();
+        Animator anim2 = GameObject.Find("LeftSwordHolder").GetComponent<Animator>();
+
+
+
         anim.SetInteger("AttackState", attackstate);
         anim.SetBool("isReloading", isReloading);
         anim.SetBool("ReloadWithSwords", reloadingWithSwords);
+
+
+        anim2.SetInteger("AttackState", attackstate);
+        anim2.SetBool("isReloading", isReloading);
+        anim2.SetBool("ReloadWithSwords", reloadingWithSwords);
 
         cannons = GameObject.FindGameObjectsWithTag("Cannon");
 
@@ -179,18 +189,29 @@ public class MeleeScript : MonoBehaviour
             }
             else if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
-                if(hit.transform.gameObject.tag == "Platform")
+                Economy eco = GameObject.Find("Player").GetComponent<Economy>();
+                if (hit.transform.gameObject.tag == "Smith")
                 {
+                    
+                    //ui setactive
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        Cursor.lockState = CursorLockMode.None;
+                        hit.transform.gameObject.GetComponent<BlackSmith>().isBuying = true;
+                        buyUi.SetActive(true);
+                    }
+                }
+                if(hit.transform.gameObject.tag == "Platform" && eco.turrets>=1)
+                {
+                    
                     place = hit.transform.gameObject;
                     Vector3 pos = hit.transform.gameObject.transform.position;
-                    
-                   
-                    
+                    pos.y -= 1;                   
                     if (Input.GetKeyDown(KeyCode.E)&& place.GetComponent<PlaceTurret>().obstructed == false && economy.metal >=economy.turretCost)
                     {
                         Instantiate(turret,pos,Quaternion.identity);
-                        
-                        
+
+                        eco.turrets--;
                         place.GetComponent<PlaceTurret>().cannon = turret;
                         economy.metal -= economy.turretCost;
                     }
@@ -198,6 +219,7 @@ public class MeleeScript : MonoBehaviour
 
                 if(hit.transform.gameObject.tag == "Cannon")
                 {
+                    
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         Debug.Log(hit.transform.gameObject.name);
@@ -286,6 +308,7 @@ public class MeleeScript : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         disappeared = true;
         blade.SetActive(false);
+        blade2.SetActive(false);
 
     }
 
@@ -312,8 +335,10 @@ public class MeleeScript : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(0.8f);
         blade.SetActive(false);
+        blade2.SetActive(false);
         yield return new WaitForSeconds(1f);
         blade.SetActive(true);
+        blade2.SetActive(true);
         disappeared = false;
         yield return new WaitForSeconds(1.5f);
         swordBlades = 3;

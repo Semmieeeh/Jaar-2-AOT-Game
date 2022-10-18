@@ -44,40 +44,15 @@ public class EnemyHealth : MonoBehaviour
     {
         if(death == true && playerKilled == true)
         {
-            // StartCoroutine(DeathEffect());
-            if (gettingShotBy != null)
-            {
-                GrapplingTest gt1 = GameObject.Find("GrapplingGun").GetComponent<GrapplingTest>();
-                GrapplingTest gt2 = GameObject.Find("GrapplingGun2").GetComponent<GrapplingTest>();
-
-                gt1.StopGrapple();
-                gt2.StopGrapple();
-                Turrets turret = gettingShotBy.GetComponent<Turrets>();
-                turret.titan = null;
-            }
-            Destroy(gameObject);
+            StartCoroutine(DeathEffect());
             death = false;
             
         }
         else if(death == true && playerKilled == false)
         {
-            eco.metal += eco.payment;
-            if (gettingShotBy != null)
-            {
-                Turrets turret = gettingShotBy.GetComponent<Turrets>();
-                GrapplingTest gt1 = GameObject.Find("GrapplingGun").GetComponent<GrapplingTest>();
-                GrapplingTest gt2 = GameObject.Find("GrapplingGun2").GetComponent<GrapplingTest>();
-
-                gt1.StopGrapple();
-                gt2.StopGrapple();
-                turret.titan = null;
-            }
-            Destroy(gameObject);
-            
-            //StartCoroutine(DeathEffectNotCausedByPlayer());
-
+            StartCoroutine(DeathEffectNotCausedByPlayer());
             death = false;
-            
+
         }
     }
 
@@ -103,11 +78,16 @@ public class EnemyHealth : MonoBehaviour
         {
             Turrets turret = gettingShotBy.GetComponent<Turrets>();
             turret.titan = null;
+            GrapplingTest gt1 = GameObject.Find("GrapplingGun").GetComponent<GrapplingTest>();
+            GrapplingTest gt2 = GameObject.Find("GrapplingGun2").GetComponent<GrapplingTest>();
+
+            gt1.StopGrapple();
+            gt2.StopGrapple();
         }
         gameObject.tag = "Dead";
-        
-        yield return new WaitForSeconds(10);
         playerHp.titansKilled += 1;
+        yield return new WaitForSeconds(10);
+        
         Destroy(gameObject);
     }
 
@@ -116,11 +96,17 @@ public class EnemyHealth : MonoBehaviour
         navMesh.enabled = false;
         navMeshAgent.enabled = false;
         rb.freezeRotation = false;
+        rb.AddForce(gettingShotBy.transform.forward * knockback, ForceMode.Impulse);
         eco.metal += eco.payment;
-        if(gettingShotBy != null)
+        if (gettingShotBy != null)
         {
             Turrets turret = gettingShotBy.GetComponent<Turrets>();
             turret.titan = null;
+            GrapplingTest gt1 = GameObject.Find("GrapplingGun").GetComponent<GrapplingTest>();
+            GrapplingTest gt2 = GameObject.Find("GrapplingGun2").GetComponent<GrapplingTest>();
+
+            gt1.StopGrapple();
+            gt2.StopGrapple();
         }
         gameObject.tag = "Dead";
         playerHp.titansKilled += 1;

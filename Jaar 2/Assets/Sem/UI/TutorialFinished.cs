@@ -60,6 +60,7 @@ public class TutorialFinished : MonoBehaviour
 
     public bool tutorialFinished;
     
+    
     public void Start()
     {
         //swords
