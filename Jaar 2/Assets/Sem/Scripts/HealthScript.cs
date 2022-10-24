@@ -100,7 +100,7 @@ public class HealthScript : MonoBehaviour
             tookDamage = false;
         }
 
-        if(titansKilled >= 5)
+        if(titansKilled >= 10)
         {
             winUI.SetActive(true);
             Cursor.lockState = CursorLockMode.None;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44732475, g: 0.3869334, b: 0.31288034, a: 1}
+  m_IndirectSpecularColor: {r: 0.44731623, g: 0.3869282, b: 0.3128779, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1483,7 +1483,7 @@ MonoBehaviour:
   tut: {fileID: 226962418}
   canSpawnWaveOne: 0
   titan:
-  - {fileID: 5463039039180928348, guid: 1d8027c396ea56d449de949b9b6605e3, type: 3}
+  - {fileID: 1275075390039611913, guid: a6e2c87f21206b9479aba07a940a537d, type: 3}
   enemiesInScene: []
   ui: {fileID: 8072398896467126336}
   waveTime: 5
@@ -3406,12 +3406,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grapplingGun: {fileID: 468434804}
-  quality: 5
-  damper: 1
-  strength: 4
-  velocity: 8
+  quality: 500
+  damper: 14
+  strength: 800
+  velocity: 15
   waveCount: 5
-  waveHeight: 5
+  waveHeight: 1
   affectCurve:
     serializedVersion: 2
     m_Curve:
@@ -3559,7 +3559,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 468434800}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5119,12 +5119,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grapplingGun: {fileID: 695661928}
-  quality: 5
-  damper: 1
-  strength: 4
-  velocity: 8
+  quality: 500
+  damper: 14
+  strength: 800
+  velocity: 15
   waveCount: 5
-  waveHeight: 5
+  waveHeight: 1
   affectCurve:
     serializedVersion: 2
     m_Curve:

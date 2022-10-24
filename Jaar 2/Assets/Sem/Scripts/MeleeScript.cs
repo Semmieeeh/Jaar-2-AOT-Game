@@ -213,7 +213,7 @@ public class MeleeScript : MonoBehaviour
 
                         eco.turrets--;
                         place.GetComponent<PlaceTurret>().cannon = turret;
-                        economy.metal -= economy.turretCost;
+                        
                     }
                 }
 
@@ -225,6 +225,7 @@ public class MeleeScript : MonoBehaviour
                         Debug.Log(hit.transform.gameObject.name);
                         hit.transform.gameObject.GetComponentInParent<Turrets>().destroyed = true;
                         economy.metal += 10;
+                        economy.turrets += 1;
                         
                     }
                 }
@@ -353,9 +354,11 @@ public class MeleeScript : MonoBehaviour
         weaponSway.canSway = false;
         canAttack = false;
         blade.SetActive(false);
+        blade2.SetActive(false);
         yield return new WaitForSeconds(1f);
 
         blade.SetActive(true);
+        blade2.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         swordBlades = 3;
         disappeared = false;

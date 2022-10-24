@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.XR;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -22,27 +23,35 @@ public class EnemyHealth : MonoBehaviour
     public TagAttribute def;
     public GameObject gettingShotBy;
     HealthScript playerHp;
+    public Slider slider;
 
 
     // Start is called before the first frame update
     void Start()
-    {       
+    {
+        slider = gameObject.transform.GetChild(0).GetComponent<Slider>();
+
+        
+        
         playerHp = GameObject.Find("Player").GetComponent<HealthScript>();
         eco = GameObject.Find("Player").GetComponent<Economy>();
         melee = FindObjectOfType<MeleeScript>().GetComponent<MeleeScript>();
         minHealth = 0f;
         maxHealth = 200;
+        slider.maxValue = maxHealth;
         enemyHealth = maxHealth;
         fpsCam = GameObject.Find("Main Camera");
         rb = gameObject.GetComponent<Rigidbody>();
         navMesh = gameObject.GetComponent<NavMesh2>();
+        
         navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(death == true && playerKilled == true)
+        slider.value = enemyHealth;
+        if (death == true && playerKilled == true)
         {
             StartCoroutine(DeathEffect());
             death = false;
@@ -73,7 +82,7 @@ public class EnemyHealth : MonoBehaviour
         navMeshAgent.enabled = false;
         rb.freezeRotation = false;
         eco.metal += eco.payment;
-        rb.AddForce(fpsCam.transform.forward * knockback, ForceMode.Impulse);
+        rb.AddForce(fpsCam.transform.forward * knockback*2f, ForceMode.Impulse);
         if (gettingShotBy != null)
         {
             Turrets turret = gettingShotBy.GetComponent<Turrets>();
@@ -96,7 +105,7 @@ public class EnemyHealth : MonoBehaviour
         navMesh.enabled = false;
         navMeshAgent.enabled = false;
         rb.freezeRotation = false;
-        rb.AddForce(gettingShotBy.transform.forward * knockback, ForceMode.Impulse);
+        rb.AddForce(gettingShotBy.transform.forward * knockback*2f, ForceMode.Impulse);
         eco.metal += eco.payment;
         if (gettingShotBy != null)
         {
