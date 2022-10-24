@@ -125,6 +125,8 @@ public class WaveSystem : MonoBehaviour
             yield return new WaitForSeconds(waveTime);
             continue;
         }
+        yield return new WaitForSeconds(5);
+        oneFinished = true;
         GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
         
     }
@@ -138,6 +140,8 @@ public class WaveSystem : MonoBehaviour
             yield return new WaitForSeconds(waveTime);
             continue;
         }
+        yield return new WaitForSeconds(5);
+        twoFinished = true;
         GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
         
     }
@@ -151,6 +155,8 @@ public class WaveSystem : MonoBehaviour
             yield return new WaitForSeconds(waveTime);
             continue;
         }
+        yield return new WaitForSeconds(5);
+        threeFinished = true;
         GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
         
     }
@@ -164,6 +170,8 @@ public class WaveSystem : MonoBehaviour
             yield return new WaitForSeconds(waveTime);
             continue;
         }
+        yield return new WaitForSeconds(5);
+        fourFinished = true;
         GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
     }
 
@@ -176,6 +184,10 @@ public class WaveSystem : MonoBehaviour
             yield return new WaitForSeconds(waveTime);
             continue;
         }
+        yield return new WaitForSeconds(5);
+        fiveFinished = true;
         GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
+
+
     }
 }
