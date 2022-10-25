@@ -113,7 +113,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: rig|walk
-  m_Speed: 0.2
+  m_Speed: 0.26
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8864543746858936780}
@@ -143,10 +143,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1408178872549248446}
-    m_Position: {x: 40, y: 10, z: 0}
+    m_Position: {x: 140, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7114477586941094834}
-    m_Position: {x: 40, y: -70, z: 0}
+    m_Position: {x: 270, y: -110, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

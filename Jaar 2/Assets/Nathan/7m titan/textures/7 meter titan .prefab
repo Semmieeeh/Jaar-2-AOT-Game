@@ -796,6 +796,7 @@ Transform:
   m_Children:
   - {fileID: 5430423176297533620}
   - {fileID: 4044080548383338810}
+  - {fileID: 3374907460269735255}
   - {fileID: 4455408451813545993}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -925,11 +926,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 9
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1528,7 +1529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464649090602772510}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 1.5700073, y: -14.070001, z: 0.21997069}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1542,8 +1543,8 @@ Transform:
   - {fileID: 6957387927451395375}
   - {fileID: 5308238934858015138}
   - {fileID: 8800148581208036447}
-  m_Father: {fileID: 4455408451813545993}
-  m_RootOrder: 0
+  m_Father: {fileID: 6326664782110598}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1524767369434023100
 GameObject:
@@ -8122,10 +8123,9 @@ Transform:
   m_LocalPosition: {x: -1.5700073, y: 14.069999, z: -0.2199707}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3374907460269735255}
+  m_Children: []
   m_Father: {fileID: 6326664782110598}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &2086280748234862057
 SkinnedMeshRenderer:

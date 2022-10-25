@@ -112,6 +112,7 @@ public class NavMesh2 : MonoBehaviour
 
                     navMeshAgent.destination = target[currentTargetIndex].position;
                     transform.LookAt(pos);
+                    Debug.Log(target[currentTargetIndex].name+distanceToNextPoint);
                     if (Vector3.Distance(titanHolder.transform.position, target[currentTargetIndex].position) < targetRange)
                     {
                         if (currentTargetIndex < 22)
