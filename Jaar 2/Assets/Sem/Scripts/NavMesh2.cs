@@ -33,7 +33,7 @@ public class NavMesh2 : MonoBehaviour
     public bool closeToWall;
     public bool wallBroken;
     public bool stateTwo;
-
+    public float distanceToNextPoint;
     
     public enum TitanState
     {
@@ -52,9 +52,9 @@ public class NavMesh2 : MonoBehaviour
         trapped = false;
         damage = 100f;
         currentTargetIndex = 0;
-        
+        targetRange = 5;
         playerHealth = GameObject.Find("Player").GetComponent<HealthScript>();
-        titanHolder = gameObject.transform.GetChild(0).gameObject;
+        titanHolder = gameObject.transform.GetChild(1).gameObject;
         target[0] = GameObject.Find("Waypoint1").transform;
         target[1] = GameObject.Find("Waypoint2").transform;
         target[2] = GameObject.Find("Waypoint3").transform;
@@ -84,6 +84,8 @@ public class NavMesh2 : MonoBehaviour
 
     public void Update()
     {
+        distanceToNextPoint = Vector3.Distance(titanHolder.transform.position, target[currentTargetIndex].transform.position);
+
         if(gameStart == false)
         {
             targetName = target[currentTargetIndex].name;
