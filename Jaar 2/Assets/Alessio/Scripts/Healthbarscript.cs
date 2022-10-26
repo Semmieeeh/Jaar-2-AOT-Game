@@ -7,7 +7,7 @@ public class Healthbarscript : MonoBehaviour
 {
     public Image healthbarSprite;
     public Turrets turrets;
-
+    public GameObject deathUI,wall;
     public float maxHeal = 1000f, currentHeal = 1000f;
 
     public GameObject titan;
@@ -23,7 +23,7 @@ public class Healthbarscript : MonoBehaviour
     public void Update()
     {
         UpdateHealthBar();
-        //slider.value = currentHeal;
+        slider.value = currentHeal;
         if(death == true)
         {
             
@@ -67,8 +67,10 @@ public class Healthbarscript : MonoBehaviour
         }
     }
     public void Death()
-    {     
-        
-        Destroy(gameObject);
+    {
+        deathUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Destroy(wall);
     }
 }

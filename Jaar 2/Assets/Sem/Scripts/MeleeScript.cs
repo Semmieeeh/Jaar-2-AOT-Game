@@ -203,12 +203,12 @@ public class MeleeScript : MonoBehaviour
                 }
                 if(hit.transform.gameObject.tag == "Platform" && eco.turrets>=1)
                 {
-                    
                     place = hit.transform.gameObject;
-                    Vector3 pos = hit.transform.gameObject.transform.position;
-                    pos.y -= 1;                   
-                    if (Input.GetKeyDown(KeyCode.E)&& place.GetComponent<PlaceTurret>().obstructed == false && economy.metal >=economy.turretCost)
+                    if (Input.GetKeyDown(KeyCode.E)&& place.GetComponent<PlaceTurret>().obstructed == false)
                     {
+                        
+                        Vector3 pos = hit.transform.gameObject.transform.position;
+                        pos.y -= 1;
                         Instantiate(turret,pos,Quaternion.identity);
 
                         eco.turrets--;

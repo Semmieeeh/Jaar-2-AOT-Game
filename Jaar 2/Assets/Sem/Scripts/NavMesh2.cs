@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static NavMesh2;
+
 public class NavMesh2 : MonoBehaviour
 {
     public Vector3 dir;
@@ -34,6 +36,8 @@ public class NavMesh2 : MonoBehaviour
     public bool wallBroken;
     public bool stateTwo;
     public float distanceToNextPoint;
+    public Animator animator;
+    public int titanState;
     
     public enum TitanState
     {
@@ -46,6 +50,8 @@ public class NavMesh2 : MonoBehaviour
     public TitanState state = TitanState.Patrolling;
     public void Start()
     {
+        animator = GetComponent<Animator>();
+        titanState = 1;
         player = GameObject.Find("Player");
         navMeshAgent = GetComponent<NavMeshAgent>();
         idle = true;
@@ -78,12 +84,13 @@ public class NavMesh2 : MonoBehaviour
         target[20] = GameObject.Find("Waypoint21").transform;
         target[21] = GameObject.Find("Waypoint22").transform;
         target[22] = GameObject.Find("Waypoint23").transform;
-        wall = GameObject.Find("WallToAttack");
+        wall = GameObject.Find("Shighanshina Gate");
         attackRange = 10;
     }
 
     public void Update()
     {
+        animator.SetInteger("TitanState", titanState);
         distanceToNextPoint = Vector3.Distance(titanHolder.transform.position, target[currentTargetIndex].transform.position);
 
         if(gameStart == false)
@@ -99,7 +106,7 @@ public class NavMesh2 : MonoBehaviour
 
 
 
-        Vector3 pos = new Vector3(target[currentTargetIndex].transform.position.x, target[currentTargetIndex].transform.position.y, 0);
+        Vector3 pos = target[currentTargetIndex].position;
         Vector3 playerPos = new Vector3(player.transform.position.x, player.transform.position.y, 0);
 
 
@@ -111,7 +118,12 @@ public class NavMesh2 : MonoBehaviour
                 case TitanState.Patrolling:
 
                     navMeshAgent.destination = target[currentTargetIndex].position;
-                    transform.LookAt(pos);
+                    
+
+                    //Vector3 rot = Vector3.RotateTowards(transform.forward, target[currentTargetIndex].position - transform.position, 10, 0.0f);
+                    //transform.rotation = Quaternion.LookRotation(rot);
+
+
                     Debug.Log(target[currentTargetIndex].name+distanceToNextPoint);
                     if (Vector3.Distance(titanHolder.transform.position, target[currentTargetIndex].position) < targetRange)
                     {
@@ -129,7 +141,7 @@ public class NavMesh2 : MonoBehaviour
                     break;
                 case TitanState.Chasing:
                     navMeshAgent.destination = player.transform.position;
-                    transform.LookAt(playerPos);
+                    //transform.LookAt(playerPos);
 
                     if (Vector3.Distance(titanHolder.transform.position, player.transform.position) < attackRange && attackCooldown < 0.1)
                     {
@@ -157,30 +169,14 @@ public class NavMesh2 : MonoBehaviour
                     break;
                 case TitanState.AttackingWall:
 
-
-                    
-                    if(stateTwo == false)
+                    titanState = 0;
+                    if(attackCooldown < 0.1)
                     {
-                        if (wall.GetComponent<Healthbarscript>().death == true)
-                        {
-                            stateTwo = true;
-                            state = TitanState.Patrolling;
+                        wall.transform.GetChild(0).GetComponent<Healthbarscript>().WallDamage(damage);
 
-                        }
-                        navMeshAgent.destination = wall.transform.position;
-                        wall.GetComponent<Healthbarscript>().titan = gameObject;
-                        if (Vector3.Distance(titanHolder.transform.position, wall.transform.position) < 20 && attackCooldown < 0.1)
-                        {
-
-                            wall.GetComponent<Healthbarscript>().WallDamage(damage);
-                            attackCooldown += 3;
-
-                        }
+                        attackCooldown += 3;
                     }
-                    if(stateTwo == true)
-                    {
-                        state = TitanState.Patrolling;
-                    }
+
                     break;
 
             }

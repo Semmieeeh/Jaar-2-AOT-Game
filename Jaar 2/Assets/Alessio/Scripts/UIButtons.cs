@@ -202,6 +202,7 @@ public class UIButtons : MonoBehaviour
         if (eco.metal >= 10)
         {
             eco.turrets += 1;
+            eco.metal -= 10;
         }
         else if(eco.metal < 10)
         {
@@ -217,6 +218,7 @@ public class UIButtons : MonoBehaviour
         if(eco.metal >= 5)
         {
             eco.traps += 1;
+            eco.metal -= 5;
         }
         else if (eco.metal < 5)
         {

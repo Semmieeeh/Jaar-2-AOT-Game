@@ -36,6 +36,12 @@ public class Esc : MonoBehaviour
 
     void Update()
     {
+        
+
+
+
+
+
         if(played == true)
         {
             //if(wall.GetComponent<Healthbarscript>().currentHeal < 0f)
@@ -95,10 +101,12 @@ public class Esc : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Tab) && canvasActive == false && played == true)
                     {
+                        canvasActive = true;
                         shop.SetActive(true);
                         shopActive = true;
                         Time.timeScale = 0f;
                         Cursor.lockState = CursorLockMode.None;
+                        Cursor.visible = true;
                     }
                 }
                 
@@ -106,10 +114,12 @@ public class Esc : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Tab))
                     {
+                        canvasActive = false;
                         shop.SetActive(false);
                         shopActive = false;
                         Time.timeScale = 1f;
                         Cursor.lockState = CursorLockMode.Locked;
+                        Cursor.visible = false;
                     }
                 }
             }

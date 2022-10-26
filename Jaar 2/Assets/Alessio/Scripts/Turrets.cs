@@ -13,7 +13,7 @@ public class Turrets : MonoBehaviour
 
     //bools 
     public bool shooting;
-    bool reloading;
+    public bool reloading;
     public bool readyToShoot;
 
     //Reference

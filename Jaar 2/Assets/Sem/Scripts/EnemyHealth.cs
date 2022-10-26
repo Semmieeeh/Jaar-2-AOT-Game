@@ -17,12 +17,13 @@ public class EnemyHealth : MonoBehaviour
     public NavMesh2 navMesh;
     public NavMeshAgent navMeshAgent;
     public float knockback;
-    
+    public Animator animator;
     public Economy eco;
     public bool playerKilled;
     public TagAttribute def;
     public GameObject gettingShotBy;
     HealthScript playerHp;
+    public int titanState;
     public Slider slider;
 
 
@@ -38,19 +39,20 @@ public class EnemyHealth : MonoBehaviour
         
         
         minHealth = 0f;
-        maxHealth = 200;
+        titanState = 1;
         slider.maxValue = maxHealth;
         enemyHealth = maxHealth;
         fpsCam = GameObject.Find("Main Camera");
         rb = gameObject.GetComponent<Rigidbody>();
         navMesh = gameObject.GetComponent<NavMesh2>();
-        
+        animator = gameObject.GetComponent<Animator>();
         navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        animator.SetInteger("TitanState", titanState);
         slider.value = enemyHealth;
         if (death == true && playerKilled == true)
         {
