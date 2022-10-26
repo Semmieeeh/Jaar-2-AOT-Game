@@ -60,6 +60,16 @@ public class Esc : MonoBehaviour
                 currency.SetActive(false);
                 gameOverMenu = false;
             }
+            if(escActive == true)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
 
             if (gameOverMenu == true)
             {
@@ -83,8 +93,12 @@ public class Esc : MonoBehaviour
                 }
                 else if (escActive == true)
                 {
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    Time.timeScale = 0f;
                     if (Input.GetKeyDown(KeyCode.Escape))
                     {
+                        
                         restart.SetActive(false);
                         escActive = false;
                         Time.timeScale = 1f;
@@ -95,6 +109,7 @@ public class Esc : MonoBehaviour
                         Cursor.lockState = CursorLockMode.Locked;
                         canvasSem.SetActive(true);
                         shopActive = true;
+
                     }
 
                 }
@@ -133,6 +148,11 @@ public class Esc : MonoBehaviour
     }
     public void Resume()
     {
+        escActive = false;
+        Time.timeScale = 1f;
+        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
         GameObject.Find("MainMenu").GetComponent<UIButtons>().Play();
         canvas.GetComponent<UIButtons>().escmenuoff();
         resume.SetActive(false);

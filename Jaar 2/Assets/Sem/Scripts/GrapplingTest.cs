@@ -173,7 +173,7 @@ public class GrapplingTest : MonoBehaviour
         PlayerMovementAdvanced pm = GameObject.Find("Player").GetComponent<PlayerMovementAdvanced>();
        
         
-        if (Physics.Raycast(playerCam.position, playerCam.forward, out hit, maxDistance, whatIsGrappleable)&& esc.shopCanvasActive == false)
+        if (Physics.Raycast(playerCam.position, playerCam.forward, out hit, maxDistance, whatIsGrappleable)&& esc.shopCanvasActive == false&&esc.escActive == false)
         {
             isGrappling = true;
             pm.airDash = true;
