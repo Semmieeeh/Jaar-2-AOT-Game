@@ -60,7 +60,7 @@ public class UIButtons : MonoBehaviour
         {
             creditsbutton.SetActive(false);
             play.SetActive(false);
-            GameObject.Find("Canvas").GetComponent<Esc>().ResumeTrue();
+            GameObject.Find("MainCanvas").GetComponent<Esc>().ResumeTrue();
         }
     }
     public void Play()
@@ -77,7 +77,7 @@ public class UIButtons : MonoBehaviour
         canvasSem.SetActive(true);
         currency.SetActive(true);
         imageEsc.SetActive(false);
-        GameObject.Find("Canvas").GetComponent<Esc>().Played();
+        GameObject.Find("MainCanvas").GetComponent<Esc>().Played();
         cam.SetActive(false);
         panels.SetActive(false);
         titel.SetActive(false);

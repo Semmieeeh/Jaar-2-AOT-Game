@@ -16,6 +16,8 @@ public class Esc : MonoBehaviour
     public GameObject resume;
     public GameObject restart,restart2;
     public bool played;
+    public GameObject shop;
+    public bool shopActive;
 
     public Transform wall;
     // Start is called before the first frame update
@@ -67,6 +69,7 @@ public class Esc : MonoBehaviour
                         Cursor.visible = true;
                         Cursor.lockState = CursorLockMode.None;
                         canvasSem.SetActive(false);
+                        shopActive = true;
 
                     }
                 }
@@ -83,8 +86,31 @@ public class Esc : MonoBehaviour
                         Cursor.visible = false;
                         Cursor.lockState = CursorLockMode.Locked;
                         canvasSem.SetActive(true);
+                        shopActive = true;
                     }
 
+                }
+
+                if(shopActive == false)
+                {
+                    if (Input.GetKeyDown(KeyCode.Tab) && canvasActive == false && played == true)
+                    {
+                        shop.SetActive(true);
+                        shopActive = true;
+                        Time.timeScale = 0f;
+                        Cursor.lockState = CursorLockMode.None;
+                    }
+                }
+                
+                else if(shopActive == true)
+                {
+                    if (Input.GetKeyDown(KeyCode.Tab))
+                    {
+                        shop.SetActive(false);
+                        shopActive = false;
+                        Time.timeScale = 1f;
+                        Cursor.lockState = CursorLockMode.Locked;
+                    }
                 }
             }
         }  

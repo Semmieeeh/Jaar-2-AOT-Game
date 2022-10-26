@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour
     public NavMesh2 navMesh;
     public NavMeshAgent navMeshAgent;
     public float knockback;
-    public MeleeScript melee;
+    
     public Economy eco;
     public bool playerKilled;
     public TagAttribute def;
@@ -35,7 +35,8 @@ public class EnemyHealth : MonoBehaviour
         
         playerHp = GameObject.Find("Player").GetComponent<HealthScript>();
         eco = GameObject.Find("Player").GetComponent<Economy>();
-        melee = FindObjectOfType<MeleeScript>().GetComponent<MeleeScript>();
+        
+        
         minHealth = 0f;
         maxHealth = 200;
         slider.maxValue = maxHealth;
