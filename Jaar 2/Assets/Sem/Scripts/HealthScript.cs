@@ -102,9 +102,17 @@ public class HealthScript : MonoBehaviour
 
         if(titansKilled >= 10)
         {
-            winUI.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            titansKilled = 0;
+            // winUI.SetActive(true);
+            //Cursor.lockState = CursorLockMode.None;
+            // titansKilled = 0;
+            WaveSystem wave = FindObjectOfType<WaveSystem>();
+            if(wave.fiveFinished == true)
+            {
+                 winUI.SetActive(true);
+                 Cursor.lockState = CursorLockMode.None;
+                 Cursor.visible = true;
+                
+            }
         }
 
     }
