@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44731623, g: 0.3869282, b: 0.3128779, a: 1}
+  m_IndirectSpecularColor: {r: 0.44732475, g: 0.3869334, b: 0.31288034, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -991,7 +991,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1887456450}
   canvasSem: {fileID: 1887456450}
-  canvasActive: 0
+  shopCanvasActive: 0
+  escActive: 0
   gameOverMenu: 0
   gameOver: {fileID: 1181280563}
   image: {fileID: 1887456450}
@@ -1871,6 +1872,11 @@ MonoBehaviour:
   five: 0
   fiveFinished: 0
   finished: 0
+  allSpawnedone: 0
+  allSpawnedtwo: 0
+  allSpawnedthree: 0
+  allSpawnedfour: 0
+  allSpawnedfive: 0
 --- !u!114 &255902363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14992,7 +14998,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1887456450}
   canvasSem: {fileID: 1887456450}
-  canvasActive: 0
+  shopCanvasActive: 0
+  escActive: 0
   gameOverMenu: 0
   gameOver: {fileID: 1887456450}
   image: {fileID: 1707540378}
@@ -23080,7 +23087,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 627650813205376172}
   canvasSem: {fileID: 1766721121}
-  canvasActive: 0
+  shopCanvasActive: 0
+  escActive: 0
   gameOverMenu: 1
   gameOver: {fileID: 1318294078}
   image: {fileID: 627650813188421333}
@@ -26439,7 +26447,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5618dde65d0bd4846bd28f5b317bf9cc, type: 2}
+  - {fileID: 2100000, guid: a82c6d7a15e6ea444b1fcdf8c4711c40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
