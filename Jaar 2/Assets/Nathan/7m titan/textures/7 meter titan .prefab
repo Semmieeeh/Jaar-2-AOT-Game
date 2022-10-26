@@ -843,7 +843,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   navMesh: {fileID: 0}
   navMeshAgent: {fileID: 0}
-  knockback: 0
+  knockback: 10
+  animator: {fileID: 0}
   eco: {fileID: 0}
   playerKilled: 0
   gettingShotBy: {fileID: 0}
@@ -916,6 +917,8 @@ MonoBehaviour:
   wallBroken: 0
   stateTwo: 0
   distanceToNextPoint: 0
+  animator: {fileID: 0}
+  titanState: 0
   state: 0
 --- !u!195 &818998440074872120
 NavMeshAgent:
@@ -927,7 +930,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 9
+  m_Speed: 15
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -948,7 +951,7 @@ Rigidbody:
   m_GameObject: {fileID: 818998440074872124}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0

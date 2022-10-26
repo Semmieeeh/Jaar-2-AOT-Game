@@ -210,10 +210,7 @@ public class NavMesh2 : MonoBehaviour
                     state = TitanState.AttackingWall;
                 }
             }
-            else
-            {
-                state = TitanState.Patrolling;
-            }
+            
             
 
 
