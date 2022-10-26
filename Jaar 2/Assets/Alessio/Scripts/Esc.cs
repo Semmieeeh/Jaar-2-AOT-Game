@@ -7,7 +7,8 @@ public class Esc : MonoBehaviour
 {
     public GameObject canvas;
     public GameObject canvasSem;
-    public bool canvasActive;
+    public bool shopCanvasActive;
+    public bool escActive;
     public bool gameOverMenu;
 
     public GameObject gameOver;
@@ -23,7 +24,8 @@ public class Esc : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        canvasActive = false;
+        escActive = false;
+        shopCanvasActive = false;
         gameOver.SetActive(false);
         gameOverMenu = true;
         resume.SetActive(false);
@@ -61,12 +63,12 @@ public class Esc : MonoBehaviour
 
             if (gameOverMenu == true)
             {
-                if (canvasActive == false)
+                if (escActive == false)
                 {
-                    if (Input.GetKeyDown(KeyCode.Escape))
+                    if (Input.GetKeyDown(KeyCode.Escape)&&shopActive == false)
                     {
                         restart.SetActive(true);
-                        canvasActive = true;
+                        escActive = true;
                         Time.timeScale = 0f;
                         FindObjectOfType<AudioManager>().StopAllAudio();
 
@@ -79,12 +81,12 @@ public class Esc : MonoBehaviour
 
                     }
                 }
-                else if (canvasActive == true)
+                else if (escActive == true)
                 {
                     if (Input.GetKeyDown(KeyCode.Escape))
                     {
                         restart.SetActive(false);
-                        canvasActive = false;
+                        escActive = false;
                         Time.timeScale = 1f;
                         canvas.GetComponent<UIButtons>().ExitEscape();
                         canvas.GetComponent<UIButtons>().EscBack();
@@ -99,9 +101,9 @@ public class Esc : MonoBehaviour
 
                 if(shopActive == false)
                 {
-                    if (Input.GetKeyDown(KeyCode.Tab) && canvasActive == false && played == true)
+                    if (Input.GetKeyDown(KeyCode.Tab) && escActive == false && played == true)
                     {
-                        canvasActive = true;
+                        shopCanvasActive = true;
                         shop.SetActive(true);
                         shopActive = true;
                         Time.timeScale = 0f;
@@ -112,9 +114,9 @@ public class Esc : MonoBehaviour
                 
                 else if(shopActive == true)
                 {
-                    if (Input.GetKeyDown(KeyCode.Tab))
+                    if (Input.GetKeyDown(KeyCode.Tab)||Input.GetKeyDown(KeyCode.Escape))
                     {
-                        canvasActive = false;
+                        shopCanvasActive = false;
                         shop.SetActive(false);
                         shopActive = false;
                         Time.timeScale = 1f;
@@ -135,7 +137,7 @@ public class Esc : MonoBehaviour
         canvas.GetComponent<UIButtons>().escmenuoff();
         resume.SetActive(false);
         restart.SetActive(false);
-        canvasActive = false;
+        shopCanvasActive = false;
     }
 
     public void ResumeTrue()
