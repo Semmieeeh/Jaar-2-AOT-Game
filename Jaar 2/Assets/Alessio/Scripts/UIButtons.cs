@@ -30,6 +30,7 @@ public class UIButtons : MonoBehaviour
     public GameObject play;
     public GameObject titel;
     public GameObject slidersensitivity;
+    public GameObject cantBuy;
     public void Start()
     {
         imageEsc.SetActive(false);
@@ -172,7 +173,6 @@ public class UIButtons : MonoBehaviour
         fullscreen.SetActive(false);
         panelFront.transform.localScale = new Vector3(0.3f, 0.8f, 1);
         resolution.SetActive(false);
-
     }
 
     List<int> widhts = new List<int>() { 568, 960, 1280, 1920 };
@@ -194,8 +194,6 @@ public class UIButtons : MonoBehaviour
     {
         Application.Quit();
     }
-
-
     public void BuyTurret()
     {
         Economy eco = GameObject.Find("Player").GetComponent<Economy>();
@@ -206,12 +204,10 @@ public class UIButtons : MonoBehaviour
         }
         else if(eco.metal < 10)
         {
-            //cant buy
-        }
-
-        
+            cantBuy.SetActive(true);
+            Invoke("CantBuy", 0.2f);
+        }      
     }
-
     public void BuyTrap()
     {
         Economy eco = GameObject.Find("Player").GetComponent<Economy>();
@@ -222,16 +218,16 @@ public class UIButtons : MonoBehaviour
         }
         else if (eco.metal < 5)
         {
-            //cant buy
+            cantBuy.SetActive(true);
+            Invoke("CantBuy", 0.2f);
         }
     }
-
+    public void CantBuy()
+    {
+        cantBuy.SetActive(false);
+    }
     public void ExitShopMenu()
     {
         shopUI.SetActive(false);
     }
-
-
-
-
 }
