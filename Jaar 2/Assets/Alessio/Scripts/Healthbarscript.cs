@@ -15,6 +15,7 @@ public class Healthbarscript : MonoBehaviour
     public bool reset;
     public Slider slider;
     public NavMesh2 navMesh;
+    public GameObject mainCanvas;
 
     public void Start()
     {
@@ -70,7 +71,9 @@ public class Healthbarscript : MonoBehaviour
     {
         deathUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
         Cursor.visible = true;
         Destroy(wall);
+        mainCanvas.SetActive(false);
     }
 }

@@ -10,6 +10,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public float walkSpeed;
     public float sprintSpeed;
     public bool groundHitParticle;
+    
 
     public float groundDrag;
     public bool smallGroundHit;
@@ -90,6 +91,18 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     private void Update()
     {
+        if(rb.velocity.x >0&&grounded || rb.velocity.z>0&&grounded)
+        {
+            FindObjectOfType<AudioManager>().PlayAudio(12, 1, 1);
+        }
+        else if (!grounded || horizontalInput ==0 && verticalInput == 0)
+        {
+            FindObjectOfType<AudioManager>().StopAudio(12);
+        }
+
+
+
+
 
         
         // ground check
@@ -119,8 +132,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
             
         }
 
-        
 
+        
 
 
 

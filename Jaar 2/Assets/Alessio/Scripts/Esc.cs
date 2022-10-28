@@ -60,6 +60,8 @@ public class Esc : MonoBehaviour
                 currency.SetActive(false);
                 gameOverMenu = false;
             }
+
+
             if(escActive == true||shopActive == true)
             {
                 Cursor.lockState = CursorLockMode.None;
@@ -70,6 +72,7 @@ public class Esc : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
+
 
             if (gameOverMenu == true)
             {

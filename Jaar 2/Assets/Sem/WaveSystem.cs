@@ -30,6 +30,8 @@ public class WaveSystem : MonoBehaviour
     public bool allSpawnedthree;
     public bool allSpawnedfour;
     public bool allSpawnedfive;
+    public GameObject winUI;
+    public GameObject mainCanvas;
     
     
 
@@ -115,9 +117,8 @@ public class WaveSystem : MonoBehaviour
 
         if(finished == true)
         {
-            ui.GetComponent<TextMeshProUGUI>().text = "Wave: Finished";
-            five = false;
-
+            winUI.SetActive(true);
+            mainCanvas.SetActive(false);
         }
 
         if(one == true && enemiesInScene.Length == 0&& allSpawnedone == true)
@@ -216,6 +217,7 @@ public class WaveSystem : MonoBehaviour
         }
         yield return new WaitForSeconds(5);
         allSpawnedfive = true;
+        fiveFinished = true;
         GameObject.Find("TitanSpawner").GetComponent<Waves>().time = true;
 
 

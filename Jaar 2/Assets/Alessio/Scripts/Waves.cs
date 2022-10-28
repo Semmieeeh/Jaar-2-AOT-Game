@@ -52,7 +52,7 @@ public class Waves : MonoBehaviour
             }
             else if(timer == 0f && wave.threeFinished == true)
             {
-                wave.threeFinished = true;
+                wave.threeFinished = false;
                 time = false;
                 timer = 20f;
                 wave.StartCoroutine(wave.WaveFour());
@@ -61,7 +61,7 @@ public class Waves : MonoBehaviour
             }
             else if (timer == 0f && wave.fourFinished == true)
             {
-                wave.fourFinished = true;
+                wave.fourFinished = false;
                 time = false;
                 timer = 0f;
                 wave.StartCoroutine(wave.WaveFive());
@@ -70,7 +70,7 @@ public class Waves : MonoBehaviour
             }
             else if (timer == 0f && wave.fiveFinished == true)
             {
-                wave.fiveFinished = true;
+                wave.fiveFinished = false;
                 time = false;
 
                 wave.finished = true;
