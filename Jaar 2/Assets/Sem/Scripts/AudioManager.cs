@@ -8,7 +8,17 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource[] audioSources;
     public int currentlyPlaying;
+    public bool curPlaying;
+    public bool stop;
 
+
+    public void Update()
+    {
+        if(stop == true)
+        {
+            StopCoroutine(CountDown(12));
+        }
+    }
     public void PlayAudio(int toPLay, float minimalPitch, float maximumPitch)
     {
 
@@ -31,8 +41,23 @@ public class AudioManager : MonoBehaviour
         
 
     }
+    public void PlayOnce(int toPlay)
+    {
+        if(curPlaying == true)
+        {
+            CountDown(toPlay);
+        }
 
+    }
     
+    public IEnumerator CountDown(int toPlay)
+    {
+        
+        audioSources[12].Play();
+        yield return new WaitForSeconds(17.943f);
+        StopAudio(toPlay);
+        
+    }
 
     
 }

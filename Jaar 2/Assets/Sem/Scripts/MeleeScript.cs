@@ -47,6 +47,7 @@ public class MeleeScript : MonoBehaviour
     public GameObject[] cannons;
     public GameObject place;
     public GameObject turret, buyUi;
+    public TrailRenderer leftTrail, rightTrail;
     
     // Start is called before the first frame update
     void Start()
@@ -315,19 +316,23 @@ public class MeleeScript : MonoBehaviour
 
     public IEnumerator Slash()
     {
+        
         yield return new WaitForSeconds(0.2f);
         hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(finalDamage);
         swordBlades -= 1;
         Instantiate(swordhitParticle, hit.point, Quaternion.identity);
+        
 
     }
     public IEnumerator SlashHit()
     {
+        
         yield return new WaitForSeconds(0.2f);
         if (swordBlades > 0)
         {
             Instantiate(swordGroundhitParticle, hit.point, Quaternion.identity);
         }
+        
     }
 
     public IEnumerator ReloadWithSwords()

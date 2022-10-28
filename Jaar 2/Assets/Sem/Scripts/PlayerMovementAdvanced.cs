@@ -67,6 +67,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public MovementState state;
     public ParticleSystem groundparticle;
     public bool canPlayGroundSound;
+    public bool walking;
     public enum MovementState
     {
         walking,
@@ -87,20 +88,34 @@ public class PlayerMovementAdvanced : MonoBehaviour
         startYScale = transform.localScale.y;
         dashCoolDownMax = 3f;
         canPlay = false;
+        FindObjectOfType<AudioManager>().audioSources[12].Play(12);
+        FindObjectOfType<AudioManager>().audioSources[12].volume = 0;
     }
 
     private void Update()
     {
-        if(rb.velocity.x >0&&grounded || rb.velocity.z>0&&grounded)
+        if (walking == true && grounded)
         {
-            FindObjectOfType<AudioManager>().PlayAudio(12, 1, 1);
+            FindObjectOfType<AudioManager>().audioSources[12].volume = 1;
+
         }
-        else if (!grounded || horizontalInput ==0 && verticalInput == 0)
+        else if (walking == false ||grounded)
         {
-            FindObjectOfType<AudioManager>().StopAudio(12);
+            FindObjectOfType<AudioManager>().audioSources[12].volume = 0;
         }
 
-
+        if(grounded == true && horizontalInput > 0 ||horizontalInput < 0 || verticalInput < 0 || verticalInput > 0)
+        {
+            walking = true;
+        }
+        else if(horizontalInput == 0 && verticalInput== 0 || !grounded)
+        {
+            walking = false;
+        }
+        if (!grounded)
+        {
+            FindObjectOfType<AudioManager>().audioSources[12].volume = 0;
+        }
 
 
 

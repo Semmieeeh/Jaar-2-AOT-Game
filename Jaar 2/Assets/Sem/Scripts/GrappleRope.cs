@@ -35,7 +35,10 @@ public class GrappleRope : MonoBehaviour
         if (!grapplingGun.IsGrappling())
         {
             currentGrapplePosition = grapplingGun.gunTip.position;
-            spring.Reset();
+            if(spring != null)
+            {
+                spring.Reset();
+            }
             if (lr.positionCount > 0)
                 lr.positionCount = 0;
             return;

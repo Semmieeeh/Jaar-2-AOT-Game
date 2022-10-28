@@ -161,6 +161,8 @@ public class Esc : MonoBehaviour
         resume.SetActive(false);
         restart.SetActive(false);
         shopCanvasActive = false;
+        FindObjectOfType<AudioManager>().PlayAudio(12,1,1);
+        FindObjectOfType<AudioManager>().audioSources[12].volume = 0;
     }
 
     public void ResumeTrue()
