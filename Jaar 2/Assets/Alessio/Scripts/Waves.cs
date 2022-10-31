@@ -7,12 +7,13 @@ public class Waves : MonoBehaviour
     public TMP_Text timerUI;
     public bool time;
     public WaveSystem wave;
-
+    public bool initialWave;
     float timer = 20;
 
 
     public void Start()
     {
+        initialWave = true;
         wave = GameObject.Find("TitanSpawner").GetComponent<WaveSystem>();
     }
     void Update()
@@ -25,9 +26,25 @@ public class Waves : MonoBehaviour
 
             timer -= 1 * Time.deltaTime;
 
+
+
+
+
             if (timer < 0f)
             {
                 timer = 0f;
+            }
+
+            if(timer == 0f && initialWave == true)
+            {
+                initialWave = false;
+                Debug.Log("WaveOneStarted");
+                wave.one = true;
+                time = false;
+                timer = 20f;
+                wave.StartCoroutine(wave.WaveOne());
+
+                wave.two = true;
             }
 
             if (timer == 0f && wave.oneFinished == true)

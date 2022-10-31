@@ -844,7 +844,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   navMesh: {fileID: 0}
   navMeshAgent: {fileID: 0}
-  knockback: 10
+  knockback: 20
   animator: {fileID: 0}
   eco: {fileID: 0}
   playerKilled: 0
@@ -907,7 +907,7 @@ MonoBehaviour:
   targetRange: 5
   attackRange: 5
   attackCooldown: 3
-  damage: 30
+  damage: 10
   trap: {fileID: 0}
   playerHealth: {fileID: 0}
   trapped: 0

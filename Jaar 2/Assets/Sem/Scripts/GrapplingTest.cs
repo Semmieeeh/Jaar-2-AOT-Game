@@ -25,6 +25,7 @@ public class GrapplingTest : MonoBehaviour
     public GameObject grapplePointChild;
     public GameObject grapplePointParent;
     public GameObject fpsCam;
+    public UIButtons ui;
     
     
     
@@ -41,7 +42,7 @@ public class GrapplingTest : MonoBehaviour
     {
 
         idleStrength = 4;
-        
+        //ui = GameObject.Find("MainMenu").GetComponent<UIButtons>();
         minDamperStrength = 1f;
         
     }

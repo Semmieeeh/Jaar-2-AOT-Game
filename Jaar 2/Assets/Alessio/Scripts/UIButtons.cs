@@ -31,6 +31,12 @@ public class UIButtons : MonoBehaviour
     public GameObject titel;
     public GameObject slidersensitivity;
     public GameObject cantBuy;
+    public GameObject gg1;
+    public GameObject gg2;
+    public PlayerMovementAdvanced pma;
+    public GameObject rtg;
+    public GameObject rtg2;
+    public bool started;
     public void Start()
     {
         imageEsc.SetActive(false);
@@ -66,6 +72,11 @@ public class UIButtons : MonoBehaviour
     }
     public void Play()
     {
+        
+        gg1.SetActive(true);
+        gg2.SetActive(true);
+        pma.enabled = true;
+        started = true;
         waves.SetActive(true);
         playtrue = true;
         mainMenu.SetActive(false);

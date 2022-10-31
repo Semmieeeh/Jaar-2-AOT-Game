@@ -188,6 +188,13 @@ public class MeleeScript : MonoBehaviour
                     }
                 }
             }
+            else if (!Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+            {
+                if (Input.GetKeyUp(KeyCode.F))
+                {
+                    SwordSound();
+                }
+            }
             else if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
                 Economy eco = GameObject.Find("Player").GetComponent<Economy>();
@@ -246,6 +253,7 @@ public class MeleeScript : MonoBehaviour
                     chargedDamage = minChargedDamage;
                 }
             }
+            
             if (Input.GetKeyUp(KeyCode.F))
             {
                 attackstate = 2;
@@ -316,7 +324,7 @@ public class MeleeScript : MonoBehaviour
 
     public IEnumerator Slash()
     {
-        
+        FindObjectOfType<AudioManager>().PlayAudio(13, 0.9f, 1.1f);
         yield return new WaitForSeconds(0.2f);
         hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(finalDamage);
         swordBlades -= 1;
@@ -326,13 +334,17 @@ public class MeleeScript : MonoBehaviour
     }
     public IEnumerator SlashHit()
     {
-        
+        FindObjectOfType<AudioManager>().PlayAudio(13, 0.9f, 1.1f);
         yield return new WaitForSeconds(0.2f);
         if (swordBlades > 0)
         {
             Instantiate(swordGroundhitParticle, hit.point, Quaternion.identity);
         }
         
+    }
+    public void SwordSound()
+    {
+        FindObjectOfType<AudioManager>().PlayAudio(13, 0.9f, 1.1f);
     }
 
     public IEnumerator ReloadWithSwords()
