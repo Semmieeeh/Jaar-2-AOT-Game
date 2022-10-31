@@ -41,7 +41,7 @@ public class Turrets : MonoBehaviour
         readyToShoot = true;
         platform = ml.place;
         range = 40;
-        attackPoint = gameObject.transform.GetChild(0);
+        attackPoint = gameObject.transform.GetChild(1);
 
     }
     public void Update()
