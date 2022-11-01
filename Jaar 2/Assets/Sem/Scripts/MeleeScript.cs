@@ -347,24 +347,6 @@ public class MeleeScript : MonoBehaviour
         FindObjectOfType<AudioManager>().PlayAudio(13, 0.9f, 1.1f);
     }
 
-    public IEnumerator ReloadWithSwords()
-    {
-        weaponSway.canSway = false;
-        canAttack = false;
-        yield return new WaitForSeconds(0.8f);
-        blade.SetActive(false);
-        blade2.SetActive(false);
-        yield return new WaitForSeconds(1f);
-        blade.SetActive(true);
-        blade2.SetActive(true);
-        disappeared = false;
-        yield return new WaitForSeconds(1.5f);
-        swordBlades = 3;
-        canAttack = true;
-        reloadingWithSwords = false;
-        weaponSway.canSway = true;
-    }
-
 
     public IEnumerator Reload()
     {
@@ -377,6 +359,7 @@ public class MeleeScript : MonoBehaviour
         blade.SetActive(true);
         blade2.SetActive(true);
         yield return new WaitForSeconds(1.5f);
+
         swordBlades = 3;
         disappeared = false;
         canAttack = true;
@@ -384,5 +367,39 @@ public class MeleeScript : MonoBehaviour
         weaponSway.canSway = true;
     }
 
+    public IEnumerator ReloadWithSwords()
+    {
+        weaponSway.canSway = false;
+        canAttack = false;
+        StartCoroutine(SwordReloadSounds());
+        yield return new WaitForSeconds(0.8f);
+        blade.SetActive(false);
+        blade2.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        blade.SetActive(true);
+        blade2.SetActive(true);
+        
+        disappeared = false;
+        yield return new WaitForSeconds(1.5f);
+        swordBlades = 3;
+        canAttack = true;
+        reloadingWithSwords = false;
+        weaponSway.canSway = true;
+    }
 
+
+    
+
+    public IEnumerator SwordReloadSounds()
+    {
+        yield return new WaitForSeconds(0.2f);
+        FindObjectOfType<AudioManager>().PlayAudio(15, 0.9f, 1.1f);
+        yield return new WaitForSeconds(1.2f);
+        FindObjectOfType<AudioManager>().PlayAudio(14, 0.9f, 1.1f);
+    
+    }
+    public IEnumerator ReloadSound()
+    {
+        yield return new WaitForSeconds(1);
+    }
 }

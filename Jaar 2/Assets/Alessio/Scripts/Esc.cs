@@ -179,7 +179,7 @@ public class Esc : MonoBehaviour
     public void BuyTurret()
     {
         Economy eco = GameObject.Find("Player").GetComponent<Economy>();
-        if (eco.metal >= 10)
+        if (eco.metal >= 10 && eco.turrets <=5)
         {
             eco.turrets += 1;
             eco.metal -= 10;

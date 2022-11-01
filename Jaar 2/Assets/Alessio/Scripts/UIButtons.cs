@@ -31,8 +31,8 @@ public class UIButtons : MonoBehaviour
     public GameObject titel;
     public GameObject slidersensitivity;
     
-    public GameObject gg1;
-    public GameObject gg2;
+    public GameObject gg;
+    
     public PlayerMovementAdvanced pma;
     public GameObject rtg;
     public GameObject rtg2;
@@ -73,8 +73,8 @@ public class UIButtons : MonoBehaviour
     public void Play()
     {
         
-        gg1.SetActive(true);
-        gg2.SetActive(true);
+        gg.SetActive(true);
+        
         pma.enabled = true;
         started = true;
         waves.SetActive(true);
