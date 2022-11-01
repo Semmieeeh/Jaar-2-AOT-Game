@@ -19,7 +19,7 @@ public class Esc : MonoBehaviour
     public bool played;
     public GameObject shop;
     public bool shopActive;
-
+    public GameObject cantBuy;
     public Transform wall;
     // Start is called before the first frame update
     void Start()
@@ -173,5 +173,44 @@ public class Esc : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+
+
+    public void BuyTurret()
+    {
+        Economy eco = GameObject.Find("Player").GetComponent<Economy>();
+        if (eco.metal >= 10)
+        {
+            eco.turrets += 1;
+            eco.metal -= 10;
+        }
+        else if (eco.metal < 10)
+        {
+            cantBuy.SetActive(true);
+            StartCoroutine(CantBuy());
+        }
+    }
+    public void BuyTrap()
+    {
+        Economy eco = GameObject.Find("Player").GetComponent<Economy>();
+        if (eco.metal >= 5)
+        {
+            eco.traps += 1;
+            eco.metal -= 5;
+        }
+        else if (eco.metal < 5)
+        {
+            cantBuy.SetActive(true);
+            StartCoroutine(CantBuy());
+        }
+    }
+    public IEnumerator CantBuy()
+    {
+        yield return new WaitForSeconds(0.2f);
+        cantBuy.SetActive(false);
+    }
+    public void ExitShopMenu()
+    {
+        shop.SetActive(false);
     }
 }
