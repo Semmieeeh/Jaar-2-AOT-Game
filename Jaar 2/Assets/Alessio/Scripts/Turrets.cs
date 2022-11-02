@@ -31,6 +31,7 @@ public class Turrets : MonoBehaviour
     public Transform titan;
     public MeleeScript ml;
     public bool destroyed;
+    public ParticleSystem ps;
 
 
     // Start is called before the first frame update
@@ -123,6 +124,7 @@ public class Turrets : MonoBehaviour
         if (titan != null)
         {
             EnemyHealth hp = titan.GetComponent<EnemyHealth>();
+            ps.Play();
             hp.TakeDamage(damageTurret);
             readyToShoot = true;
             

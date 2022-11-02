@@ -23,6 +23,7 @@ public class HealthScript : MonoBehaviour
     public bool tookDamage;
     public bool damageDelay;
     public float titansKilled;
+    public GameObject music,music2;
     
 
 
@@ -88,6 +89,8 @@ public class HealthScript : MonoBehaviour
 
             
             deathUI.SetActive(true);
+            music.SetActive(false);
+            music2.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
             death = false;
 
@@ -100,19 +103,14 @@ public class HealthScript : MonoBehaviour
             tookDamage = false;
         }
 
-        if(titansKilled >= 10)
+
+        WaveSystem wave = FindObjectOfType<WaveSystem>();
+        if (wave.fiveFinished == true)
         {
-            // winUI.SetActive(true);
-            //Cursor.lockState = CursorLockMode.None;
-            // titansKilled = 0;
-            WaveSystem wave = FindObjectOfType<WaveSystem>();
-            if(wave.fiveFinished == true)
-            {
-                 winUI.SetActive(true);
-                 Cursor.lockState = CursorLockMode.None;
-                 Cursor.visible = true;
-                
-            }
+            winUI.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
         }
 
     }

@@ -11,6 +11,7 @@ public class UIButtons : MonoBehaviour
     public GameObject imageEsc;
     public GameObject slider;
     public GameObject music;
+    
     public GameObject fullscreen, resolution;
     public GameObject canvasSem;
     public GameObject currency;
@@ -40,9 +41,11 @@ public class UIButtons : MonoBehaviour
     public GameObject rtg2;
     public bool started;
     public GameObject edges;
+    public GameObject music2;
 
     public void Start()
     {
+        FindObjectOfType<AudioManager>().PlayAudio(16, 1, 1);
         imageEsc.SetActive(false);
         credits.SetActive(false);
         back.SetActive(false);
@@ -77,6 +80,8 @@ public class UIButtons : MonoBehaviour
     public void Play()
     { 
         gg.SetActive(true);
+        FindObjectOfType<AudioManager>().PlayAudio(17, 1, 1);
+        FindObjectOfType<AudioManager>().StopAudio(16);
         
         pma.enabled = true;
         started = true;
@@ -85,7 +90,7 @@ public class UIButtons : MonoBehaviour
         mainMenu.SetActive(false);
         credits.SetActive(false);
         image.SetActive(false);
-        music.SetActive(false);
+        
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
