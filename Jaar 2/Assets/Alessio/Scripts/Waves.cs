@@ -26,10 +26,6 @@ public class Waves : MonoBehaviour
 
             timer -= 1 * Time.deltaTime;
 
-
-
-
-
             if (timer < 0f)
             {
                 timer = 0f;

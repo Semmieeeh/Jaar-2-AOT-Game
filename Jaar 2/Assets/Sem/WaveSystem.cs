@@ -7,8 +7,6 @@ public class WaveSystem : MonoBehaviour
 {
     // Start is called before the first frame update
     
-    public TutorialFinished tut;
-    public bool canSpawnWaveOne;
     public GameObject[] titan;
     public GameObject[] enemiesInScene;
     public GameObject ui;

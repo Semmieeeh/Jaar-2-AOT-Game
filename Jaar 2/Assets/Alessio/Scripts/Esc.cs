@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Esc : MonoBehaviour
 {
@@ -21,12 +22,12 @@ public class Esc : MonoBehaviour
     public bool shopActive;
     public GameObject cantBuy;
     public Transform wall;
+    public Image deadImage;
     // Start is called before the first frame update
     void Start()
     {
         escActive = false;
         shopCanvasActive = false;
-        gameOver.SetActive(false);
         gameOverMenu = true;
         resume.SetActive(false);
         restart.SetActive(false);
@@ -38,23 +39,10 @@ public class Esc : MonoBehaviour
 
     void Update()
     {
-        
+        deadImage.GetComponent<Image>().color = new Color(255, 0, 0, 1);
 
-
-
-
-
-        if(played == true)
+        if (played == true)
         {
-            //if(wall.GetComponent<Healthbarscript>().currentHeal < 0f)
-            //{
-            //Cursor.lockState = CursorLockMode.None;
-            // restart.SetActive(true);
-            //gameOver.SetActive(true);
-            //image.SetActive(true);
-            //Time.timeScale = 0f;
-            //}
-
             if (gameOver.activeSelf == true)
             {
                 currency.SetActive(false);

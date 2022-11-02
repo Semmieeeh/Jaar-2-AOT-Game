@@ -18,7 +18,9 @@ public class UIButtons : MonoBehaviour
     public GameObject waves;
     public GameObject resume;
     public GameObject restart;
+
     public GameObject cam;
+
     public GameObject fovSlider;
     public GameObject panels;
     public GameObject maincam;
@@ -37,6 +39,8 @@ public class UIButtons : MonoBehaviour
     public GameObject rtg;
     public GameObject rtg2;
     public bool started;
+    public GameObject edges;
+
     public void Start()
     {
         imageEsc.SetActive(false);
@@ -58,12 +62,12 @@ public class UIButtons : MonoBehaviour
     }
     public void Update()
     {
-        if(playtrue == false)
+        if (playtrue == false)
         {
             play.SetActive(true);
         }
 
-        else if(playtrue == true)
+        else if (playtrue == true)
         {
             creditsbutton.SetActive(false);
             play.SetActive(false);
@@ -71,8 +75,7 @@ public class UIButtons : MonoBehaviour
         }
     }
     public void Play()
-    {
-        
+    { 
         gg.SetActive(true);
         
         pma.enabled = true;
@@ -138,6 +141,7 @@ public class UIButtons : MonoBehaviour
         panelFront.transform.localScale = new Vector3(0.5f, 0.8f, 1);
         titel.SetActive(false);
         slidersensitivity.SetActive(true);
+        edges.SetActive(true);
     }
     public void Credits()
     {
@@ -165,6 +169,7 @@ public class UIButtons : MonoBehaviour
         }
         titel.SetActive(true);
         slidersensitivity.SetActive(false);
+        edges.SetActive(false);
     }
     public void escmenu()
     {

@@ -124,7 +124,7 @@ public class NavMesh2 : MonoBehaviour
                     //transform.rotation = Quaternion.LookRotation(rot);
 
 
-                    Debug.Log(target[currentTargetIndex].name+distanceToNextPoint);
+                    //Debug.Log(target[currentTargetIndex].name+distanceToNextPoint);
                     if (Vector3.Distance(titanHolder.transform.position, target[currentTargetIndex].position) < targetRange)
                     {
                         if (currentTargetIndex < 22)
