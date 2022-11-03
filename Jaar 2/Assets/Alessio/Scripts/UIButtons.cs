@@ -166,6 +166,7 @@ public class UIButtons : MonoBehaviour
         fullscreen.SetActive(false);
         resolution.SetActive(false);
         fovSlider.SetActive(false);
+        edges.SetActive(false);
         panelFront.transform.localScale = new Vector3(0.3f, 0.8f, 1);
         if (escmenuon == true)
         {
