@@ -11,7 +11,8 @@ public class Esc : MonoBehaviour
     public bool shopCanvasActive;
     public bool escActive;
     public bool gameOverMenu;
-
+    public GameObject ui;
+    public GameObject edges;
     public GameObject gameOver;
     public GameObject image;
     public GameObject currency;
@@ -22,6 +23,7 @@ public class Esc : MonoBehaviour
     public bool shopActive;
     public Transform wall;
     public Image deadImage;
+    public GameObject playerUI;
 
     [Header("Shop")]
     public GameObject turrets;
@@ -40,6 +42,7 @@ public class Esc : MonoBehaviour
     public GameObject traplvl1;
     public GameObject traplvl2;
     public GameObject traplvl3;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -66,16 +69,7 @@ public class Esc : MonoBehaviour
                 gameOverMenu = false;
             }
 
-            if(escActive == true||shopActive == true)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+            
 
             if (gameOverMenu == true)
             {
@@ -87,7 +81,8 @@ public class Esc : MonoBehaviour
                         escActive = true;
                         Time.timeScale = 0f;
                         FindObjectOfType<AudioManager>().StopAllAudio();
-
+                        playerUI.SetActive(false);
+                        
                         canvas.GetComponent<UIButtons>().Escape();
                         canvas.GetComponent<UIButtons>().escmenu();
                         Cursor.visible = true;
@@ -104,10 +99,12 @@ public class Esc : MonoBehaviour
                     Time.timeScale = 0f;
                     if (Input.GetKeyDown(KeyCode.Escape))
                     {
-                        
+                        edges.SetActive(false);
                         restart.SetActive(false);
+                        ui.SetActive(false);
                         escActive = false;
                         Time.timeScale = 1f;
+                        playerUI.SetActive(true);
                         canvas.GetComponent<UIButtons>().ExitEscape();
                         canvas.GetComponent<UIButtons>().EscBack();
                         canvas.GetComponent<UIButtons>().escmenuoff();
@@ -115,6 +112,8 @@ public class Esc : MonoBehaviour
                         Cursor.lockState = CursorLockMode.Locked;
                         canvasSem.SetActive(true);
                         shopActive = true;
+                        Cursor.visible = false;
+                        Cursor.lockState = CursorLockMode.Locked;
 
                     }
 

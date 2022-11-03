@@ -28,7 +28,7 @@ public class Turrets : MonoBehaviour
     public ParticleSystem muzzle;
     public EnemyHealth enemyHp;
     public LayerMask titanMask;
-    public Transform titan;
+    public GameObject titan;
     public MeleeScript ml;
     public bool destroyed;
     public ParticleSystem ps;
@@ -56,13 +56,17 @@ public class Turrets : MonoBehaviour
         if(titan != null)
         {
             MyInput();
-
+            if (titan.GetComponent<EnemyHealth>().enemyHealth <= 0)
+            {
+                titan = null;
+            }
         }
-
         else if(titan == null)
         {
             gameObject.GetComponent<SphereCollider>().radius += 75 * Time.deltaTime;
         }
+
+
         if(gameObject.GetComponent<SphereCollider>().radius > range)
         {
             gameObject.GetComponent<SphereCollider>().radius = 0;
@@ -85,7 +89,7 @@ public class Turrets : MonoBehaviour
         //Shoot
         if(titan != null)
         {
-            transform.LookAt(titan);
+            transform.LookAt(titan.transform.position);
             titan.GetComponent<EnemyHealth>().gettingShotBy = gameObject;
             Vector3 angles = transform.localEulerAngles;
             angles.x = 0;
@@ -148,7 +152,7 @@ public class Turrets : MonoBehaviour
     {
         if (other.gameObject.tag == "Titan" && titan == null)
         {
-            titan = other.gameObject.transform;
+            titan = other.transform.gameObject;
             titan.GetComponent<EnemyHealth>().gettingShotBy = gameObject;
             MyInput();
             readyToShoot = true;
