@@ -38,7 +38,7 @@ public class NavMesh2 : MonoBehaviour
     public float distanceToNextPoint;
     public Animator animator;
     public int titanState;
-    
+    public bool canPatrol;
     public enum TitanState
     {
         Patrolling,
@@ -85,6 +85,7 @@ public class NavMesh2 : MonoBehaviour
         target[21] = GameObject.Find("Waypoint22").transform;
         target[22] = GameObject.Find("Waypoint23").transform;
         wall = GameObject.Find("Shighanshina Gate");
+        canPatrol = true;
         attackRange = 10;
     }
 
@@ -111,12 +112,15 @@ public class NavMesh2 : MonoBehaviour
 
 
         EnemyHealth enemyhealth = gameObject.GetComponent<EnemyHealth>();
-        if(titanHolder != null)
+        if(titanHolder != null&& canPatrol == true)
         {
             switch (state)
             {
                 case TitanState.Patrolling:
-
+                    if(enemyhealth.enemyHealth > 0)
+                    {
+                        titanState = 0;
+                    }
                     navMeshAgent.destination = target[currentTargetIndex].position;
                     
 
@@ -168,7 +172,7 @@ public class NavMesh2 : MonoBehaviour
 
                     break;
                 case TitanState.AttackingWall:
-
+                    titanState = 1;
                     titanState = 0;
                     if(attackCooldown < 0.1)
                     {
@@ -195,7 +199,7 @@ public class NavMesh2 : MonoBehaviour
             {
                 //state = TitanState.Chasing;
             }
-            else if (trapped == false && Vector3.Distance(gameObject.transform.position, player.transform.position) >inRange && closeToWall == false)
+            else if (trapped == false && Vector3.Distance(gameObject.transform.position, player.transform.position) >inRange && closeToWall == false && enemyhealth.death == false)
             {
                 state = TitanState.Patrolling;
             }

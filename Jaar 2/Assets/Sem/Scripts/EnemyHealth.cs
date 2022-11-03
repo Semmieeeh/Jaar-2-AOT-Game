@@ -53,18 +53,21 @@ public class EnemyHealth : MonoBehaviour
     void Update()
     {
         
-        slider.value = enemyHealth;
-        if (death == true && playerKilled == true)
+        if(slider != null)
         {
+            slider.value = enemyHealth;
+        }
+        if (death == true)
+        {
+            navMesh.titanState = 2;
             StartCoroutine(DeathEffect());
             death = false;
             
         }
-        else if(death == true && playerKilled == false)
+        
+        if(enemyHealth <= 0)
         {
-            StartCoroutine(DeathEffectNotCausedByPlayer());
-            death = false;
-
+            death = true;
         }
     }
 
@@ -81,21 +84,10 @@ public class EnemyHealth : MonoBehaviour
 
     public IEnumerator DeathEffect()
     {
-        navMesh.enabled = false;
+        navMesh.canPatrol = false;
         navMeshAgent.enabled = false;
         rb.freezeRotation = false;
         eco.metal += eco.payment;
-        rb.AddForce(fpsCam.transform.forward * knockback*2f, ForceMode.Impulse);
-        if (gettingShotBy != null)
-        {
-            Turrets turret = gettingShotBy.GetComponent<Turrets>();
-            turret.titan = null;
-            GrapplingTest gt1 = GameObject.Find("GrapplingGun").GetComponent<GrapplingTest>();
-            GrapplingTest gt2 = GameObject.Find("GrapplingGun2").GetComponent<GrapplingTest>();
-
-            gt1.StopGrapple();
-            gt2.StopGrapple();
-        }
         gameObject.tag = "Dead";
         playerHp.titansKilled += 1;
         yield return new WaitForSeconds(10);
@@ -108,10 +100,11 @@ public class EnemyHealth : MonoBehaviour
         navMesh.enabled = false;
         navMeshAgent.enabled = false;
         rb.freezeRotation = false;
-        rb.AddForce(gettingShotBy.transform.forward * knockback*2f, ForceMode.Impulse);
+        
         eco.metal += eco.payment;
         if (gettingShotBy != null)
         {
+            rb.AddForce(gettingShotBy.transform.forward * knockback * 2f, ForceMode.Impulse);
             Turrets turret = gettingShotBy.GetComponent<Turrets>();
             turret.titan = null;
             GrapplingTest gt1 = GameObject.Find("GrapplingGun").GetComponent<GrapplingTest>();
