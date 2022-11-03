@@ -173,7 +173,7 @@ public class NavMesh2 : MonoBehaviour
                     break;
                 case TitanState.AttackingWall:
                     titanState = 1;
-                    titanState = 0;
+                    
                     if(attackCooldown < 0.1)
                     {
                         wall.transform.GetChild(0).GetComponent<Healthbarscript>().WallDamage(damage);
