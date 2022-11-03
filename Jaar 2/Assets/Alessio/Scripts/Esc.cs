@@ -20,9 +20,28 @@ public class Esc : MonoBehaviour
     public bool played;
     public GameObject shop;
     public bool shopActive;
-    public GameObject cantBuy;
     public Transform wall;
     public Image deadImage;
+
+    [Header("Shop")]
+    public GameObject turrets;
+    public GameObject traps;
+    public GameObject images;
+    public GameObject upgradesButton;
+    public GameObject shopText;
+    public float switchVoid;
+    public float switchVoidTraps;
+
+    [Header("Turrets")]
+    public GameObject turretlvl1;
+    public GameObject turretlvl2;
+    public GameObject turretlvl3;
+
+    [Header("Traps")]
+    public GameObject traplvl1;
+    public GameObject traplvl2;
+    public GameObject traplvl3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +55,6 @@ public class Esc : MonoBehaviour
             restart2.SetActive(true);
         }
     }
-
     void Update()
     {
         deadImage.GetComponent<Image>().color = new Color(255, 0, 0, 1);
@@ -49,7 +67,6 @@ public class Esc : MonoBehaviour
                 gameOverMenu = false;
             }
 
-
             if(escActive == true||shopActive == true)
             {
                 Cursor.lockState = CursorLockMode.None;
@@ -60,7 +77,6 @@ public class Esc : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
-
 
             if (gameOverMenu == true)
             {
@@ -115,6 +131,8 @@ public class Esc : MonoBehaviour
                         Time.timeScale = 0f;
                         Cursor.lockState = CursorLockMode.None;
                         Cursor.visible = true;
+                        turrets.SetActive(true);
+                        shopText.SetActive(true);
                     }
                 }
                 
@@ -128,6 +146,7 @@ public class Esc : MonoBehaviour
                         Time.timeScale = 1f;
                         Cursor.lockState = CursorLockMode.Locked;
                         Cursor.visible = false;
+                        traps.SetActive(false);
                     }
                 }
             }
@@ -152,7 +171,6 @@ public class Esc : MonoBehaviour
         FindObjectOfType<AudioManager>().PlayAudio(12,1,1);
         FindObjectOfType<AudioManager>().audioSources[12].volume = 0;
     }
-
     public void ResumeTrue()
     {
         resume.SetActive(true);
@@ -162,20 +180,95 @@ public class Esc : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
-
-
     public void BuyTurret()
     {
         Economy eco = GameObject.Find("Player").GetComponent<Economy>();
-        if (eco.metal >= 10 && eco.turrets <=5)
+        if (eco.metal >= 10 && eco.turrets <=4)
         {
             eco.turrets += 1;
             eco.metal -= 10;
         }
-        else if (eco.metal < 10)
+    }
+    public void BuyTurretLvl2()
+    {
+        Economy eco = GameObject.Find("Player").GetComponent<Economy>();
+        if (eco.metal >= 10 && eco.turrets <= 4)
         {
-            cantBuy.SetActive(true);
-            StartCoroutine(CantBuy());
+            turretlvl2.SetActive(false);
+            turretlvl3.SetActive(true);
+            eco.turrets += 1;
+            eco.metal -= 10;
+        }
+    }
+    public void BuyTurretLvl3()
+    {
+        Economy eco = GameObject.Find("Player").GetComponent<Economy>();
+        if (eco.metal >= 10 && eco.turrets <= 4)
+        {
+            eco.turrets += 1;
+            eco.metal -= 10;
+        }
+    }
+    public void UpgradeTurrets()
+    {
+        switchVoid += 1f;
+
+        Economy eco = GameObject.Find("Player").GetComponent<Economy>();
+        if (eco.metal >= 100)
+        {
+            eco.metal -= 100;
+        }
+
+        if (switchVoid == 0f)
+        {
+            turretlvl1.SetActive(true);
+            turretlvl2.SetActive(false);
+            turretlvl3.SetActive(false);
+        }
+
+        if (switchVoid == 1f)
+        {
+            turretlvl1.SetActive(false);
+            turretlvl2.SetActive(true);
+            turretlvl3.SetActive(false);
+        }
+
+        if (switchVoid == 2f)
+        {
+            turretlvl1.SetActive(false);
+            turretlvl2.SetActive(false);
+            turretlvl3.SetActive(true);
+        }
+    }
+    public void UpgradeTraps()
+    {
+        switchVoidTraps += 1f;
+
+        Economy eco = GameObject.Find("Player").GetComponent<Economy>();
+        if (eco.metal >= 50)
+        {
+            eco.metal -= 50;
+        }
+
+        if (switchVoidTraps == 0f)
+        {
+            traplvl1.SetActive(true);
+            traplvl2.SetActive(false);
+            traplvl3.SetActive(false);
+        }
+
+        if (switchVoidTraps == 1f)
+        {
+            traplvl1.SetActive(false);
+            traplvl2.SetActive(true);
+            traplvl3.SetActive(false);
+        }
+
+        if (switchVoidTraps == 2f)
+        {
+            traplvl1.SetActive(false);
+            traplvl2.SetActive(false);
+            traplvl3.SetActive(true);
         }
     }
     public void BuyTrap()
@@ -183,22 +276,45 @@ public class Esc : MonoBehaviour
         Economy eco = GameObject.Find("Player").GetComponent<Economy>();
         if (eco.metal >= 5)
         {
+            traplvl1.SetActive(false);
+            traplvl2.SetActive(true);
             eco.traps += 1;
             eco.metal -= 5;
         }
-        else if (eco.metal < 5)
+    }
+    public void BuyTrapLvl2()
+    {
+        Economy eco = GameObject.Find("Player").GetComponent<Economy>();
+        if (eco.metal >= 5)
         {
-            cantBuy.SetActive(true);
-            StartCoroutine(CantBuy());
+            traplvl2.SetActive(false);
+            traplvl3.SetActive(true);
+            eco.traps += 1;
+            eco.metal -= 5;
         }
     }
-    public IEnumerator CantBuy()
+    public void BuyTrapLvl3()
     {
-        yield return new WaitForSeconds(0.2f);
-        cantBuy.SetActive(false);
+        Economy eco = GameObject.Find("Player").GetComponent<Economy>();
+        if (eco.metal >= 5)
+        {
+            eco.traps += 1;
+            eco.metal -= 5;
+        }
     }
     public void ExitShopMenu()
     {
         shop.SetActive(false);
+    }
+    public void NextPage()
+    {
+        turrets.SetActive(false);
+        traps.SetActive(true);
+    }
+
+    public void PreviousPage()
+    {
+        turrets.SetActive(true);
+        traps.SetActive(false);
     }
 }
