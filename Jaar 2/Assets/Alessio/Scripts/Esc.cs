@@ -27,7 +27,6 @@ public class Esc : MonoBehaviour
     public GameObject turrets;
     public GameObject traps;
     public GameObject images;
-    public GameObject upgradesButton;
     public GameObject shopText;
     public float switchVoid;
     public float switchVoidTraps;
@@ -133,6 +132,7 @@ public class Esc : MonoBehaviour
                         Cursor.visible = true;
                         turrets.SetActive(true);
                         shopText.SetActive(true);
+                        canvasSem.SetActive(false);
                     }
                 }
                 
@@ -147,6 +147,7 @@ public class Esc : MonoBehaviour
                         Cursor.lockState = CursorLockMode.Locked;
                         Cursor.visible = false;
                         traps.SetActive(false);
+                        canvasSem.SetActive(true); 
                     }
                 }
             }
@@ -207,6 +208,7 @@ public class Esc : MonoBehaviour
         {
             eco.turrets += 1;
             eco.metal -= 10;
+
         }
     }
     public void UpgradeTurrets()
@@ -214,8 +216,9 @@ public class Esc : MonoBehaviour
         switchVoid += 1f;
 
         Economy eco = GameObject.Find("Player").GetComponent<Economy>();
-        if (eco.metal >= 100)
+        if (eco.metal >= 100 && switchVoid <= 2)
         {
+            eco.turretLvl += 1;
             eco.metal -= 100;
         }
 

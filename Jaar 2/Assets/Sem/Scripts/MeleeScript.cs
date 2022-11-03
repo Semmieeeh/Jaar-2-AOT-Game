@@ -90,7 +90,20 @@ public class MeleeScript : MonoBehaviour
         anim2.SetBool("isReloading", isReloading);
         anim2.SetBool("ReloadWithSwords", reloadingWithSwords);
 
-        cannons = GameObject.FindGameObjectsWithTag("Cannon");
+        if (GetComponent<Esc>().switchVoid == 0)
+        {
+            cannons = GameObject.FindGameObjectsWithTag("Cannon");
+        }
+
+        if(GetComponent<Esc>().switchVoid == 1)
+        {
+            cannons = GameObject.FindGameObjectsWithTag("Cannon2");
+        }
+
+        if (GetComponent<Esc>().switchVoid == 2)
+        {
+            cannons = GameObject.FindGameObjectsWithTag("Cannon3");
+        }
 
 
 
@@ -101,7 +114,7 @@ public class MeleeScript : MonoBehaviour
 
 
 
-        
+
 
 
         if (swordBlades == 0 && disappeared == false)
