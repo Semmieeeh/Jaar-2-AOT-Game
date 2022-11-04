@@ -13,6 +13,8 @@ public class Economy : MonoBehaviour
     public int traps;
     public GameObject turretUI;
     public GameObject turretLvlUI;
+    public GameObject trapUI;
+    public int trapfloat;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,7 @@ public class Economy : MonoBehaviour
         turrets = 1;
         turretLvl = 1;
         traps = 1;
-        metal = 300;
+        
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class Economy : MonoBehaviour
             metal += 20f;
         }
         //slider. value = metal
+        trapUI.GetComponent<TextMeshProUGUI>().text = "Traps:" + trapfloat.ToString();
         turretLvlUI.GetComponent<TextMeshProUGUI>().text = "Cannons Lvl: " + turretLvl.ToString();
         turretUI.GetComponent<TextMeshProUGUI>().text = "Cannons:" + turrets.ToString();
     }

@@ -387,13 +387,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
                 rb.velocity = Vector3.ClampMagnitude(rb.velocity, walkSpeed * 7.5f);
             }
 
-
-
-
         }
 
-
-        
     }
     
 
@@ -403,7 +398,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
         Vector3 vel = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
 
-        rb.AddForce(fpsCam.transform.forward * dashForce * + 2f + vel, ForceMode.Impulse);
+        rb.AddForce(fpsCam.transform.forward * dashForce * 7.5f + vel, ForceMode.Impulse);
+        rb.AddForce(fpsCam.transform.up * dashForce + vel, ForceMode.Impulse);
         FindObjectOfType<AudioManager>().PlayAudio(9, 0.8f, 1.2f);
 
     }
@@ -449,18 +445,6 @@ public class PlayerMovementAdvanced : MonoBehaviour
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
-
-
-    
-	
-
-    
-    
-
-
-
-
-    
 }
 
 

@@ -41,8 +41,30 @@ public class WaveSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
+        if(enemiesInScene.Length == 0 && allSpawnedone == true && one == true)
+        {
+            oneFinished = true;
+        }
+        else if(enemiesInScene.Length == 0 && allSpawnedtwo == true &&two == true)
+        {
+            twoFinished = true;
+        }
+        else if (enemiesInScene.Length == 0 && allSpawnedthree == true&&three == true)
+        {
+            threeFinished = true;
+        }
+        else if (enemiesInScene.Length == 0 && allSpawnedfour == true&&four == true)
+        {
+            fourFinished = true;
+        }
+        else if (enemiesInScene.Length == 0 && allSpawnedfive == true&&five == true)
+        {
+            fiveFinished = true;
+        }
+        if(fiveFinished == true)
+        {
+            winUI.SetActive(true);
+        }
 
     }
     public IEnumerator WaveOne()
@@ -51,7 +73,7 @@ public class WaveSystem : MonoBehaviour
         for(int one =0; one<1; one++)
         {
             
-            Instantiate(titan[Random.Range(0, titan.Length)]);
+            Instantiate(titan[Random.Range(0, 0)]);
             yield return new WaitForSeconds(waveTime);
             continue;
         }
@@ -66,7 +88,7 @@ public class WaveSystem : MonoBehaviour
         two = true;
         for (int one = 0; one < 2; one++)
         {
-            Instantiate(titan[Random.Range(0, titan.Length)]);
+            Instantiate(titan[Random.Range(0,0)]);
             yield return new WaitForSeconds(waveTime);
             continue;
         }
@@ -81,7 +103,7 @@ public class WaveSystem : MonoBehaviour
         three = true;
         for (int one = 0; one < 4; one++)
         {
-            Instantiate(titan[Random.Range(0, titan.Length)]);
+            Instantiate(titan[Random.Range(0, 1)]);
             yield return new WaitForSeconds(waveTime);
             continue;
         }   
@@ -96,7 +118,7 @@ public class WaveSystem : MonoBehaviour
         four = true;
         for (int one = 0; one < 8; one++)
         {
-            Instantiate(titan[Random.Range(0, titan.Length)]);
+            Instantiate(titan[Random.Range(0, 1)]);
             yield return new WaitForSeconds(waveTime);
             continue;
         }
@@ -110,7 +132,7 @@ public class WaveSystem : MonoBehaviour
         five = true;
         for (int one = 0; one < 12; one++)
         {
-            Instantiate(titan[Random.Range(0, titan.Length)]);
+            Instantiate(titan[Random.Range(1, 1)]);
             yield return new WaitForSeconds(waveTime);
             continue;
         }

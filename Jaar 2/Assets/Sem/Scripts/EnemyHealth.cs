@@ -23,6 +23,7 @@ public class EnemyHealth : MonoBehaviour
     public TagAttribute def;
     public GameObject gettingShotBy;
     HealthScript playerHp;
+    public bool died;
     
     public Slider slider;
 
@@ -31,7 +32,7 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         slider = gameObject.transform.GetChild(0).GetComponent<Slider>();
-
+        died = false;
         
         
         playerHp = GameObject.Find("Player").GetComponent<HealthScript>();
@@ -57,11 +58,11 @@ public class EnemyHealth : MonoBehaviour
         {
             slider.value = enemyHealth;
         }
-        if (death == true)
+        if (death == true && died == false)
         {
             navMesh.titanState = 2;
             StartCoroutine(DeathEffect());
-            death = false;
+            died = true;
             
         }
         
@@ -84,39 +85,13 @@ public class EnemyHealth : MonoBehaviour
 
     public IEnumerator DeathEffect()
     {
-        navMesh.canPatrol = false;
-        navMeshAgent.enabled = false;
-        rb.freezeRotation = false;
+
+        GetComponent<NavMesh2>().canPatrol = false;
         eco.metal += eco.payment;
         gameObject.tag = "Dead";
         playerHp.titansKilled += 1;
-        yield return new WaitForSeconds(10);
-        
+        yield return new WaitForSeconds(10);        
         Destroy(gameObject);
     }
-
-    public IEnumerator DeathEffectNotCausedByPlayer()
-    {
-        navMesh.enabled = false;
-        navMeshAgent.enabled = false;
-        rb.freezeRotation = false;
-        
-        eco.metal += eco.payment;
-        if (gettingShotBy != null)
-        {
-            rb.AddForce(gettingShotBy.transform.forward * knockback * 2f, ForceMode.Impulse);
-            Turrets turret = gettingShotBy.GetComponent<Turrets>();
-            turret.titan = null;
-            GrapplingTest gt1 = GameObject.Find("GrapplingGun").GetComponent<GrapplingTest>();
-            GrapplingTest gt2 = GameObject.Find("GrapplingGun2").GetComponent<GrapplingTest>();
-
-            gt1.StopGrapple();
-            gt2.StopGrapple();
-        }
-        gameObject.tag = "Dead";
-        playerHp.titansKilled += 1;
-        yield return new WaitForSeconds(10);
-        Destroy(gameObject);
-
-    }
+   
 }

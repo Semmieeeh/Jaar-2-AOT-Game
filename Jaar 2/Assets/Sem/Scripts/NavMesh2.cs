@@ -56,7 +56,7 @@ public class NavMesh2 : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         idle = true;
         trapped = false;
-        damage = 100f;
+        
         currentTargetIndex = 0;
         targetRange = 5;
         playerHealth = GameObject.Find("Player").GetComponent<HealthScript>();
@@ -91,47 +91,52 @@ public class NavMesh2 : MonoBehaviour
 
     public void Update()
     {
+
+
         animator.SetInteger("TitanState", titanState);
-        distanceToNextPoint = Vector3.Distance(titanHolder.transform.position, target[currentTargetIndex].transform.position);
-
-        if(gameStart == false)
-        {
-            targetName = target[currentTargetIndex].name;
-        }
-        if(titanHolder != null)
-        {
-            distance = Vector3.Distance(player.transform.position, titanHolder.transform.position);
-        }
-        dir = player.transform.position - transform.position;
-        angle = Vector3.Angle(dir, transform.forward);
-
-
-
-        Vector3 pos = target[currentTargetIndex].position;
-        Vector3 playerPos = new Vector3(player.transform.position.x, player.transform.position.y, 0);
-
-
         EnemyHealth enemyhealth = gameObject.GetComponent<EnemyHealth>();
+        if(canPatrol == false)
+        {
+            navMeshAgent.destination = gameObject.transform.position;
+        }
         if(titanHolder != null&& canPatrol == true)
         {
+            
+            distanceToNextPoint = Vector3.Distance(titanHolder.transform.position, target[currentTargetIndex].transform.position);
+
+            if (target[currentTargetIndex] != null && navMeshAgent != null && GetComponent<EnemyHealth>().enemyHealth <= 1)
+            {
+                navMeshAgent.destination = target[currentTargetIndex].transform.position;
+            }
+            if (gameStart == false)
+            {
+                targetName = target[currentTargetIndex].name;
+            }
+            if (titanHolder != null)
+            {
+                distance = Vector3.Distance(player.transform.position, titanHolder.transform.position);
+            }
+            dir = player.transform.position - transform.position;
+            angle = Vector3.Angle(dir, transform.forward);
+
+
+
+            Vector3 pos = target[currentTargetIndex].position;
+            Vector3 playerPos = new Vector3(player.transform.position.x, player.transform.position.y, 0);
+
             switch (state)
             {
                 case TitanState.Patrolling:
-                    if(enemyhealth.enemyHealth > 0)
+                    navMeshAgent.destination = target[currentTargetIndex].position;
+                    if (enemyhealth.enemyHealth > 0)
                     {
                         titanState = 0;
                     }
-                    navMeshAgent.destination = target[currentTargetIndex].position;
                     
-
-                    //Vector3 rot = Vector3.RotateTowards(transform.forward, target[currentTargetIndex].position - transform.position, 10, 0.0f);
-                    //transform.rotation = Quaternion.LookRotation(rot);
-
-
-                    //Debug.Log(target[currentTargetIndex].name+distanceToNextPoint);
+                                        
                     if (Vector3.Distance(titanHolder.transform.position, target[currentTargetIndex].position) < targetRange)
                     {
-                        if (currentTargetIndex < 22)
+                        if (currentTargetIndex < 23)
                         {
                             currentTargetIndex++;
                         }
@@ -173,7 +178,7 @@ public class NavMesh2 : MonoBehaviour
                     break;
                 case TitanState.AttackingWall:
                     titanState = 1;
-                    
+                    navMeshAgent.destination = wall.transform.position;
                     if(attackCooldown < 0.1)
                     {
                         wall.transform.GetChild(0).GetComponent<Healthbarscript>().WallDamage(damage);
@@ -209,7 +214,7 @@ public class NavMesh2 : MonoBehaviour
             }
             if(wall != null)
             {
-                if (Vector3.Distance(titanHolder.transform.position, wall.transform.position) < 20 && closeToWall == true && wallBroken == false)
+                if (closeToWall == true && wallBroken == false)
                 {
                     state = TitanState.AttackingWall;
                 }

@@ -32,6 +32,7 @@ public class Turrets : MonoBehaviour
     public MeleeScript ml;
     public bool destroyed;
     public ParticleSystem ps;
+    public AudioSource source;
 
 
     // Start is called before the first frame update
@@ -43,6 +44,7 @@ public class Turrets : MonoBehaviour
         platform = ml.place;
         range = 40;
         attackPoint = gameObject.transform.GetChild(0);
+        source = gameObject.transform.GetChild(1).GetComponent<AudioSource>();
 
     }
     public void Update()
@@ -127,6 +129,8 @@ public class Turrets : MonoBehaviour
 
         if (titan != null)
         {
+            source.pitch = Random.Range(0.9f,1.1f);
+            source.Play();
             EnemyHealth hp = titan.GetComponent<EnemyHealth>();
             ps.Play();
             hp.TakeDamage(damageTurret);

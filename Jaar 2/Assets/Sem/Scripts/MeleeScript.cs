@@ -46,12 +46,14 @@ public class MeleeScript : MonoBehaviour
     public GameObject sellUi;
     public GameObject[] cannons;
     public GameObject place;
-    public GameObject turret, buyUi;
+    public GameObject buyUi, turret;
     public TrailRenderer leftTrail, rightTrail;
+    public Esc esc;
     
     // Start is called before the first frame update
     void Start()
     {
+        
         isShaking = false;
         swordBlades = 3;
         reloadingWithSwords = false;
@@ -91,7 +93,18 @@ public class MeleeScript : MonoBehaviour
         anim2.SetBool("ReloadWithSwords", reloadingWithSwords);
 
         
-
+        if(esc.switchVoid == 0)
+        {
+            turret = cannons[0];
+        }
+        else if(esc.switchVoid == 1)
+        {
+            turret = cannons[1];
+        }
+        else if(esc.switchVoid == 2)
+        {
+            turret = cannons[2];
+        }
 
 
 

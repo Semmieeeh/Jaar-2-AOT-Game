@@ -75,6 +75,7 @@ public class Esc : MonoBehaviour
             {
                 if (escActive == false)
                 {
+                    canvasSem.SetActive(true);
                     if (Input.GetKeyDown(KeyCode.Escape)&&shopActive == false)
                     {
                         restart.SetActive(true);
@@ -94,6 +95,7 @@ public class Esc : MonoBehaviour
                 }
                 else if (escActive == true)
                 {
+                    canvasSem.SetActive(false);
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     Time.timeScale = 0f;
@@ -212,7 +214,7 @@ public class Esc : MonoBehaviour
     }
     public void UpgradeTurrets()
     {
-        switchVoid += 1f;
+        switchVoid ++;
 
         Economy eco = GameObject.Find("Player").GetComponent<Economy>();
         if (eco.metal >= 100 && switchVoid <= 2)
@@ -278,10 +280,9 @@ public class Esc : MonoBehaviour
         Economy eco = GameObject.Find("Player").GetComponent<Economy>();
         if (eco.metal >= 5)
         {
-            traplvl1.SetActive(false);
-            traplvl2.SetActive(true);
             eco.traps += 1;
             eco.metal -= 5;
+            eco.trapfloat += 1;
         }
     }
     public void BuyTrapLvl2()
@@ -289,10 +290,9 @@ public class Esc : MonoBehaviour
         Economy eco = GameObject.Find("Player").GetComponent<Economy>();
         if (eco.metal >= 5)
         {
-            traplvl2.SetActive(false);
-            traplvl3.SetActive(true);
             eco.traps += 1;
             eco.metal -= 5;
+            eco.trapfloat += 1;
         }
     }
     public void BuyTrapLvl3()
@@ -302,6 +302,7 @@ public class Esc : MonoBehaviour
         {
             eco.traps += 1;
             eco.metal -= 5;
+            eco.trapfloat += 1;
         }
     }
     public void ExitShopMenu()

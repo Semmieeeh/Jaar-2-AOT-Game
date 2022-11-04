@@ -11,7 +11,7 @@ public class CamZoom : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fieldOfView = 60.0f;
+        fieldOfView = 71.0f;
         fovSlider.value = fieldOfView;
         menuCam = GameObject.Find("Main Camera");
     }
@@ -19,7 +19,7 @@ public class CamZoom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fieldOfView = fovSlider.value * 1f;
+        fieldOfView = fovSlider.value;
         menuCam.GetComponent<Camera>().fieldOfView = fieldOfView;
     }
 }
