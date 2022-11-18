@@ -380,20 +380,15 @@ public class PlayerMovementAdvanced : MonoBehaviour
             }
             else if (flatVel.magnitude > moveSpeed && grapplingTest.isGrappling == true)
             {
-                rb.velocity = Vector3.ClampMagnitude(rb.velocity, walkSpeed * 7.5f);
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, walkSpeed * 6f);
             }
             else if (flatVel.magnitude > moveSpeed && grapplingTest.isGrappling == false)
             {
                 rb.velocity = Vector3.ClampMagnitude(rb.velocity, walkSpeed * 7.5f);
             }
 
-
-
-
         }
 
-
-        
     }
     
 
@@ -450,18 +445,6 @@ public class PlayerMovementAdvanced : MonoBehaviour
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
-
-
-    
-	
-
-    
-    
-
-
-
-
-    
 }
 
 

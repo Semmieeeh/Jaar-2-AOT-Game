@@ -106,6 +106,17 @@ public class MeleeScript : MonoBehaviour
             turret = cannons[2];
         }
 
+
+
+
+
+
+
+
+
+
+
+
         if (swordBlades == 0 && disappeared == false)
         {
             StartCoroutine(BladeDisappear());
@@ -266,7 +277,7 @@ public class MeleeScript : MonoBehaviour
         }
 
         
-        
+
 
 
 
